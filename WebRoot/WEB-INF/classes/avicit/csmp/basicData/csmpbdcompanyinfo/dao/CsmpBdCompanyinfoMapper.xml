@@ -1,0 +1,1796 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="avicit.csmp.basicData.csmpbdcompanyinfo.dao.CsmpBdCompanyinfoDao">
+
+	<resultMap id="CsmpBdCompanyinfoDTOMap"
+		type="avicit.csmp.basicData.csmpbdcompanyinfo.dto.CsmpBdCompanyinfoDTO">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="nodeId" column="NODE_ID" jdbcType="VARCHAR" />
+		<result property="deptId" column="DEPT_ID" jdbcType="VARCHAR" />
+		<result property="companyCode" column="COMPANY_CODE" jdbcType="VARCHAR" />
+		<result property="companyName" column="COMPANY_NAME" jdbcType="VARCHAR" />
+		<result property="nameEn" column="NAME_EN" jdbcType="VARCHAR" />
+		<result property="shortName" column="SHORT_NAME" jdbcType="VARCHAR" />
+		<result property="shortNameEn" column="SHORT_NAME_EN" jdbcType="VARCHAR" />
+		<result property="address" column="ADDRESS" jdbcType="VARCHAR" />
+		<result property="receiveAddress" column="RECEIVE_ADDRESS"
+			jdbcType="VARCHAR" />
+		<result property="companyType" column="COMPANY_TYPE" jdbcType="VARCHAR" />
+		<result property="companyLevel" column="COMPANY_LEVEL"
+			jdbcType="VARCHAR" />
+		<result property="country" column="COUNTRY" jdbcType="VARCHAR" />
+		<result property="province" column="PROVINCE" jdbcType="VARCHAR" />
+		<result property="setupdate" column="SETUPDATE" jdbcType="TIMESTAMP" />
+		<result property="businessNature" column="BUSINESS_NATURE"
+			jdbcType="VARCHAR" />
+		<result property="operatingStatus" column="OPERATING_STATUS"
+			jdbcType="VARCHAR" />
+		<result property="language" column="LANGUAGE" jdbcType="VARCHAR" />
+		<result property="telephone" column="TELEPHONE" jdbcType="VARCHAR" />
+		<result property="fax" column="FAX" jdbcType="VARCHAR" />
+		<result property="mail" column="MAIL" jdbcType="VARCHAR" />
+		<result property="accountName" column="ACCOUNT_NAME" jdbcType="VARCHAR" />
+		<result property="accountId" column="ACCOUNT_ID" jdbcType="VARCHAR" />
+		<result property="accountAddress" column="ACCOUNT_ADDRESS"
+			jdbcType="VARCHAR" />
+		<result property="accountTel" column="ACCOUNT_TEL" jdbcType="VARCHAR" />
+		<result property="accountBankName" column="ACCOUNT_BANK_NAME"
+			jdbcType="VARCHAR" />
+		<result property="accountNo" column="ACCOUNT_NO" jdbcType="VARCHAR" />
+		<result property="describe" column="DESCRIBE" jdbcType="VARCHAR" />
+		<result property="contacts" column="CONTACTS" jdbcType="VARCHAR" />
+		<result property="serviceRepresentative" column="SERVICE_REPRESENTATIVE"
+			jdbcType="VARCHAR" />
+		<result property="legalPerson" column="LEGAL_PERSON" jdbcType="VARCHAR" />
+		<result property="clClientCode" column="CL_CLIENT_CODE"
+			jdbcType="VARCHAR" />
+		<result property="remark" column="REMARK" jdbcType="VARCHAR" />
+		<result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR" />
+		<result property="creationDate" column="CREATION_DATE"
+			jdbcType="TIMESTAMP" />
+		<result property="lastUpdatedBy" column="LAST_UPDATED_BY"
+			jdbcType="VARCHAR" />
+		<result property="lastUpdateDate" column="LAST_UPDATE_DATE"
+			jdbcType="TIMESTAMP" />
+		<result property="lastUpdateIp" column="LAST_UPDATE_IP"
+			jdbcType="VARCHAR" />
+		<result property="heatSort" column="HEAT_SORT" jdbcType="DECIMAL" />
+		<result property="version" column="VERSION" jdbcType="DECIMAL" />
+		<result property="attribute01" column="ATTRIBUTE_01" jdbcType="VARCHAR" />
+		<result property="attribute02" column="ATTRIBUTE_02" jdbcType="VARCHAR" />
+		<result property="attribute03" column="ATTRIBUTE_03" jdbcType="VARCHAR" />
+		<result property="attribute04" column="ATTRIBUTE_04" jdbcType="VARCHAR" />
+		<result property="attribute05" column="ATTRIBUTE_05" jdbcType="VARCHAR" />
+		<result property="attribute06" column="ATTRIBUTE_06" jdbcType="VARCHAR" />
+		<result property="attribute07" column="ATTRIBUTE_07" jdbcType="VARCHAR" />
+		<result property="attribute08" column="ATTRIBUTE_08" jdbcType="VARCHAR" />
+		<result property="attribute09" column="ATTRIBUTE_09" jdbcType="VARCHAR" />
+		<result property="attribute10" column="ATTRIBUTE_10" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 张佳华searchCompAndStruByPage -->
+	<select id="searchCompAndStruByPage"
+		parameterType="avicit.csmp.basicData.csmpbdcompanyinfo.dto.CsmpBdCompanyinfoDTO"
+		resultMap="CsmpBdCompanyinfoDTOMap">
+		select
+		t1.id ,
+		t1.dept_id ,
+		t1.company_code ,
+		t1.company_name ,
+		t1.name_en ,
+		t1.short_name ,
+		t1.short_name_en ,
+		t1.address ,
+		t1.receive_address ,
+		t1.company_type ,
+		t1.company_level ,
+		t1.country ,
+		t1.province ,
+		t1.setupdate ,
+		t1.business_nature ,
+		t1.operating_status ,
+		t1.language ,
+		t1.telephone ,
+		t1.fax ,
+		t1.mail ,
+		t1.account_name ,
+		t1.account_id ,
+		t1.account_address ,
+		t1.account_tel ,
+		t1.account_bank_name ,
+		t1.account_no ,
+		t1.describe ,
+		t1.contacts ,
+		t1.service_representative ,
+		t1.legal_person ,
+		t1.cl_client_code ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.heat_sort ,
+		t1.version ,
+		t1.attribute_01 ,
+		t1.attribute_02 ,
+		t1.attribute_03 ,
+		t1.attribute_04 ,
+		t1.attribute_05 ,
+		t1.attribute_06 ,
+		t1.attribute_07 ,
+		t1.attribute_08 ,
+		t1.attribute_09 ,
+		t1.attribute_10
+		from csmp_bd_companyinfo t1 left join CSMP_BD_COM_STR
+		t2 on t2.com_id=t1.id
+		<where>
+		       t2.Str_id = #{bean.nodeId}
+			   <if test="bean != null">
+				<if test="bean.id != null and bean.id != ''">
+					and t1.ID like '%'||#{bean.id}||'%'
+				</if>
+				<!-- <if test="bean.nodeId != null and bean.nodeId != ''"> and t1.NODE_ID 
+					like '%'||#{bean.nodeId}||'%' </if> -->
+				<if test="bean.deptId != null and bean.deptId != ''">
+					and t1.DEPT_ID like '%'||#{bean.deptId}||'%'
+				</if>
+				<if test="bean.companyCode != null and bean.companyCode != ''">
+					and t1.COMPANY_CODE like '%'||#{bean.companyCode}||'%'
+				</if>
+				<if test="bean.companyName != null and bean.companyName != ''">
+					and t1.COMPANY_NAME like '%'||#{bean.companyName}||'%'
+				</if>
+				<if test="bean.nameEn != null and bean.nameEn != ''">
+					and t1.NAME_EN like '%'||#{bean.nameEn}||'%'
+				</if>
+				<if test="bean.shortName != null and bean.shortName != ''">
+					and t1.SHORT_NAME like '%'||#{bean.shortName}||'%'
+				</if>
+				<if test="bean.shortNameEn != null and bean.shortNameEn != ''">
+					and t1.SHORT_NAME_EN like '%'||#{bean.shortNameEn}||'%'
+				</if>
+				<if test="bean.address != null and bean.address != ''">
+					and t1.ADDRESS like '%'||#{bean.address}||'%'
+				</if>
+				<if test="bean.receiveAddress != null and bean.receiveAddress != ''">
+					and t1.RECEIVE_ADDRESS like
+					'%'||#{bean.receiveAddress}||'%'
+				</if>
+				<if test="bean.companyType != null and bean.companyType != ''">
+					and t1.COMPANY_TYPE like '%'||#{bean.companyType}||'%'
+				</if>
+				<if test="bean.companyLevel != null and bean.companyLevel != ''">
+					and t1.COMPANY_LEVEL like '%'||#{bean.companyLevel}||'%'
+				</if>
+				<if test="bean.country != null and bean.country != ''">
+					and t1.COUNTRY like '%'||#{bean.country}||'%'
+				</if>
+				<if test="bean.province != null and bean.province != ''">
+					and t1.PROVINCE like '%'||#{bean.province}||'%'
+				</if>
+				<if test="bean.setupdateBegin != null and bean.setupdateBegin != ''">
+					and t1.SETUPDATE &gt;= #{bean.setupdateBegin}
+				</if>
+				<if test="bean.setupdateEnd != null and bean.setupdateEnd != ''">
+					and t1.SETUPDATE &lt;= #{bean.setupdateEnd}
+				</if>
+				<if test="bean.businessNature != null and bean.businessNature != ''">
+					and t1.BUSINESS_NATURE like
+					'%'||#{bean.businessNature}||'%'
+				</if>
+				<if test="bean.operatingStatus != null and bean.operatingStatus != ''">
+					and t1.OPERATING_STATUS like
+					'%'||#{bean.operatingStatus}||'%'
+				</if>
+				<if test="bean.language != null and bean.language != ''">
+					and t1.LANGUAGE like '%'||#{bean.language}||'%'
+				</if>
+				<if test="bean.telephone != null and bean.telephone != ''">
+					and t1.TELEPHONE like '%'||#{bean.telephone}||'%'
+				</if>
+				<if test="bean.fax != null and bean.fax != ''">
+					and t1.FAX like '%'||#{bean.fax}||'%'
+				</if>
+				<if test="bean.mail != null and bean.mail != ''">
+					and t1.MAIL like '%'||#{bean.mail}||'%'
+				</if>
+				<if test="bean.accountName != null and bean.accountName != ''">
+					and t1.ACCOUNT_NAME like '%'||#{bean.accountName}||'%'
+				</if>
+				<if test="bean.accountId != null and bean.accountId != ''">
+					and t1.ACCOUNT_ID like '%'||#{bean.accountId}||'%'
+				</if>
+				<if test="bean.accountAddress != null and bean.accountAddress != ''">
+					and t1.ACCOUNT_ADDRESS like
+					'%'||#{bean.accountAddress}||'%'
+				</if>
+				<if test="bean.accountTel != null and bean.accountTel != ''">
+					and t1.ACCOUNT_TEL like '%'||#{bean.accountTel}||'%'
+				</if>
+				<if test="bean.accountBankName != null and bean.accountBankName != ''">
+					and t1.ACCOUNT_BANK_NAME like
+					'%'||#{bean.accountBankName}||'%'
+				</if>
+				<if test="bean.accountNo != null and bean.accountNo != ''">
+					and t1.ACCOUNT_NO like '%'||#{bean.accountNo}||'%'
+				</if>
+				<if test="bean.describe != null and bean.describe != ''">
+					and t1.DESCRIBE like '%'||#{bean.describe}||'%'
+				</if>
+				<if test="bean.contacts != null and bean.contacts != ''">
+					and t1.CONTACTS like '%'||#{bean.contacts}||'%'
+				</if>
+				<if
+					test="bean.serviceRepresentative != null and bean.serviceRepresentative != ''">
+					and t1.SERVICE_REPRESENTATIVE like
+					'%'||#{bean.serviceRepresentative}||'%'
+				</if>
+				<if test="bean.legalPerson != null and bean.legalPerson != ''">
+					and t1.LEGAL_PERSON like '%'||#{bean.legalPerson}||'%'
+				</if>
+				<if test="bean.clClientCode != null and bean.clClientCode != ''">
+					and t1.CL_CLIENT_CODE = #{bean.clClientCode}
+				</if>
+				<if test="bean.remark != null and bean.remark != ''">
+					and t1.REMARK like '%'||#{bean.remark}||'%'
+				</if>
+				<if test="bean.createdBy != null and bean.createdBy != ''">
+					and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+				</if>
+				<if test="bean.creationDate != null and bean.creationDate != ''">
+					and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+				</if>
+				<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+					and t1.LAST_UPDATED_BY like
+					'%'||#{bean.lastUpdatedBy}||'%'
+				</if>
+				<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+					and t1.LAST_UPDATE_DATE like
+					'%'||#{bean.lastUpdateDate}||'%'
+				</if>
+				<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+					and t1.LAST_UPDATE_IP like
+					'%'||#{bean.lastUpdateIp}||'%'
+				</if>
+				<if test="bean.heatSort != null and bean.heatSort != ''">
+				and t1.HEAT_SORT like '%'||#{bean.heatSort}||'%'
+			   </if>
+				<if test="bean.version != null and bean.version != ''">
+					and t1.VERSION like '%'||#{bean.version}||'%'
+				</if>
+				<if test="bean.attribute01 != null and bean.attribute01 != ''">
+					and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+				</if>
+				<if test="bean.attribute02 != null and bean.attribute02 != ''">
+					and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+				</if>
+				<if test="bean.attribute03 != null and bean.attribute03 != ''">
+					and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+				</if>
+				<if test="bean.attribute04 != null and bean.attribute04 != ''">
+					and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+				</if>
+				<if test="bean.attribute05 != null and bean.attribute05 != ''">
+					and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+				</if>
+				<if test="bean.attribute06 != null and bean.attribute06 != ''">
+					and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+				</if>
+				<if test="bean.attribute07 != null and bean.attribute07 != ''">
+					and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+				</if>
+				<if test="bean.attribute08 != null and bean.attribute08 != ''">
+					and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+				</if>
+				<if test="bean.attribute09 != null and bean.attribute09 != ''">
+					and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+				</if>
+				<if test="bean.attribute10 != null and bean.attribute10 != ''">
+					and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+				</if>
+			</if>
+		</where>
+		
+	</select>
+	<!-- 张佳华searchCompAndStruByPage -->
+	<select id="searchCsmpBdCompanyinfoParentByPage" parameterType="avicit.csmp.basicData.csmpbdcompanyinfo.dto.CsmpBdCompanyinfoDTO" resultMap="CsmpBdCompanyinfoDTOMap">
+		select
+		t1.id ,
+		t1.dept_id ,
+		t1.company_code ,
+		t1.company_name ,
+		t1.name_en ,
+		t1.short_name ,
+		t1.short_name_en ,
+		t1.address ,
+		t1.receive_address ,
+		t1.company_type ,
+		t1.company_level ,
+		t1.country ,
+		t1.province ,
+		t1.setupdate ,
+		t1.business_nature ,
+		t1.operating_status ,
+		t1.language ,
+		t1.telephone ,
+		t1.fax ,
+		t1.mail ,
+		t1.account_name ,
+		t1.account_id ,
+		t1.account_address ,
+		t1.account_tel ,
+		t1.account_bank_name ,
+		t1.account_no ,
+		t1.describe ,
+		t1.contacts ,
+		t1.service_representative ,
+		t1.legal_person ,
+		t1.cl_client_code ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.heat_sort ,
+		t1.version ,
+		t1.attribute_01 ,
+		t1.attribute_02 ,
+		t1.attribute_03 ,
+		t1.attribute_04 ,
+		t1.attribute_05 ,
+		t1.attribute_06 ,
+		t1.attribute_07 ,
+		t1.attribute_08 ,
+		t1.attribute_09 ,
+		t1.attribute_10
+		from csmp_bd_companyinfo t1 left join CSMP_BD_COM_STR t2 on  t1.id=t2.com_id
+		<where>
+		        t2.str_id is null
+			   <if test="bean != null">
+				<if test="bean.id != null and bean.id != ''">
+					and t1.ID like '%'||#{bean.id}||'%'
+				</if>
+				<if test="bean.deptId != null and bean.deptId != ''">
+					and t1.DEPT_ID like '%'||#{bean.deptId}||'%'
+				</if>
+				<if test="bean.companyCode != null and bean.companyCode != ''">
+					and t1.COMPANY_CODE like '%'||#{bean.companyCode}||'%'
+				</if>
+				<if test="bean.companyName != null and bean.companyName != ''">
+					and t1.COMPANY_NAME like '%'||#{bean.companyName}||'%'
+				</if>
+				<if test="bean.nameEn != null and bean.nameEn != ''">
+					and t1.NAME_EN like '%'||#{bean.nameEn}||'%'
+				</if>
+				<if test="bean.shortName != null and bean.shortName != ''">
+					and t1.SHORT_NAME like '%'||#{bean.shortName}||'%'
+				</if>
+				<if test="bean.shortNameEn != null and bean.shortNameEn != ''">
+					and t1.SHORT_NAME_EN like '%'||#{bean.shortNameEn}||'%'
+				</if>
+				<if test="bean.address != null and bean.address != ''">
+					and t1.ADDRESS like '%'||#{bean.address}||'%'
+				</if>
+				<if test="bean.receiveAddress != null and bean.receiveAddress != ''">
+					and t1.RECEIVE_ADDRESS like '%'||#{bean.receiveAddress}||'%'
+				</if>
+				<if test="bean.companyType != null and bean.companyType != ''">
+					and t1.COMPANY_TYPE like '%'||#{bean.companyType}||'%'
+				</if>
+				<if test="bean.companyLevel != null and bean.companyLevel != ''">
+					and t1.COMPANY_LEVEL like '%'||#{bean.companyLevel}||'%'
+				</if>
+				<if test="bean.country != null and bean.country != ''">
+					and t1.COUNTRY like '%'||#{bean.country}||'%'
+				</if>
+				<if test="bean.province != null and bean.province != ''">
+					and t1.PROVINCE like '%'||#{bean.province}||'%'
+				</if>
+				<if test="bean.setupdateBegin != null and bean.setupdateBegin != ''">
+					and t1.SETUPDATE &gt;= #{bean.setupdateBegin}
+				</if>
+				<if test="bean.setupdateEnd != null and bean.setupdateEnd != ''">
+					and t1.SETUPDATE &lt;= #{bean.setupdateEnd}
+				</if>
+				<if test="bean.businessNature != null and bean.businessNature != ''">
+					and t1.BUSINESS_NATURE like
+					'%'||#{bean.businessNature}||'%'
+				</if>
+				<if test="bean.operatingStatus != null and bean.operatingStatus != ''">
+					and t1.OPERATING_STATUS like
+					'%'||#{bean.operatingStatus}||'%'
+				</if>
+				<if test="bean.language != null and bean.language != ''">
+					and t1.LANGUAGE like '%'||#{bean.language}||'%'
+				</if>
+				<if test="bean.telephone != null and bean.telephone != ''">
+					and t1.TELEPHONE like '%'||#{bean.telephone}||'%'
+				</if>
+				<if test="bean.fax != null and bean.fax != ''">
+					and t1.FAX like '%'||#{bean.fax}||'%'
+				</if>
+				<if test="bean.mail != null and bean.mail != ''">
+					and t1.MAIL like '%'||#{bean.mail}||'%'
+				</if>
+				<if test="bean.accountName != null and bean.accountName != ''">
+					and t1.ACCOUNT_NAME like '%'||#{bean.accountName}||'%'
+				</if>
+				<if test="bean.accountId != null and bean.accountId != ''">
+					and t1.ACCOUNT_ID like '%'||#{bean.accountId}||'%'
+				</if>
+				<if test="bean.accountAddress != null and bean.accountAddress != ''">
+					and t1.ACCOUNT_ADDRESS like
+					'%'||#{bean.accountAddress}||'%'
+				</if>
+				<if test="bean.accountTel != null and bean.accountTel != ''">
+					and t1.ACCOUNT_TEL like '%'||#{bean.accountTel}||'%'
+				</if>
+				<if test="bean.accountBankName != null and bean.accountBankName != ''">
+					and t1.ACCOUNT_BANK_NAME like
+					'%'||#{bean.accountBankName}||'%'
+				</if>
+				<if test="bean.accountNo != null and bean.accountNo != ''">
+					and t1.ACCOUNT_NO like '%'||#{bean.accountNo}||'%'
+				</if>
+				<if test="bean.describe != null and bean.describe != ''">
+					and t1.DESCRIBE like '%'||#{bean.describe}||'%'
+				</if>
+				<if test="bean.contacts != null and bean.contacts != ''">
+					and t1.CONTACTS like '%'||#{bean.contacts}||'%'
+				</if>
+				<if
+					test="bean.serviceRepresentative != null and bean.serviceRepresentative != ''">
+					and t1.SERVICE_REPRESENTATIVE like
+					'%'||#{bean.serviceRepresentative}||'%'
+				</if>
+				<if test="bean.legalPerson != null and bean.legalPerson != ''">
+					and t1.LEGAL_PERSON like '%'||#{bean.legalPerson}||'%'
+				</if>
+				<if test="bean.clClientCode != null and bean.clClientCode != ''">
+					and t1.CL_CLIENT_CODE = #{bean.clClientCode}
+				</if>
+				<if test="bean.remark != null and bean.remark != ''">
+					and t1.REMARK like '%'||#{bean.remark}||'%'
+				</if>
+				<if test="bean.createdBy != null and bean.createdBy != ''">
+					and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+				</if>
+				<if test="bean.creationDate != null and bean.creationDate != ''">
+					and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+				</if>
+				<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+					and t1.LAST_UPDATED_BY like
+					'%'||#{bean.lastUpdatedBy}||'%'
+				</if>
+				<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+					and t1.LAST_UPDATE_DATE like
+					'%'||#{bean.lastUpdateDate}||'%'
+				</if>
+				<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+					and t1.LAST_UPDATE_IP like
+					'%'||#{bean.lastUpdateIp}||'%'
+				</if>
+				<if test="bean.heatSort != null and bean.heatSort != ''">
+				and t1.HEAT_SORT like '%'||#{bean.heatSort}||'%'
+			   </if>
+				<if test="bean.version != null and bean.version != ''">
+					and t1.VERSION like '%'||#{bean.version}||'%'
+				</if>
+				<if test="bean.attribute01 != null and bean.attribute01 != ''">
+					and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+				</if>
+				<if test="bean.attribute02 != null and bean.attribute02 != ''">
+					and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+				</if>
+				<if test="bean.attribute03 != null and bean.attribute03 != ''">
+					and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+				</if>
+				<if test="bean.attribute04 != null and bean.attribute04 != ''">
+					and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+				</if>
+				<if test="bean.attribute05 != null and bean.attribute05 != ''">
+					and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+				</if>
+				<if test="bean.attribute06 != null and bean.attribute06 != ''">
+					and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+				</if>
+				<if test="bean.attribute07 != null and bean.attribute07 != ''">
+					and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+				</if>
+				<if test="bean.attribute08 != null and bean.attribute08 != ''">
+					and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+				</if>
+				<if test="bean.attribute09 != null and bean.attribute09 != ''">
+					and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+				</if>
+				<if test="bean.attribute10 != null and bean.attribute10 != ''">
+					and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+				</if>
+			</if>
+		</where>
+		
+	</select>
+<!--  根节点加载的信息-->
+	<select id="searchRootCominfos"  parameterType="avicit.csmp.basicData.csmpbdcompanyinfo.dto.CsmpBdCompanyinfoDTO" resultMap="CsmpBdCompanyinfoDTOMap">
+	
+		select t1.id  
+		t1.dept_id ,
+		t1.company_code ,
+		t1.company_name ,
+		t1.name_en ,
+		t1.short_name ,
+		t1.short_name_en ,
+		t1.address ,
+		t1.receive_address ,
+		t1.company_type ,
+		t1.company_level ,
+		t1.country ,
+		t1.province ,
+		t1.setupdate ,
+		t1.business_nature ,
+		t1.operating_status ,
+		t1.language ,
+		t1.telephone ,
+		t1.fax ,
+		t1.mail ,
+		t1.account_name ,
+		t1.account_id ,
+		t1.account_address ,
+		t1.account_tel ,
+		t1.account_bank_name ,
+		t1.account_no ,
+		t1.describe ,
+		t1.contacts ,
+		t1.service_representative ,
+		t1.legal_person ,
+		t1.cl_client_code ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.heat_sort ,
+		t1.version ,
+		t1.attribute_01 ,
+		t1.attribute_02 ,
+		t1.attribute_03 ,
+		t1.attribute_04 ,
+		t1.attribute_05 ,
+		t1.attribute_06 ,
+		t1.attribute_07 ,
+		t1.attribute_08 ,
+		t1.attribute_09 ,
+		t1.attribute_10
+		
+		
+		from csmp_bd_companyinfo t1
+		
+ 		where t1.id  not in (select distinct t2.com_Id  from csmp_bd_com_str t2)
+	</select>
+
+
+	<!-- 分页查询 CSMP_BD_COMPANYINFO -->
+	<select id="searchCsmpBdCompanyinfoByPage" parameterType="java.util.Map"
+		resultMap ="CsmpBdCompanyinfoDTOMap">
+		select
+		t1.id ,
+		<!-- t1.node_id , -->
+		t1.dept_id ,
+		t1.company_code ,
+		t1.company_name ,
+		t1.name_en ,
+		t1.short_name ,
+		t1.short_name_en ,
+		t1.address ,
+		t1.receive_address ,
+		t1.company_type ,
+		t1.company_level ,
+		t1.country ,
+		t1.province ,
+		t1.setupdate ,
+		t1.business_nature ,
+		t1.operating_status ,
+		t1.language ,
+		t1.telephone ,
+		t1.fax ,
+		t1.mail ,
+		t1.account_name ,
+		t1.account_id ,
+		t1.account_address ,
+		t1.account_tel ,
+		t1.account_bank_name ,
+		t1.account_no ,
+		t1.describe ,
+		t1.contacts ,
+		t1.service_representative ,
+		t1.legal_person ,
+		t1.cl_client_code ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.heat_sort ,
+		t1.version ,
+		t1.attribute_01 ,
+		t1.attribute_02 ,
+		t1.attribute_03 ,
+		t1.attribute_04 ,
+		t1.attribute_05 ,
+		t1.attribute_06 ,
+		t1.attribute_07 ,
+		t1.attribute_08 ,
+		t1.attribute_09 ,
+		t1.attribute_10
+		from csmp_bd_companyinfo t1
+
+		<where>
+			<if test="bean != null">
+				<if test="bean.id != null and bean.id != ''">
+					and t1.ID like '%'||#{bean.id}||'%'
+				</if>
+				<!-- <if test="bean.nodeId != null and bean.nodeId != ''"> and t1.NODE_ID 
+					like '%'||#{bean.nodeId}||'%' </if> -->
+				<if test="bean.deptId != null and bean.deptId != ''">
+					and t1.DEPT_ID like '%'||#{bean.deptId}||'%'
+				</if>
+				<if test="bean.companyCode != null and bean.companyCode != ''">
+					and t1.COMPANY_CODE like '%'||#{bean.companyCode}||'%'
+				</if>
+				<if test="bean.companyName != null and bean.companyName != ''">
+					and t1.COMPANY_NAME like '%'||#{bean.companyName}||'%'
+				</if>
+				<if test="bean.nameEn != null and bean.nameEn != ''">
+					and t1.NAME_EN like '%'||#{bean.nameEn}||'%'
+				</if>
+				<if test="bean.shortName != null and bean.shortName != ''">
+					and t1.SHORT_NAME like '%'||#{bean.shortName}||'%'
+				</if>
+				<if test="bean.shortNameEn != null and bean.shortNameEn != ''">
+					and t1.SHORT_NAME_EN like '%'||#{bean.shortNameEn}||'%'
+				</if>
+				<if test="bean.address != null and bean.address != ''">
+					and t1.ADDRESS like '%'||#{bean.address}||'%'
+				</if>
+				<if test="bean.receiveAddress != null and bean.receiveAddress != ''">
+					and t1.RECEIVE_ADDRESS like
+					'%'||#{bean.receiveAddress}||'%'
+				</if>
+				<if test="bean.companyType != null and bean.companyType != ''">
+					and t1.COMPANY_TYPE like '%'||#{bean.companyType}||'%'
+				</if>
+				<if test="bean.companyLevel != null and bean.companyLevel != ''">
+					and t1.COMPANY_LEVEL like '%'||#{bean.companyLevel}||'%'
+				</if>
+				<if test="bean.country != null and bean.country != ''">
+					and t1.COUNTRY like '%'||#{bean.country}||'%'
+				</if>
+				<if test="bean.province != null and bean.province != ''">
+					and t1.PROVINCE like '%'||#{bean.province}||'%'
+				</if>
+				<if test="bean.setupdateBegin != null and bean.setupdateBegin != ''">
+					and t1.SETUPDATE &gt;= #{bean.setupdateBegin}
+				</if>
+				<if test="bean.setupdateEnd != null and bean.setupdateEnd != ''">
+					and t1.SETUPDATE &lt;= #{bean.setupdateEnd}
+				</if>
+				<if test="bean.businessNature != null and bean.businessNature != ''">
+					and t1.BUSINESS_NATURE like
+					'%'||#{bean.businessNature}||'%'
+				</if>
+				<if test="bean.operatingStatus != null and bean.operatingStatus != ''">
+					and t1.OPERATING_STATUS like
+					'%'||#{bean.operatingStatus}||'%'
+				</if>
+				<if test="bean.language != null and bean.language != ''">
+					and t1.LANGUAGE like '%'||#{bean.language}||'%'
+				</if>
+				<if test="bean.telephone != null and bean.telephone != ''">
+					and t1.TELEPHONE like '%'||#{bean.telephone}||'%'
+				</if>
+				<if test="bean.fax != null and bean.fax != ''">
+					and t1.FAX like '%'||#{bean.fax}||'%'
+				</if>
+				<if test="bean.mail != null and bean.mail != ''">
+					and t1.MAIL like '%'||#{bean.mail}||'%'
+				</if>
+				<if test="bean.accountName != null and bean.accountName != ''">
+					and t1.ACCOUNT_NAME like '%'||#{bean.accountName}||'%'
+				</if>
+				<if test="bean.accountId != null and bean.accountId != ''">
+					and t1.ACCOUNT_ID like '%'||#{bean.accountId}||'%'
+				</if>
+				<if test="bean.accountAddress != null and bean.accountAddress != ''">
+					and t1.ACCOUNT_ADDRESS like
+					'%'||#{bean.accountAddress}||'%'
+				</if>
+				<if test="bean.accountTel != null and bean.accountTel != ''">
+					and t1.ACCOUNT_TEL like '%'||#{bean.accountTel}||'%'
+				</if>
+				<if test="bean.accountBankName != null and bean.accountBankName != ''">
+					and t1.ACCOUNT_BANK_NAME like
+					'%'||#{bean.accountBankName}||'%'
+				</if>
+				<if test="bean.accountNo != null and bean.accountNo != ''">
+					and t1.ACCOUNT_NO like '%'||#{bean.accountNo}||'%'
+				</if>
+				<if test="bean.describe != null and bean.describe != ''">
+					and t1.DESCRIBE like '%'||#{bean.describe}||'%'
+				</if>
+				<if test="bean.contacts != null and bean.contacts != ''">
+					and t1.CONTACTS like '%'||#{bean.contacts}||'%'
+				</if>
+				<if
+					test="bean.serviceRepresentative != null and bean.serviceRepresentative != ''">
+					and t1.SERVICE_REPRESENTATIVE like
+					'%'||#{bean.serviceRepresentative}||'%'
+				</if>
+				<if test="bean.legalPerson != null and bean.legalPerson != ''">
+					and t1.LEGAL_PERSON like '%'||#{bean.legalPerson}||'%'
+				</if>
+				<if test="bean.clClientCode != null and bean.clClientCode != ''">
+					and t1.CL_CLIENT_CODE = #{bean.clClientCode}
+				</if>
+				<if test="bean.remark != null and bean.remark != ''">
+					and t1.REMARK like '%'||#{bean.remark}||'%'
+				</if>
+				<if test="bean.createdBy != null and bean.createdBy != ''">
+					and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+				</if>
+				<if test="bean.creationDate != null and bean.creationDate != ''">
+					and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+				</if>
+				<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+					and t1.LAST_UPDATED_BY like
+					'%'||#{bean.lastUpdatedBy}||'%'
+				</if>
+				<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+					and t1.LAST_UPDATE_DATE like
+					'%'||#{bean.lastUpdateDate}||'%'
+				</if>
+				<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+					and t1.LAST_UPDATE_IP like
+					'%'||#{bean.lastUpdateIp}||'%'
+				</if>
+				<if test="bean.heatSort != null and bean.heatSort != ''">
+				and t1.HEAT_SORT like '%'||#{bean.heatSort}||'%'
+			   </if>
+				<if test="bean.version != null and bean.version != ''">
+					and t1.VERSION like '%'||#{bean.version}||'%'
+				</if>
+				<if test="bean.attribute01 != null and bean.attribute01 != ''">
+					and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+				</if>
+				<if test="bean.attribute02 != null and bean.attribute02 != ''">
+					and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+				</if>
+				<if test="bean.attribute03 != null and bean.attribute03 != ''">
+					and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+				</if>
+				<if test="bean.attribute04 != null and bean.attribute04 != ''">
+					and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+				</if>
+				<if test="bean.attribute05 != null and bean.attribute05 != ''">
+					and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+				</if>
+				<if test="bean.attribute06 != null and bean.attribute06 != ''">
+					and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+				</if>
+				<if test="bean.attribute07 != null and bean.attribute07 != ''">
+					and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+				</if>
+				<if test="bean.attribute08 != null and bean.attribute08 != ''">
+					and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+				</if>
+				<if test="bean.attribute09 != null and bean.attribute09 != ''">
+					and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+				</if>
+				<if test="bean.attribute10 != null and bean.attribute10 != ''">
+					and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+				</if>
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}
+			</if>
+		</where>
+		order by t1.creation_date desc
+
+
+	</select>
+	<!-- 查询列表 CSMP_BD_COMPANYINFO -->
+	<select id="searchCsmpBdCompanyinfo" parameterType="java.util.Map"
+		resultMap="CsmpBdCompanyinfoDTOMap">
+		select
+		t1.id ,
+		<!-- t1.node_id , -->
+		t1.dept_id ,
+		t1.company_code ,
+		t1.company_name ,
+		t1.name_en ,
+		t1.short_name ,
+		t1.short_name_en ,
+		t1.address ,
+		t1.receive_address ,
+		t1.company_type ,
+		t1.company_level ,
+		t1.country ,
+		t1.province ,
+		t1.setupdate ,
+		t1.business_nature ,
+		t1.operating_status ,
+		t1.language ,
+		t1.telephone ,
+		t1.fax ,
+		t1.mail ,
+		t1.account_name ,
+		t1.account_id ,
+		t1.account_address ,
+		t1.account_tel ,
+		t1.account_bank_name ,
+		t1.account_no ,
+		t1.describe ,
+		t1.contacts ,
+		t1.service_representative ,
+		t1.legal_person ,
+		t1.cl_client_code ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.heat_sort ,
+		t1.version ,
+		t1.attribute_01 ,
+		t1.attribute_02 ,
+		t1.attribute_03 ,
+		t1.attribute_04 ,
+		t1.attribute_05 ,
+		t1.attribute_06 ,
+		t1.attribute_07 ,
+		t1.attribute_08 ,
+		t1.attribute_09 ,
+		t1.attribute_10
+		from csmp_bd_companyinfo t1
+		<where>
+			<if test="id != null and id != ''">
+				and t1.ID =#{id}
+			</if>
+			<!-- <if test="nodeId != null and nodeId != ''"> and t1.NODE_ID =#{nodeId} 
+				</if> -->
+			<if test="deptId != null and deptId != ''">
+				and t1.DEPT_ID =#{deptId}
+			</if>
+			<if test="companyCode != null and companyCode != ''">
+				and t1.COMPANY_CODE =#{companyCode}
+			</if>
+			<if test="companyName != null and companyName != ''">
+				and t1.COMPANY_NAME =#{companyName}
+			</if>
+			<if test="nameEn != null and nameEn != ''">
+				and t1.NAME_EN =#{nameEn}
+			</if>
+			<if test="shortName != null and shortName != ''">
+				and t1.SHORT_NAME =#{shortName}
+			</if>
+			<if test="shortNameEn != null and shortNameEn != ''">
+				and t1.SHORT_NAME_EN =#{shortNameEn}
+			</if>
+			<if test="address != null and address != ''">
+				and t1.ADDRESS =#{address}
+			</if>
+			<if test="receiveAddress != null and receiveAddress != ''">
+				and t1.RECEIVE_ADDRESS =#{receiveAddress}
+			</if>
+			<if test="companyType != null and companyType != ''">
+				and t1.COMPANY_TYPE =#{companyType}
+			</if>
+			<if test="companyLevel != null and companyLevel != ''">
+				and t1.COMPANY_LEVEL =#{companyLevel}
+			</if>
+			<if test="country != null and country != ''">
+				and t1.COUNTRY =#{country}
+			</if>
+			<if test="province != null and province != ''">
+				and t1.PROVINCE =#{province}
+			</if>
+			<if test="bean.setupdateBegin != null and bean.setupdateBegin != ''">
+				and t1.SETUPDATE &gt;= #{bean.setupdateBegin}
+			</if>
+			<if test="bean.setupdateEnd != null and bean.setupdateEnd != ''">
+				and t1.SETUPDATE &lt;= #{bean.setupdateEnd}
+			</if>
+			<if test="businessNature != null and businessNature != ''">
+				and t1.BUSINESS_NATURE =#{businessNature}
+			</if>
+			<if test="operatingStatus != null and operatingStatus != ''">
+				and t1.OPERATING_STATUS =#{operatingStatus}
+			</if>
+			<if test="language != null and language != ''">
+				and t1.LANGUAGE =#{language}
+			</if>
+			<if test="telephone != null and telephone != ''">
+				and t1.TELEPHONE =#{telephone}
+			</if>
+			<if test="fax != null and fax != ''">
+				and t1.FAX =#{fax}
+			</if>
+			<if test="mail != null and mail != ''">
+				and t1.MAIL =#{mail}
+			</if>
+			<if test="accountName != null and accountName != ''">
+				and t1.ACCOUNT_NAME =#{accountName}
+			</if>
+			<if test="accountId != null and accountId != ''">
+				and t1.ACCOUNT_ID =#{accountId}
+			</if>
+			<if test="accountAddress != null and accountAddress != ''">
+				and t1.ACCOUNT_ADDRESS =#{accountAddress}
+			</if>
+			<if test="accountTel != null and accountTel != ''">
+				and t1.ACCOUNT_TEL =#{accountTel}
+			</if>
+			<if test="accountBankName != null and accountBankName != ''">
+				and t1.ACCOUNT_BANK_NAME =#{accountBankName}
+			</if>
+			<if test="accountNo != null and accountNo != ''">
+				and t1.ACCOUNT_NO =#{accountNo}
+			</if>
+			<if test="describe != null and describe != ''">
+				and t1.DESCRIBE =#{describe}
+			</if>
+			<if test="contacts != null and contacts != ''">
+				and t1.CONTACTS =#{contacts}
+			</if>
+			<if test="serviceRepresentative != null and serviceRepresentative != ''">
+				and t1.SERVICE_REPRESENTATIVE =#{serviceRepresentative}
+			</if>
+			<if test="legalPerson != null and legalPerson != ''">
+				and t1.LEGAL_PERSON =#{legalPerson}
+			</if>
+			<if test="clClientCode != null and clClientCode != ''">
+				and t1.CL_CLIENT_CODE =#{clClientCode}
+			</if>
+			<if test="remark != null and remark != ''">
+				and t1.REMARK =#{remark}
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				and t1.CREATED_BY =#{createdBy}
+			</if>
+			<if test="creationDate != null and creationDate != ''">
+				and t1.CREATION_DATE =#{creationDate}
+			</if>
+			<if test="lastUpdatedBy != null and lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY =#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdateDate != null and lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE =#{lastUpdateDate}
+			</if>
+			<if test="lastUpdateIp != null and lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP =#{lastUpdateIp}
+			</if>
+			<if test="bean.heatSort != null and bean.heatSort != ''">
+				and t1.HEAT_SORT like '%'||#{bean.heatSort}||'%'
+			   </if>
+			<if test="version != null and version != ''">
+				and t1.VERSION =#{version}
+			</if>
+			<if test="attribute01 != null and attribute01 != ''">
+				and t1.ATTRIBUTE_01 =#{attribute01}
+			</if>
+			<if test="attribute02 != null and attribute02 != ''">
+				and t1.ATTRIBUTE_02 =#{attribute02}
+			</if>
+			<if test="attribute03 != null and attribute03 != ''">
+				and t1.ATTRIBUTE_03 =#{attribute03}
+			</if>
+			<if test="attribute04 != null and attribute04 != ''">
+				and t1.ATTRIBUTE_04 =#{attribute04}
+			</if>
+			<if test="attribute05 != null and attribute05 != ''">
+				and t1.ATTRIBUTE_05 =#{attribute05}
+			</if>
+			<if test="attribute06 != null and attribute06 != ''">
+				and t1.ATTRIBUTE_06 =#{attribute06}
+			</if>
+			<if test="attribute07 != null and attribute07 != ''">
+				and t1.ATTRIBUTE_07 =#{attribute07}
+			</if>
+			<if test="attribute08 != null and attribute08 != ''">
+				and t1.ATTRIBUTE_08 =#{attribute08}
+			</if>
+			<if test="attribute09 != null and attribute09 != ''">
+				and t1.ATTRIBUTE_09 =#{attribute09}
+			</if>
+			<if test="attribute10 != null and attribute10 != ''">
+				and t1.ATTRIBUTE_10 =#{attribute10}
+			</if>
+		</where>
+	</select>
+	<!-- 主键查询对象 CSMP_BD_COMPANYINFO -->
+	<select id="findCsmpBdCompanyinfoById" parameterType="java.util.Map"
+		resultMap="CsmpBdCompanyinfoDTOMap">
+		select
+		t1.id ,
+		<!-- t1.node_id , -->
+		t1.dept_id ,
+		t1.company_code ,
+		t1.company_name ,
+		t1.name_en ,
+		t1.short_name ,
+		t1.short_name_en ,
+		t1.address ,
+		t1.receive_address ,
+		t1.company_type ,
+		t1.company_level ,
+		t1.country ,
+		t1.province ,
+		t1.setupdate ,
+		t1.business_nature ,
+		t1.operating_status ,
+		t1.language ,
+		t1.telephone ,
+		t1.fax ,
+		t1.mail ,
+		t1.account_name ,
+		t1.account_id ,
+		t1.account_address ,
+		t1.account_tel ,
+		t1.account_bank_name ,
+		t1.account_no ,
+		t1.describe ,
+		t1.contacts ,
+		t1.service_representative ,
+		t1.legal_person ,
+		t1.cl_client_code ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.heat_sort ,
+		t1.version ,
+		t1.attribute_01 ,
+		t1.attribute_02 ,
+		t1.attribute_03 ,
+		t1.attribute_04 ,
+		t1.attribute_05 ,
+		t1.attribute_06 ,
+		t1.attribute_07 ,
+		t1.attribute_08 ,
+		t1.attribute_09 ,
+		t1.attribute_10
+		from csmp_bd_companyinfo t1
+		where t1.id = #{id}
+	</select>
+	<!-- 新增对象 CSMP_BD_COMPANYINFO -->
+	<insert id="insertCsmpBdCompanyinfo"
+		parameterType="avicit.csmp.basicData.csmpbdcompanyinfo.dto.CsmpBdCompanyinfoDTO">
+		insert into csmp_bd_companyinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="nodeId != null">
+				node_id,
+			</if>
+			<if test="deptId != null">
+				dept_id,
+			</if>
+			<if test="companyCode != null">
+				company_code,
+			</if>
+			<if test="companyName != null">
+				company_name,
+			</if>
+			<if test="nameEn != null">
+				name_en,
+			</if>
+			<if test="shortName != null">
+				short_name,
+			</if>
+			<if test="shortNameEn != null">
+				short_name_en,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="receiveAddress != null">
+				receive_address,
+			</if>
+			<if test="companyType != null">
+				company_type,
+			</if>
+			<if test="companyLevel != null">
+				company_level,
+			</if>
+			<if test="country != null">
+				country,
+			</if>
+			<if test="province != null">
+				province,
+			</if>
+			<if test="setupdate != null">
+				setupdate,
+			</if>
+			<if test="businessNature != null">
+				business_nature,
+			</if>
+			<if test="operatingStatus != null">
+				operating_status,
+			</if>
+			<if test="language != null">
+				language,
+			</if>
+			<if test="telephone != null">
+				telephone,
+			</if>
+			<if test="fax != null">
+				fax,
+			</if>
+			<if test="mail != null">
+				mail,
+			</if>
+			<if test="accountName != null">
+				account_name,
+			</if>
+			<if test="accountId != null">
+				account_id,
+			</if>
+			<if test="accountAddress != null">
+				account_address,
+			</if>
+			<if test="accountTel != null">
+				account_tel,
+			</if>
+			<if test="accountBankName != null">
+				account_bank_name,
+			</if>
+			<if test="accountNo != null">
+				account_no,
+			</if>
+			<if test="describe != null">
+				describe,
+			</if>
+			<if test="contacts != null">
+				contacts,
+			</if>
+			<if test="serviceRepresentative != null">
+				service_representative,
+			</if>
+			<if test="legalPerson != null">
+				legal_person,
+			</if>
+			<if test="clClientCode != null">
+				cl_client_code,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="creationDate != null">
+				creation_date,
+			</if>
+			<if test="lastUpdatedBy != null">
+				last_updated_by,
+			</if>
+			<if test="lastUpdateDate != null">
+				last_update_date,
+			</if>
+			<if test="lastUpdateIp != null">
+				last_update_ip,
+			</if>
+			<if test="heatSort != null">
+				heat_sort,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+			<if test="attribute01 != null">
+				attribute_01,
+			</if>
+			<if test="attribute02 != null">
+				attribute_02,
+			</if>
+			<if test="attribute03 != null">
+				attribute_03,
+			</if>
+			<if test="attribute04 != null">
+				attribute_04,
+			</if>
+			<if test="attribute05 != null">
+				attribute_05,
+			</if>
+			<if test="attribute06 != null">
+				attribute_06,
+			</if>
+			<if test="attribute07 != null">
+				attribute_07,
+			</if>
+			<if test="attribute08 != null">
+				attribute_08,
+			</if>
+			<if test="attribute09 != null">
+				attribute_09,
+			</if>
+			<if test="attribute10 != null">
+				attribute_10,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="nodeId != null">
+				#{nodeId,jdbcType=VARCHAR},
+			</if>
+			<if test="deptId != null">
+				#{deptId,jdbcType=VARCHAR},
+			</if>
+			<if test="companyCode != null">
+				#{companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="companyName != null">
+				#{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="nameEn != null">
+				#{nameEn,jdbcType=VARCHAR},
+			</if>
+			<if test="shortName != null">
+				#{shortName,jdbcType=VARCHAR},
+			</if>
+			<if test="shortNameEn != null">
+				#{shortNameEn,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="receiveAddress != null">
+				#{receiveAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="companyType != null">
+				#{companyType,jdbcType=VARCHAR},
+			</if>
+			<if test="companyLevel != null">
+				#{companyLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="country != null">
+				#{country,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				#{province,jdbcType=VARCHAR},
+			</if>
+			<if test="setupdate != null">
+				#{setupdate,jdbcType=DATE},
+			</if>
+			<if test="businessNature != null">
+				#{businessNature,jdbcType=VARCHAR},
+			</if>
+			<if test="operatingStatus != null">
+				#{operatingStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="language != null">
+				#{language,jdbcType=VARCHAR},
+			</if>
+			<if test="telephone != null">
+				#{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null">
+				#{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="mail != null">
+				#{mail,jdbcType=VARCHAR},
+			</if>
+			<if test="accountName != null">
+				#{accountName,jdbcType=VARCHAR},
+			</if>
+			<if test="accountId != null">
+				#{accountId,jdbcType=VARCHAR},
+			</if>
+			<if test="accountAddress != null">
+				#{accountAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="accountTel != null">
+				#{accountTel,jdbcType=VARCHAR},
+			</if>
+			<if test="accountBankName != null">
+				#{accountBankName,jdbcType=VARCHAR},
+			</if>
+			<if test="accountNo != null">
+				#{accountNo,jdbcType=VARCHAR},
+			</if>
+			<if test="describe != null">
+				#{describe,jdbcType=VARCHAR},
+			</if>
+			<if test="contacts != null">
+				#{contacts,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceRepresentative != null">
+				#{serviceRepresentative,jdbcType=VARCHAR},
+			</if>
+			<if test="legalPerson != null">
+				#{legalPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="clClientCode != null">
+				#{clClientCode,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="heatSort != null">
+				#{heatSort,jdbcType=DECIMAL},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute01 != null">
+				#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				#{attribute10,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- 更新对象 CSMP_BD_COMPANYINFO -->
+	<update id="updateCsmpBdCompanyinfoSensitive"
+		parameterType="avicit.csmp.basicData.csmpbdcompanyinfo.dto.CsmpBdCompanyinfoDTO">
+		update csmp_bd_companyinfo t1
+		<set>
+			<if test="id != null">
+				t1.id =#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="nodeId != null">
+				t1.node_id =#{nodeId,jdbcType=VARCHAR},
+			</if>
+			<if test="deptId != null">
+				t1.dept_id =#{deptId,jdbcType=VARCHAR},
+			</if>
+			<if test="companyCode != null">
+				t1.company_code =#{companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="companyName != null">
+				t1.company_name =#{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="nameEn != null">
+				t1.name_en =#{nameEn,jdbcType=VARCHAR},
+			</if>
+			<if test="shortName != null">
+				t1.short_name =#{shortName,jdbcType=VARCHAR},
+			</if>
+			<if test="shortNameEn != null">
+				t1.short_name_en =#{shortNameEn,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				t1.address =#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="receiveAddress != null">
+				t1.receive_address =#{receiveAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="companyType != null">
+				t1.company_type =#{companyType,jdbcType=VARCHAR},
+			</if>
+			<if test="companyLevel != null">
+				t1.company_level =#{companyLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="country != null">
+				t1.country =#{country,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				t1.province =#{province,jdbcType=VARCHAR},
+			</if>
+			<if test="setupdate != null">
+				t1.setupdate =#{setupdate,jdbcType=DATE},
+			</if>
+			<if test="businessNature != null">
+				t1.business_nature =#{businessNature,jdbcType=VARCHAR},
+			</if>
+			<if test="operatingStatus != null">
+				t1.operating_status =#{operatingStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="language != null">
+				t1.language =#{language,jdbcType=VARCHAR},
+			</if>
+			<if test="telephone != null">
+				t1.telephone =#{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null">
+				t1.fax =#{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="mail != null">
+				t1.mail =#{mail,jdbcType=VARCHAR},
+			</if>
+			<if test="accountName != null">
+				t1.account_name =#{accountName,jdbcType=VARCHAR},
+			</if>
+			<if test="accountId != null">
+				t1.account_id =#{accountId,jdbcType=VARCHAR},
+			</if>
+			<if test="accountAddress != null">
+				t1.account_address =#{accountAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="accountTel != null">
+				t1.account_tel =#{accountTel,jdbcType=VARCHAR},
+			</if>
+			<if test="accountBankName != null">
+				t1.account_bank_name
+				=#{accountBankName,jdbcType=VARCHAR},
+			</if>
+			<if test="accountNo != null">
+				t1.account_no =#{accountNo,jdbcType=VARCHAR},
+			</if>
+			<if test="describe != null">
+				t1.describe =#{describe,jdbcType=VARCHAR},
+			</if>
+			<if test="contacts != null">
+				t1.contacts =#{contacts,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceRepresentative != null">
+				t1.service_representative
+				=#{serviceRepresentative,jdbcType=VARCHAR},
+			</if>
+			<if test="legalPerson != null">
+				t1.legal_person =#{legalPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="clClientCode != null">
+				t1.cl_client_code =#{clClientCode,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				t1.remark =#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				t1.created_by =#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				t1.creation_date =#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				t1.last_updated_by =#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				t1.last_update_date =#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				t1.last_update_ip =#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="heatSort != null">
+				t1.heat_sort =#{heatSort,jdbcType=DECIMAL},
+			</if>
+			<if test="version != null">
+				t1.version =t1.version+1,
+			</if>
+			<if test="attribute01 != null">
+				t1.attribute_01 =#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				t1.attribute_02 =#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				t1.attribute_03 =#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				t1.attribute_04 =#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				t1.attribute_05 =#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				t1.attribute_06 =#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				t1.attribute_07 =#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				t1.attribute_08 =#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				t1.attribute_09 =#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				t1.attribute_10 =#{attribute10,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where t1.id = #{id} and t1.version =#{version}
+	</update>
+	<!-- 更新对象 CSMP_BD_COMPANYINFO -->
+	<update id="updateCsmpBdCompanyinfoAll"
+		parameterType="avicit.csmp.basicData.csmpbdcompanyinfo.dto.CsmpBdCompanyinfoDTO">
+		update csmp_bd_companyinfo t1
+		set
+		t1.id
+		=#{id,jdbcType=VARCHAR},
+		t1.node_id =#{nodeId,jdbcType=VARCHAR},
+		t1.dept_id =#{deptId,jdbcType=VARCHAR},
+		t1.company_code
+		=#{companyCode,jdbcType=VARCHAR},
+		t1.company_name
+		=#{companyName,jdbcType=VARCHAR},
+		t1.name_en
+		=#{nameEn,jdbcType=VARCHAR},
+		t1.short_name
+		=#{shortName,jdbcType=VARCHAR},
+		t1.short_name_en
+		=#{shortNameEn,jdbcType=VARCHAR},
+		t1.address
+		=#{address,jdbcType=VARCHAR},
+		t1.receive_address
+		=#{receiveAddress,jdbcType=VARCHAR},
+		t1.company_type
+		=#{companyType,jdbcType=VARCHAR},
+		t1.company_level
+		=#{companyLevel,jdbcType=VARCHAR},
+		t1.country
+		=#{country,jdbcType=VARCHAR},
+		t1.province
+		=#{province,jdbcType=VARCHAR},
+		t1.setupdate
+		=#{setupdate,jdbcType=DATE},
+		t1.business_nature
+		=#{businessNature,jdbcType=VARCHAR},
+		t1.operating_status
+		=#{operatingStatus,jdbcType=VARCHAR},
+		t1.language
+		=#{language,jdbcType=VARCHAR},
+		t1.telephone
+		=#{telephone,jdbcType=VARCHAR},
+		t1.fax =#{fax,jdbcType=VARCHAR},
+		t1.mail =#{mail,jdbcType=VARCHAR},
+		t1.account_name
+		=#{accountName,jdbcType=VARCHAR},
+		t1.account_id
+		=#{accountId,jdbcType=VARCHAR},
+		t1.account_address
+		=#{accountAddress,jdbcType=VARCHAR},
+		t1.account_tel
+		=#{accountTel,jdbcType=VARCHAR},
+		t1.account_bank_name
+		=#{accountBankName,jdbcType=VARCHAR},
+		t1.account_no
+		=#{accountNo,jdbcType=VARCHAR},
+		t1.describe
+		=#{describe,jdbcType=VARCHAR},
+		t1.contacts
+		=#{contacts,jdbcType=VARCHAR},
+		t1.service_representative
+		=#{serviceRepresentative,jdbcType=VARCHAR},
+		t1.legal_person
+		=#{legalPerson,jdbcType=VARCHAR},
+		t1.cl_client_code
+		=#{clClientCode,jdbcType=VARCHAR},
+		t1.remark
+		=#{remark,jdbcType=VARCHAR},
+		t1.created_by
+		=#{createdBy,jdbcType=VARCHAR},
+		t1.creation_date =#{dto.creationDate},
+		t1.last_updated_by =#{lastUpdatedBy,jdbcType=VARCHAR},
+		t1.last_update_date =#{dto.lastUpdateDate},
+		t1.last_update_ip
+		=#{lastUpdateIp,jdbcType=VARCHAR},
+		t1.heat_sort =#{heatSort,jdbcType=DECIMAL},
+		t1.version =t1.version+1,
+		t1.attribute_01 =#{attribute01,jdbcType=VARCHAR},
+		t1.attribute_02
+		=#{attribute02,jdbcType=VARCHAR},
+		t1.attribute_03
+		=#{attribute03,jdbcType=VARCHAR},
+		t1.attribute_04
+		=#{attribute04,jdbcType=VARCHAR},
+		t1.attribute_05
+		=#{attribute05,jdbcType=VARCHAR},
+		t1.attribute_06
+		=#{attribute06,jdbcType=VARCHAR},
+		t1.attribute_07
+		=#{attribute07,jdbcType=VARCHAR},
+		t1.attribute_08
+		=#{attribute08,jdbcType=VARCHAR},
+		t1.attribute_09
+		=#{attribute09,jdbcType=VARCHAR},
+		t1.attribute_10
+		=#{attribute10,jdbcType=VARCHAR},
+		where t1.id = #{id} and t1.version
+		=#{version}
+	</update>
+	<!-- 主键删除 CSMP_BD_COMPANYINFO -->
+	<delete id="deleteCsmpBdCompanyinfoById" parameterType="java.lang.String">
+		delete
+		from csmp_bd_companyinfo where id = #{id} 
+	</delete>
+	<!-- 删除时提示先删除关系表中的数据 -->
+	<delete id="deleteCsmpBdCompanyinfoBy" parameterType="java.lang.String">
+		delete
+		from csmp_bd_companyinfo where id = #{id} 
+	</delete>
+	
+	
+	
+	<!--查询一个信息树 -->
+	<select id="getTree" resultMap="CsmpBdCompanyinfoDTOMap">
+		select
+		t1.id ,
+		t1.node_id ,
+		t1.dept_id ,
+		t1.company_code ,
+		t1.company_name ,
+		t1.name_en ,
+		t1.short_name ,
+		t1.short_name_en ,
+		t1.address ,
+		t1.receive_address ,
+		t1.company_type ,
+		t1.company_level ,
+		t1.country ,
+		t1.province ,
+		t1.setupdate ,
+		t1.business_nature ,
+		t1.operating_status ,
+		t1.language ,
+		t1.telephone ,
+		t1.fax ,
+		t1.mail ,
+		t1.account_name ,
+		t1.account_id ,
+		t1.account_address ,
+		t1.account_tel ,
+		t1.account_bank_name ,
+		t1.account_no ,
+		t1.describe ,
+		t1.contacts ,
+		t1.service_representative ,
+		t1.legal_person ,
+		t1.cl_client_code ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.heat_sort ,
+		t1.version ,
+		t1.attribute_01 ,
+		t1.attribute_02 ,
+		t1.attribute_03 ,
+		t1.attribute_04 ,
+		t1.attribute_05 ,
+		t1.attribute_06 ,
+		t1.attribute_07 ,
+		t1.attribute_08 ,
+		t1.attribute_09 ,
+		t1.attribute_10
+		from csmp_bd_companyinfo t1
+	</select>
+	<!-- 根据一个树的id来查询类型为客户的所有的单位-->
+	<select id="selectByTreeId"  parameterType="string" resultMap="CsmpBdCompanyinfoDTOMap">
+	select distinct t1.id , t1.company_name from CSMP_BD_COMPANYINFO t1 left join CSMP_BD_COM_STR t2 on t1.id = t2.com_id  left join
+	 CSMP_BD_COMPANYSTRUCTURE t3 on t3.id = t2.str_id where t3.catalog_type=#{catalogType}
+
+</select>
+
+
+
+	
+	
+	<!-- 根据公司ID查询机型架次信息和所有客户名称-->
+<select id="selectCsmpBdCompanyinfoByToComId"  parameterType="java.lang.String" resultMap="CsmpBdCompanyinfoDTOMap">
+	select comp.id ,
+		comp.node_id ,
+		comp.dept_id ,
+		comp.company_code ,
+		comp.company_name ,
+		comp.name_en ,
+		comp.short_name ,
+		comp.short_name_en ,
+		comp.address ,
+		comp.receive_address ,
+		comp.company_type ,
+		comp.company_level ,
+		comp.country ,
+		comp.province ,
+		comp.setupdate ,
+		comp.business_nature ,
+		comp.operating_status ,
+		comp.language ,
+		comp.telephone ,
+		comp.fax ,
+		comp.mail ,
+		comp.account_name ,
+		comp.account_id ,
+		comp.account_address ,
+		comp.account_tel ,
+		comp.account_bank_name ,
+		comp.account_no ,
+		comp.describe ,
+		comp.contacts ,
+		comp.service_representative ,
+		comp.legal_person ,
+		comp.cl_client_code ,
+		comp.remark ,
+		comp.created_by ,
+		comp.creation_date ,
+		comp.last_updated_by ,
+		comp.last_update_date ,
+		comp.last_update_ip ,
+		comp.heat_sort ,
+		comp.version ,
+		comp.attribute_01 ,
+		comp.attribute_02 ,
+		comp.attribute_03 ,
+		comp.attribute_04 ,
+		comp.attribute_05 ,
+		comp.attribute_06 ,
+		comp.attribute_07 ,
+		comp.attribute_08 ,
+		comp.attribute_09 ,
+		comp.attribute_10 ,
+	       info.id as aricarftId,
+	       info.batch_no as batchNoName,
+	       moel.id as aricarftmodelId,
+	       moel.model_name as modelName
+	  from csmp_bd_companyinfo comp
+	 inner join csmp_bd_aircraftinfo info
+	    on comp.id = info.company_id
+	 inner join csmp_bd_aricarftmodel moel
+	    on info.model_id = moel.id
+	 inner join csmp_bd_com_str str
+	    on str.com_id = comp.id where 1=1 
+	      and str.com_type = #{comType}
+</select>
+<select id="searchInfoByContacts" parameterType="java.lang.String" resultMap="CsmpBdCompanyinfoDTOMap">
+	select distinct T1.company_code, T1.id, T1.node_id, T1.dept_id, T1.company_name,
+	T1.name_en, T1.short_name, T1.short_name_en, T1.address, T1.receive_address,
+	T1.company_level, T1.country, T1.province, T1.setupdate, T1.business_nature,
+	T1.operating_status, T1.language,T1.heat_sort, T1.telephone, T1.fax, T1.mail, T1.account_name, T1.account_id,
+	T1.account_address, T1.account_tel, T1.account_bank_name, T1.account_no, T1.describe, T2.COM_TYPE AS company_type,
+	T1.contacts, T1.service_representative, T1.legal_person, T1.cl_client_code, T1.remark from csmp_bd_companyinfo T1
+	INNER JOIN CSMP_BD_COM_STR T2 ON T2.COM_ID = T1.ID WHERE T2.COM_TYPE = 'customer' and t1.contacts = #{id} 
+</select>	
+<select id="searchCsmpEsNoticeinfoEffectiveCountNameByPage" parameterType="java.lang.String" resultMap="CsmpBdCompanyinfoDTOMap">
+	select distinct  t.company_name,t.name_en,t.short_name,t.address from HDKF.HDKF_BD_COMPANYINFO t,HDKF_ES_NOTICEINFO_EFFECTIVE t1
+where t.id = t1.customer_id and t1.bulletin_id =  #{id}
+</select>
+</mapper>

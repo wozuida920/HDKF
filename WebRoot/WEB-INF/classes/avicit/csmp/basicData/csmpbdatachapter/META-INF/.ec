@@ -1,0 +1,10 @@
+component.id=null
+component.path=csmpbdatachapter
+component.name=ATAChapter
+component.version=null
+component.type=null
+component.modules=
+component.service=
+component.dao=
+component.auto=false
+component.iscomp=false

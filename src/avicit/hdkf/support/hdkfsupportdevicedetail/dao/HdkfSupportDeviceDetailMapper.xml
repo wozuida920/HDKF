@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="avicit.hdkf.support.hdkfsupportdevicedetail.dao.HdkfSupportDeviceDetailDao">
+
+<resultMap id="HdkfSupportDeviceDetailDTOMap" type="avicit.hdkf.support.hdkfsupportdevicedetail.dto.HdkfSupportDeviceDetailDTO">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="taskId" column="TASK_ID" jdbcType="VARCHAR" />
+		<result property="taskNo" column="TASK_NO" jdbcType="VARCHAR" />
+		<result property="deviceNo" column="DEVICE_NO" jdbcType="VARCHAR" />
+		<result property="deviceName" column="DEVICE_NAME" jdbcType="VARCHAR" />
+		<result property="deviceType" column="DEVICE_TYPE" jdbcType="VARCHAR" />
+		<result property="singleNumber" column="SINGLE_NUMBER" jdbcType="DECIMAL" />
+		<result property="unit" column="UNIT" jdbcType="VARCHAR" />
+		<result property="price" column="PRICE" jdbcType="DECIMAL" />
+		<result property="specifications" column="SPECIFICATIONS" jdbcType="VARCHAR" />
+		<result property="liabilityUnit" column="LIABILITY_UNIT" jdbcType="VARCHAR" />
+		<result property="categorys" column="CATEGORYS" jdbcType="VARCHAR" />
+		<result property="isRandompart" column="IS_RANDOMPART" jdbcType="VARCHAR" />
+		<result property="validateFlag" column="VALIDATE_FLAG" jdbcType="VARCHAR" />
+		<result property="serOwned" column="SER_OWNED" jdbcType="VARCHAR" />
+		<result property="remark" column="REMARK" jdbcType="VARCHAR" />
+		<result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR" />
+		<result property="creationDate" column="CREATION_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdatedBy" column="LAST_UPDATED_BY" jdbcType="VARCHAR" />
+		<result property="lastUpdateDate" column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdateIp" column="LAST_UPDATE_IP" jdbcType="VARCHAR" />
+		<result property="version" column="VERSION" jdbcType="DECIMAL" />
+		<result property="attribute01" column="ATTRIBUTE_01" jdbcType="VARCHAR" />
+		<result property="attribute02" column="ATTRIBUTE_02" jdbcType="VARCHAR" />
+		<result property="attribute03" column="ATTRIBUTE_03" jdbcType="VARCHAR" />
+		<result property="attribute04" column="ATTRIBUTE_04" jdbcType="VARCHAR" />
+		<result property="attribute05" column="ATTRIBUTE_05" jdbcType="VARCHAR" />
+		<result property="attribute06" column="ATTRIBUTE_06" jdbcType="VARCHAR" />
+		<result property="attribute07" column="ATTRIBUTE_07" jdbcType="VARCHAR" />
+		<result property="attribute08" column="ATTRIBUTE_08" jdbcType="VARCHAR" />
+		<result property="attribute09" column="ATTRIBUTE_09" jdbcType="VARCHAR" />
+		<result property="attribute10" column="ATTRIBUTE_10" jdbcType="VARCHAR" />
+		<result property="attribute11" column="ATTRIBUTE_11" jdbcType="DECIMAL" />
+		<result property="attribute12" column="ATTRIBUTE_12" jdbcType="DECIMAL" />
+		<result property="attribute13" column="ATTRIBUTE_13" jdbcType="TIMESTAMP" />
+		<result property="attribute14" column="ATTRIBUTE_14" jdbcType="TIMESTAMP" />
+</resultMap>
+<!-- 分页查询 HDKF_SUPPORT_DEVICE_DETAIL -->
+<select id="searchHdkfSupportDeviceDetailByPage" parameterType="java.util.Map" resultMap="HdkfSupportDeviceDetailDTOMap">
+	select
+		t1.id                             ,
+		t1.task_id                        ,
+		t1.task_no                        ,
+		t1.device_no                      ,
+		t1.device_name                    ,
+		t1.device_type                    ,
+		t1.single_number                  ,
+		t1.unit                           ,
+		t1.price                          ,
+		t1.specifications                 ,
+		t1.liability_unit                 ,
+		t1.categorys                      ,
+		t1.is_randompart                  ,
+		t1.validate_flag                  ,
+		t1.ser_owned                      ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_support_device_detail 	t1
+		<where>
+			<if test="bean != null">
+			<if test="bean.id != null and bean.id != ''">
+				and t1.ID like '%'||#{bean.id}||'%'
+			</if>
+			<if test="bean.taskId != null and bean.taskId != ''">
+				and t1.TASK_ID like '%'||#{bean.taskId}||'%'
+			</if>
+			<if test="bean.taskNo != null and bean.taskNo != ''">
+				and t1.TASK_NO like '%'||#{bean.taskNo}||'%'
+			</if>
+			<if test="bean.deviceNo != null and bean.deviceNo != ''">
+				and t1.DEVICE_NO like '%'||#{bean.deviceNo}||'%'
+			</if>
+			<if test="bean.deviceName != null and bean.deviceName != ''">
+				and t1.DEVICE_NAME like '%'||#{bean.deviceName}||'%'
+			</if>
+			<if test="bean.deviceType != null and bean.deviceType != ''">
+				and t1.DEVICE_TYPE like '%'||#{bean.deviceType}||'%'
+			</if>
+			<if test="bean.singleNumber != null and bean.singleNumber != ''">
+				and t1.SINGLE_NUMBER like '%'||#{bean.singleNumber}||'%'
+			</if>
+			<if test="bean.unit != null and bean.unit != ''">
+				and t1.UNIT like '%'||#{bean.unit}||'%'
+			</if>
+			<if test="bean.price != null and bean.price != ''">
+				and t1.PRICE like '%'||#{bean.price}||'%'
+			</if>
+			<if test="bean.specifications != null and bean.specifications != ''">
+				and t1.SPECIFICATIONS like '%'||#{bean.specifications}||'%'
+			</if>
+			<if test="bean.liabilityUnit != null and bean.liabilityUnit != ''">
+				and t1.LIABILITY_UNIT like '%'||#{bean.liabilityUnit}||'%'
+			</if>
+			<if test="bean.categorys != null and bean.categorys != ''">
+				and t1.CATEGORYS like '%'||#{bean.categorys}||'%'
+			</if>
+			<if test="bean.isRandompart != null and bean.isRandompart != ''">
+				and t1.IS_RANDOMPART like '%'||#{bean.isRandompart}||'%'
+			</if>
+			<if test="bean.validateFlag != null and bean.validateFlag != ''">
+				and t1.VALIDATE_FLAG like '%'||#{bean.validateFlag}||'%'
+			</if>
+			<if test="bean.serOwned != null and bean.serOwned != ''">
+				and t1.SER_OWNED like '%'||#{bean.serOwned}||'%'
+			</if>
+			<if test="bean.remark != null and bean.remark != ''">
+				and t1.REMARK like '%'||#{bean.remark}||'%'
+			</if>
+			<if test="bean.createdBy != null and bean.createdBy != ''">
+				and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+			</if>
+			<if test="bean.creationDate != null and bean.creationDate != ''">
+				and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+			</if>
+			<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+			</if>
+			<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+			</if>
+			<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+			</if>
+			<if test="bean.version != null and bean.version != ''">
+				and t1.VERSION like '%'||#{bean.version}||'%'
+			</if>
+			<if test="bean.attribute01 != null and bean.attribute01 != ''">
+				and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+			</if>
+			<if test="bean.attribute02 != null and bean.attribute02 != ''">
+				and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+			</if>
+			<if test="bean.attribute03 != null and bean.attribute03 != ''">
+				and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+			</if>
+			<if test="bean.attribute04 != null and bean.attribute04 != ''">
+				and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+			</if>
+			<if test="bean.attribute05 != null and bean.attribute05 != ''">
+				and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+			</if>
+			<if test="bean.attribute06 != null and bean.attribute06 != ''">
+				and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+			</if>
+			<if test="bean.attribute07 != null and bean.attribute07 != ''">
+				and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+			</if>
+			<if test="bean.attribute08 != null and bean.attribute08 != ''">
+				and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+			</if>
+			<if test="bean.attribute09 != null and bean.attribute09 != ''">
+				and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+			</if>
+			<if test="bean.attribute10 != null and bean.attribute10 != ''">
+				and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+			</if>
+			<if test="bean.attribute11 != null and bean.attribute11 != ''">
+				and t1.ATTRIBUTE_11 like '%'||#{bean.attribute11}||'%'
+			</if>
+			<if test="bean.attribute12 != null and bean.attribute12 != ''">
+				and t1.ATTRIBUTE_12 like '%'||#{bean.attribute12}||'%'
+			</if>
+			<if test="bean.attribute13 != null and bean.attribute13 != ''">
+				and t1.ATTRIBUTE_13 like '%'||#{bean.attribute13}||'%'
+			</if>
+			<if test="bean.attribute14 != null and bean.attribute14 != ''">
+				and t1.ATTRIBUTE_14 like '%'||#{bean.attribute14}||'%'
+			</if>
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}			
+			</if>
+		</where>
+			order by t1.creation_date desc
+</select>
+<!-- 查询列表 HDKF_SUPPORT_DEVICE_DETAIL -->
+<select id="searchHdkfSupportDeviceDetail" parameterType="java.util.Map" resultMap="HdkfSupportDeviceDetailDTOMap">
+	select
+		t1.id                             ,
+		t1.task_id                        ,
+		t1.task_no                        ,
+		t1.device_no                      ,
+		t1.device_name                    ,
+		t1.device_type                    ,
+		t1.single_number                  ,
+		t1.unit                           ,
+		t1.price                          ,
+		t1.specifications                 ,
+		t1.liability_unit                 ,
+		t1.categorys                      ,
+		t1.is_randompart                  ,
+		t1.validate_flag                  ,
+		t1.ser_owned                      ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_support_device_detail 	t1
+		<where>
+			<if test="id != null and id != ''">
+				and t1.ID =#{id}
+			</if>
+			<if test="taskId != null and taskId != ''">
+				and t1.TASK_ID =#{taskId}
+			</if>
+			<if test="taskNo != null and taskNo != ''">
+				and t1.TASK_NO =#{taskNo}
+			</if>
+			<if test="deviceNo != null and deviceNo != ''">
+				and t1.DEVICE_NO =#{deviceNo}
+			</if>
+			<if test="deviceName != null and deviceName != ''">
+				and t1.DEVICE_NAME =#{deviceName}
+			</if>
+			<if test="deviceType != null and deviceType != ''">
+				and t1.DEVICE_TYPE =#{deviceType}
+			</if>
+			<if test="singleNumber != null and singleNumber != ''">
+				and t1.SINGLE_NUMBER =#{singleNumber}
+			</if>
+			<if test="unit != null and unit != ''">
+				and t1.UNIT =#{unit}
+			</if>
+			<if test="price != null and price != ''">
+				and t1.PRICE =#{price}
+			</if>
+			<if test="specifications != null and specifications != ''">
+				and t1.SPECIFICATIONS =#{specifications}
+			</if>
+			<if test="liabilityUnit != null and liabilityUnit != ''">
+				and t1.LIABILITY_UNIT =#{liabilityUnit}
+			</if>
+			<if test="categorys != null and categorys != ''">
+				and t1.CATEGORYS =#{categorys}
+			</if>
+			<if test="isRandompart != null and isRandompart != ''">
+				and t1.IS_RANDOMPART =#{isRandompart}
+			</if>
+			<if test="validateFlag != null and validateFlag != ''">
+				and t1.VALIDATE_FLAG =#{validateFlag}
+			</if>
+			<if test="serOwned != null and serOwned != ''">
+				and t1.SER_OWNED =#{serOwned}
+			</if>
+			<if test="remark != null and remark != ''">
+				and t1.REMARK =#{remark}
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				and t1.CREATED_BY =#{createdBy}
+			</if>
+			<if test="creationDate != null and creationDate != ''">
+				and t1.CREATION_DATE =#{creationDate}
+			</if>
+			<if test="lastUpdatedBy != null and lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY =#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdateDate != null and lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE =#{lastUpdateDate}
+			</if>
+			<if test="lastUpdateIp != null and lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP =#{lastUpdateIp}
+			</if>
+			<if test="version != null and version != ''">
+				and t1.VERSION =#{version}
+			</if>
+			<if test="attribute01 != null and attribute01 != ''">
+				and t1.ATTRIBUTE_01 =#{attribute01}
+			</if>
+			<if test="attribute02 != null and attribute02 != ''">
+				and t1.ATTRIBUTE_02 =#{attribute02}
+			</if>
+			<if test="attribute03 != null and attribute03 != ''">
+				and t1.ATTRIBUTE_03 =#{attribute03}
+			</if>
+			<if test="attribute04 != null and attribute04 != ''">
+				and t1.ATTRIBUTE_04 =#{attribute04}
+			</if>
+			<if test="attribute05 != null and attribute05 != ''">
+				and t1.ATTRIBUTE_05 =#{attribute05}
+			</if>
+			<if test="attribute06 != null and attribute06 != ''">
+				and t1.ATTRIBUTE_06 =#{attribute06}
+			</if>
+			<if test="attribute07 != null and attribute07 != ''">
+				and t1.ATTRIBUTE_07 =#{attribute07}
+			</if>
+			<if test="attribute08 != null and attribute08 != ''">
+				and t1.ATTRIBUTE_08 =#{attribute08}
+			</if>
+			<if test="attribute09 != null and attribute09 != ''">
+				and t1.ATTRIBUTE_09 =#{attribute09}
+			</if>
+			<if test="attribute10 != null and attribute10 != ''">
+				and t1.ATTRIBUTE_10 =#{attribute10}
+			</if>
+			<if test="attribute11 != null and attribute11 != ''">
+				and t1.ATTRIBUTE_11 =#{attribute11}
+			</if>
+			<if test="attribute12 != null and attribute12 != ''">
+				and t1.ATTRIBUTE_12 =#{attribute12}
+			</if>
+			<if test="attribute13 != null and attribute13 != ''">
+				and t1.ATTRIBUTE_13 =#{attribute13}
+			</if>
+			<if test="attribute14 != null and attribute14 != ''">
+				and t1.ATTRIBUTE_14 =#{attribute14}
+			</if>
+		</where>
+</select>
+<!-- 主键查询对象 HDKF_SUPPORT_DEVICE_DETAIL -->
+<select id="findHdkfSupportDeviceDetailById" parameterType="java.util.Map" resultMap="HdkfSupportDeviceDetailDTOMap">
+	select
+		t1.id                             ,
+		t1.task_id                        ,
+		t1.task_no                        ,
+		t1.device_no                      ,
+		t1.device_name                    ,
+		t1.device_type                    ,
+		t1.single_number                  ,
+		t1.unit                           ,
+		t1.price                          ,
+		t1.specifications                 ,
+		t1.liability_unit                 ,
+		t1.categorys                      ,
+		t1.is_randompart                  ,
+		t1.validate_flag                  ,
+		t1.ser_owned                      ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_support_device_detail 	t1
+		where t1.id = #{id}
+</select>
+<!-- 新增对象 HDKF_SUPPORT_DEVICE_DETAIL -->
+<insert id="insertHdkfSupportDeviceDetail" parameterType="avicit.hdkf.support.hdkfsupportdevicedetail.dto.HdkfSupportDeviceDetailDTO">
+	insert into hdkf_support_device_detail
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="taskId != null">
+				task_id,
+			</if>
+			<if test="taskNo != null">
+				task_no,
+			</if>
+			<if test="deviceNo != null">
+				device_no,
+			</if>
+			<if test="deviceName != null">
+				device_name,
+			</if>
+			<if test="deviceType != null">
+				device_type,
+			</if>
+			<if test="singleNumber != null">
+				single_number,
+			</if>
+			<if test="unit != null">
+				unit,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="specifications != null">
+				specifications,
+			</if>
+			<if test="liabilityUnit != null">
+				liability_unit,
+			</if>
+			<if test="categorys != null">
+				categorys,
+			</if>
+			<if test="isRandompart != null">
+				is_randompart,
+			</if>
+			<if test="validateFlag != null">
+				validate_flag,
+			</if>
+			<if test="serOwned != null">
+				ser_owned,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="creationDate != null">
+				creation_date,
+			</if>
+			<if test="lastUpdatedBy != null">
+				last_updated_by,
+			</if>
+			<if test="lastUpdateDate != null">
+				last_update_date,
+			</if>
+			<if test="lastUpdateIp != null">
+				last_update_ip,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+			<if test="attribute01 != null">
+				attribute_01,
+			</if>
+			<if test="attribute02 != null">
+				attribute_02,
+			</if>
+			<if test="attribute03 != null">
+				attribute_03,
+			</if>
+			<if test="attribute04 != null">
+				attribute_04,
+			</if>
+			<if test="attribute05 != null">
+				attribute_05,
+			</if>
+			<if test="attribute06 != null">
+				attribute_06,
+			</if>
+			<if test="attribute07 != null">
+				attribute_07,
+			</if>
+			<if test="attribute08 != null">
+				attribute_08,
+			</if>
+			<if test="attribute09 != null">
+				attribute_09,
+			</if>
+			<if test="attribute10 != null">
+				attribute_10,
+			</if>
+			<if test="attribute11 != null">
+				attribute_11,
+			</if>
+			<if test="attribute12 != null">
+				attribute_12,
+			</if>
+			<if test="attribute13 != null">
+				attribute_13,
+			</if>
+			<if test="attribute14 != null">
+				attribute_14,
+			</if>
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="taskId != null">
+				#{taskId,jdbcType=VARCHAR},
+			</if>
+			<if test="taskNo != null">
+				#{taskNo,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceNo != null">
+				#{deviceNo,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceName != null">
+				#{deviceName,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceType != null">
+				#{deviceType,jdbcType=VARCHAR},
+			</if>
+			<if test="singleNumber != null">
+				#{singleNumber,jdbcType=DECIMAL},
+			</if>
+			<if test="unit != null">
+				#{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=DECIMAL},
+			</if>
+			<if test="specifications != null">
+				#{specifications,jdbcType=VARCHAR},
+			</if>
+			<if test="liabilityUnit != null">
+				#{liabilityUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="categorys != null">
+				#{categorys,jdbcType=VARCHAR},
+			</if>
+			<if test="isRandompart != null">
+				#{isRandompart,jdbcType=VARCHAR},
+			</if>
+			<if test="validateFlag != null">
+				#{validateFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="serOwned != null">
+				#{serOwned,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute01 != null">
+				#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute11 != null">
+				#{attribute11,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute12 != null">
+				#{attribute12,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute13 != null">
+				#{attribute13,jdbcType=DATE},
+			</if>
+			<if test="attribute14 != null">
+				#{attribute14,jdbcType=DATE},
+			</if>
+	</trim>
+</insert>
+<!-- 更新对象 HDKF_SUPPORT_DEVICE_DETAIL -->
+<update id="updateHdkfSupportDeviceDetailSensitive" parameterType="avicit.hdkf.support.hdkfsupportdevicedetail.dto.HdkfSupportDeviceDetailDTO">
+	update hdkf_support_device_detail t1
+	<set>
+			<if test="id != null">
+				t1.id                             =#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="taskId != null">
+				t1.task_id                        =#{taskId,jdbcType=VARCHAR},
+			</if>
+			<if test="taskNo != null">
+				t1.task_no                        =#{taskNo,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceNo != null">
+				t1.device_no                      =#{deviceNo,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceName != null">
+				t1.device_name                    =#{deviceName,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceType != null">
+				t1.device_type                    =#{deviceType,jdbcType=VARCHAR},
+			</if>
+			<if test="singleNumber != null">
+				t1.single_number                  =#{singleNumber,jdbcType=DECIMAL},
+			</if>
+			<if test="unit != null">
+				t1.unit                           =#{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				t1.price                          =#{price,jdbcType=DECIMAL},
+			</if>
+			<if test="specifications != null">
+				t1.specifications                 =#{specifications,jdbcType=VARCHAR},
+			</if>
+			<if test="liabilityUnit != null">
+				t1.liability_unit                 =#{liabilityUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="categorys != null">
+				t1.categorys                      =#{categorys,jdbcType=VARCHAR},
+			</if>
+			<if test="isRandompart != null">
+				t1.is_randompart                  =#{isRandompart,jdbcType=VARCHAR},
+			</if>
+			<if test="validateFlag != null">
+				t1.validate_flag                  =#{validateFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="serOwned != null">
+				t1.ser_owned                      =#{serOwned,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				t1.remark                         =#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				t1.creation_date                  =#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				t1.last_update_date               =#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				t1.version                        =t1.version+1,
+			</if>
+			<if test="attribute01 != null">
+				t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute11 != null">
+				t1.attribute_11                   =#{attribute11,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute12 != null">
+				t1.attribute_12                   =#{attribute12,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute13 != null">
+				t1.attribute_13                   =#{attribute13,jdbcType=DATE},
+			</if>
+			<if test="attribute14 != null">
+				t1.attribute_14                   =#{attribute14,jdbcType=DATE},
+			</if>
+	</set>
+		where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 更新对象 HDKF_SUPPORT_DEVICE_DETAIL -->
+<update id="updateHdkfSupportDeviceDetailAll" parameterType="avicit.hdkf.support.hdkfsupportdevicedetail.dto.HdkfSupportDeviceDetailDTO">
+	update hdkf_support_device_detail t1
+		set
+			t1.id                             =#{id,jdbcType=VARCHAR},
+			t1.task_id                        =#{taskId,jdbcType=VARCHAR},
+			t1.task_no                        =#{taskNo,jdbcType=VARCHAR},
+			t1.device_no                      =#{deviceNo,jdbcType=VARCHAR},
+			t1.device_name                    =#{deviceName,jdbcType=VARCHAR},
+			t1.device_type                    =#{deviceType,jdbcType=VARCHAR},
+			t1.single_number                  =#{singleNumber,jdbcType=DECIMAL},
+			t1.unit                           =#{unit,jdbcType=VARCHAR},
+			t1.price                          =#{price,jdbcType=DECIMAL},
+			t1.specifications                 =#{specifications,jdbcType=VARCHAR},
+			t1.liability_unit                 =#{liabilityUnit,jdbcType=VARCHAR},
+			t1.categorys                      =#{categorys,jdbcType=VARCHAR},
+			t1.is_randompart                  =#{isRandompart,jdbcType=VARCHAR},
+			t1.validate_flag                  =#{validateFlag,jdbcType=VARCHAR},
+			t1.ser_owned                      =#{serOwned,jdbcType=VARCHAR},
+			t1.remark                         =#{remark,jdbcType=VARCHAR},
+			t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			t1.creation_date                  =#{creationDate},
+			t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			t1.last_update_date               =#{lastUpdateDate},
+			t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			t1.version                        =t1.version+1,
+			t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			t1.attribute_11                   =#{attribute11,jdbcType=DECIMAL},
+			t1.attribute_12                   =#{attribute12,jdbcType=DECIMAL},
+			t1.attribute_13                   =#{attribute13,jdbcType=DATE},
+			t1.attribute_14                   =#{attribute14,jdbcType=DATE},
+	where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 主键删除 HDKF_SUPPORT_DEVICE_DETAIL -->
+<delete id="deleteHdkfSupportDeviceDetailById" parameterType="java.lang.String">
+		delete from hdkf_support_device_detail  where  id = #{id}
+</delete>
+</mapper>

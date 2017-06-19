@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="avicit.hdkf.support.hdkfsupportfaultdetail.dao.HdkfSupportFaultDetailDao">
+
+<resultMap id="HdkfSupportFaultDetailDTOMap" type="avicit.hdkf.support.hdkfsupportfaultdetail.dto.HdkfSupportFaultDetailDTO">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="batchNo" column="BATCH_NO" jdbcType="VARCHAR" />
+		<result property="modelId" column="MODEL_ID" jdbcType="VARCHAR" />
+		<result property="flightHours" column="FLIGHT_HOURS" jdbcType="DECIMAL" />
+		<result property="flightLanding" column="FLIGHT_LANDING" jdbcType="DECIMAL" />
+		<result property="requestDate" column="REQUEST_DATE" jdbcType="TIMESTAMP" />
+		<result property="occurrenceDate" column="OCCURRENCE_DATE" jdbcType="TIMESTAMP" />
+		<result property="faultDesc" column="FAULT_DESC" jdbcType="VARCHAR" />
+		<result property="dealSolution" column="DEAL_SOLUTION" jdbcType="VARCHAR" />
+		<result property="requestId" column="REQUEST_ID" jdbcType="VARCHAR" />
+		<result property="requestNo" column="REQUEST_NO" jdbcType="VARCHAR" />
+		<result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR" />
+		<result property="creationDate" column="CREATION_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdatedBy" column="LAST_UPDATED_BY" jdbcType="VARCHAR" />
+		<result property="lastUpdateDate" column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdateIp" column="LAST_UPDATE_IP" jdbcType="VARCHAR" />
+		<result property="version" column="VERSION" jdbcType="DECIMAL" />
+		<result property="attribute01" column="ATTRIBUTE_01" jdbcType="VARCHAR" />
+		<result property="attribute02" column="ATTRIBUTE_02" jdbcType="VARCHAR" />
+		<result property="attribute03" column="ATTRIBUTE_03" jdbcType="VARCHAR" />
+		<result property="attribute04" column="ATTRIBUTE_04" jdbcType="VARCHAR" />
+		<result property="attribute05" column="ATTRIBUTE_05" jdbcType="VARCHAR" />
+		<result property="attribute06" column="ATTRIBUTE_06" jdbcType="VARCHAR" />
+		<result property="attribute07" column="ATTRIBUTE_07" jdbcType="VARCHAR" />
+		<result property="attribute08" column="ATTRIBUTE_08" jdbcType="VARCHAR" />
+		<result property="attribute09" column="ATTRIBUTE_09" jdbcType="VARCHAR" />
+		<result property="attribute10" column="ATTRIBUTE_10" jdbcType="VARCHAR" />
+		<result property="attribute11" column="ATTRIBUTE_11" jdbcType="DECIMAL" />
+		<result property="attribute12" column="ATTRIBUTE_12" jdbcType="DECIMAL" />
+		<result property="attribute13" column="ATTRIBUTE_13" jdbcType="TIMESTAMP" />
+		<result property="attribute14" column="ATTRIBUTE_14" jdbcType="TIMESTAMP" />
+</resultMap>
+<!-- 分页查询 HDKF_SUPPORT_FAULT_DETAIL -->
+<select id="searchHdkfSupportFaultDetailByPage" parameterType="java.util.Map" resultMap="HdkfSupportFaultDetailDTOMap">
+	select
+		t1.id                             ,
+		t1.batch_no                       ,
+		t1.model_id                       ,
+		t1.flight_hours                   ,
+		t1.flight_landing                 ,
+		t1.request_date                   ,
+		t1.occurrence_date                ,
+		t1.fault_desc                     ,
+		t1.deal_solution                  ,
+		t1.request_id                     ,
+		t1.request_no                     ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_support_fault_detail 	t1
+		<where>
+			<if test="bean != null">
+			<if test="bean.id != null and bean.id != ''">
+				and t1.ID like '%'||#{bean.id}||'%'
+			</if>
+			<if test="bean.batchNo != null and bean.batchNo != ''">
+				and t1.BATCH_NO like '%'||#{bean.batchNo}||'%'
+			</if>
+			<if test="bean.modelId != null and bean.modelId != ''">
+				and t1.MODEL_ID like '%'||#{bean.modelId}||'%'
+			</if>
+			<if test="bean.flightHours != null and bean.flightHours != ''">
+				and t1.FLIGHT_HOURS like '%'||#{bean.flightHours}||'%'
+			</if>
+			<if test="bean.flightLanding != null and bean.flightLanding != ''">
+				and t1.FLIGHT_LANDING like '%'||#{bean.flightLanding}||'%'
+			</if>
+			<if test="bean.requestDateBegin != null and bean.requestDateBegin != ''">
+				and t1.REQUEST_DATE &gt;= #{bean.requestDateBegin}
+			</if>
+			<if test="bean.requestDateEnd != null and bean.requestDateEnd != ''">
+				and t1.REQUEST_DATE &lt;= #{bean.requestDateEnd}
+			</if>
+			<if test="bean.occurrenceDateBegin != null and bean.occurrenceDateBegin != ''">
+				and t1.OCCURRENCE_DATE &gt;= #{bean.occurrenceDateBegin}
+			</if>
+			<if test="bean.occurrenceDateEnd != null and bean.occurrenceDateEnd != ''">
+				and t1.OCCURRENCE_DATE &lt;= #{bean.occurrenceDateEnd}
+			</if>
+			<if test="bean.faultDesc != null and bean.faultDesc != ''">
+				and t1.FAULT_DESC like '%'||#{bean.faultDesc}||'%'
+			</if>
+			<if test="bean.dealSolution != null and bean.dealSolution != ''">
+				and t1.DEAL_SOLUTION like '%'||#{bean.dealSolution}||'%'
+			</if>
+			<if test="bean.requestId != null and bean.requestId != ''">
+				and t1.REQUEST_ID like '%'||#{bean.requestId}||'%'
+			</if>
+			<if test="bean.requestNo != null and bean.requestNo != ''">
+				and t1.REQUEST_NO like '%'||#{bean.requestNo}||'%'
+			</if>
+			<if test="bean.createdBy != null and bean.createdBy != ''">
+				and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+			</if>
+			<if test="bean.creationDate != null and bean.creationDate != ''">
+				and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+			</if>
+			<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+			</if>
+			<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+			</if>
+			<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+			</if>
+			<if test="bean.version != null and bean.version != ''">
+				and t1.VERSION like '%'||#{bean.version}||'%'
+			</if>
+			<if test="bean.attribute01 != null and bean.attribute01 != ''">
+				and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+			</if>
+			<if test="bean.attribute02 != null and bean.attribute02 != ''">
+				and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+			</if>
+			<if test="bean.attribute03 != null and bean.attribute03 != ''">
+				and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+			</if>
+			<if test="bean.attribute04 != null and bean.attribute04 != ''">
+				and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+			</if>
+			<if test="bean.attribute05 != null and bean.attribute05 != ''">
+				and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+			</if>
+			<if test="bean.attribute06 != null and bean.attribute06 != ''">
+				and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+			</if>
+			<if test="bean.attribute07 != null and bean.attribute07 != ''">
+				and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+			</if>
+			<if test="bean.attribute08 != null and bean.attribute08 != ''">
+				and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+			</if>
+			<if test="bean.attribute09 != null and bean.attribute09 != ''">
+				and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+			</if>
+			<if test="bean.attribute10 != null and bean.attribute10 != ''">
+				and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+			</if>
+			<if test="bean.attribute11 != null and bean.attribute11 != ''">
+				and t1.ATTRIBUTE_11 like '%'||#{bean.attribute11}||'%'
+			</if>
+			<if test="bean.attribute12 != null and bean.attribute12 != ''">
+				and t1.ATTRIBUTE_12 like '%'||#{bean.attribute12}||'%'
+			</if>
+			<if test="bean.attribute13 != null and bean.attribute13 != ''">
+				and t1.ATTRIBUTE_13 like '%'||#{bean.attribute13}||'%'
+			</if>
+			<if test="bean.attribute14 != null and bean.attribute14 != ''">
+				and t1.ATTRIBUTE_14 like '%'||#{bean.attribute14}||'%'
+			</if>
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}			
+			</if>
+		</where>
+			order by t1.creation_date desc
+</select>
+<!-- 查询列表 HDKF_SUPPORT_FAULT_DETAIL -->
+<select id="searchHdkfSupportFaultDetail" parameterType="java.util.Map" resultMap="HdkfSupportFaultDetailDTOMap">
+	select
+		t1.id                             ,
+		t1.batch_no                       ,
+		t1.model_id                       ,
+		t1.flight_hours                   ,
+		t1.flight_landing                 ,
+		t1.request_date                   ,
+		t1.occurrence_date                ,
+		t1.fault_desc                     ,
+		t1.deal_solution                  ,
+		t1.request_id                     ,
+		t1.request_no                     ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_support_fault_detail 	t1
+		<where>
+			<if test="id != null and id != ''">
+				and t1.ID =#{id}
+			</if>
+			<if test="batchNo != null and batchNo != ''">
+				and t1.BATCH_NO =#{batchNo}
+			</if>
+			<if test="modelId != null and modelId != ''">
+				and t1.MODEL_ID =#{modelId}
+			</if>
+			<if test="flightHours != null and flightHours != ''">
+				and t1.FLIGHT_HOURS =#{flightHours}
+			</if>
+			<if test="flightLanding != null and flightLanding != ''">
+				and t1.FLIGHT_LANDING =#{flightLanding}
+			</if>
+			<if test="bean.requestDateBegin != null and bean.requestDateBegin != ''">
+				and t1.REQUEST_DATE &gt;= #{bean.requestDateBegin}
+			</if>
+			<if test="bean.requestDateEnd != null and bean.requestDateEnd != ''">
+				and t1.REQUEST_DATE &lt;= #{bean.requestDateEnd}
+			</if>
+			<if test="bean.occurrenceDateBegin != null and bean.occurrenceDateBegin != ''">
+				and t1.OCCURRENCE_DATE &gt;= #{bean.occurrenceDateBegin}
+			</if>
+			<if test="bean.occurrenceDateEnd != null and bean.occurrenceDateEnd != ''">
+				and t1.OCCURRENCE_DATE &lt;= #{bean.occurrenceDateEnd}
+			</if>
+			<if test="faultDesc != null and faultDesc != ''">
+				and t1.FAULT_DESC =#{faultDesc}
+			</if>
+			<if test="dealSolution != null and dealSolution != ''">
+				and t1.DEAL_SOLUTION =#{dealSolution}
+			</if>
+			<if test="requestId != null and requestId != ''">
+				and t1.REQUEST_ID =#{requestId}
+			</if>
+			<if test="requestNo != null and requestNo != ''">
+				and t1.REQUEST_NO =#{requestNo}
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				and t1.CREATED_BY =#{createdBy}
+			</if>
+			<if test="creationDate != null and creationDate != ''">
+				and t1.CREATION_DATE =#{creationDate}
+			</if>
+			<if test="lastUpdatedBy != null and lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY =#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdateDate != null and lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE =#{lastUpdateDate}
+			</if>
+			<if test="lastUpdateIp != null and lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP =#{lastUpdateIp}
+			</if>
+			<if test="version != null and version != ''">
+				and t1.VERSION =#{version}
+			</if>
+			<if test="attribute01 != null and attribute01 != ''">
+				and t1.ATTRIBUTE_01 =#{attribute01}
+			</if>
+			<if test="attribute02 != null and attribute02 != ''">
+				and t1.ATTRIBUTE_02 =#{attribute02}
+			</if>
+			<if test="attribute03 != null and attribute03 != ''">
+				and t1.ATTRIBUTE_03 =#{attribute03}
+			</if>
+			<if test="attribute04 != null and attribute04 != ''">
+				and t1.ATTRIBUTE_04 =#{attribute04}
+			</if>
+			<if test="attribute05 != null and attribute05 != ''">
+				and t1.ATTRIBUTE_05 =#{attribute05}
+			</if>
+			<if test="attribute06 != null and attribute06 != ''">
+				and t1.ATTRIBUTE_06 =#{attribute06}
+			</if>
+			<if test="attribute07 != null and attribute07 != ''">
+				and t1.ATTRIBUTE_07 =#{attribute07}
+			</if>
+			<if test="attribute08 != null and attribute08 != ''">
+				and t1.ATTRIBUTE_08 =#{attribute08}
+			</if>
+			<if test="attribute09 != null and attribute09 != ''">
+				and t1.ATTRIBUTE_09 =#{attribute09}
+			</if>
+			<if test="attribute10 != null and attribute10 != ''">
+				and t1.ATTRIBUTE_10 =#{attribute10}
+			</if>
+			<if test="attribute11 != null and attribute11 != ''">
+				and t1.ATTRIBUTE_11 =#{attribute11}
+			</if>
+			<if test="attribute12 != null and attribute12 != ''">
+				and t1.ATTRIBUTE_12 =#{attribute12}
+			</if>
+			<if test="attribute13 != null and attribute13 != ''">
+				and t1.ATTRIBUTE_13 =#{attribute13}
+			</if>
+			<if test="attribute14 != null and attribute14 != ''">
+				and t1.ATTRIBUTE_14 =#{attribute14}
+			</if>
+		</where>
+</select>
+<!-- 主键查询对象 HDKF_SUPPORT_FAULT_DETAIL -->
+<select id="findHdkfSupportFaultDetailById" parameterType="java.util.Map" resultMap="HdkfSupportFaultDetailDTOMap">
+	select
+		t1.id                             ,
+		t1.batch_no                       ,
+		t1.model_id                       ,
+		t1.flight_hours                   ,
+		t1.flight_landing                 ,
+		t1.request_date                   ,
+		t1.occurrence_date                ,
+		t1.fault_desc                     ,
+		t1.deal_solution                  ,
+		t1.request_id                     ,
+		t1.request_no                     ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_support_fault_detail 	t1
+		where t1.id = #{id}
+</select>
+<!-- 新增对象 HDKF_SUPPORT_FAULT_DETAIL -->
+<insert id="insertHdkfSupportFaultDetail" parameterType="avicit.hdkf.support.hdkfsupportfaultdetail.dto.HdkfSupportFaultDetailDTO">
+	insert into hdkf_support_fault_detail
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="batchNo != null">
+				batch_no,
+			</if>
+			<if test="modelId != null">
+				model_id,
+			</if>
+			<if test="flightHours != null">
+				flight_hours,
+			</if>
+			<if test="flightLanding != null">
+				flight_landing,
+			</if>
+			<if test="requestDate != null">
+				request_date,
+			</if>
+			<if test="occurrenceDate != null">
+				occurrence_date,
+			</if>
+			<if test="faultDesc != null">
+				fault_desc,
+			</if>
+			<if test="dealSolution != null">
+				deal_solution,
+			</if>
+			<if test="requestId != null">
+				request_id,
+			</if>
+			<if test="requestNo != null">
+				request_no,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="creationDate != null">
+				creation_date,
+			</if>
+			<if test="lastUpdatedBy != null">
+				last_updated_by,
+			</if>
+			<if test="lastUpdateDate != null">
+				last_update_date,
+			</if>
+			<if test="lastUpdateIp != null">
+				last_update_ip,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+			<if test="attribute01 != null">
+				attribute_01,
+			</if>
+			<if test="attribute02 != null">
+				attribute_02,
+			</if>
+			<if test="attribute03 != null">
+				attribute_03,
+			</if>
+			<if test="attribute04 != null">
+				attribute_04,
+			</if>
+			<if test="attribute05 != null">
+				attribute_05,
+			</if>
+			<if test="attribute06 != null">
+				attribute_06,
+			</if>
+			<if test="attribute07 != null">
+				attribute_07,
+			</if>
+			<if test="attribute08 != null">
+				attribute_08,
+			</if>
+			<if test="attribute09 != null">
+				attribute_09,
+			</if>
+			<if test="attribute10 != null">
+				attribute_10,
+			</if>
+			<if test="attribute11 != null">
+				attribute_11,
+			</if>
+			<if test="attribute12 != null">
+				attribute_12,
+			</if>
+			<if test="attribute13 != null">
+				attribute_13,
+			</if>
+			<if test="attribute14 != null">
+				attribute_14,
+			</if>
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="batchNo != null">
+				#{batchNo,jdbcType=VARCHAR},
+			</if>
+			<if test="modelId != null">
+				#{modelId,jdbcType=VARCHAR},
+			</if>
+			<if test="flightHours != null">
+				#{flightHours,jdbcType=DECIMAL},
+			</if>
+			<if test="flightLanding != null">
+				#{flightLanding,jdbcType=DECIMAL},
+			</if>
+			<if test="requestDate != null">
+				#{requestDate,jdbcType=DATE},
+			</if>
+			<if test="occurrenceDate != null">
+				#{occurrenceDate,jdbcType=DATE},
+			</if>
+			<if test="faultDesc != null">
+				#{faultDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="dealSolution != null">
+				#{dealSolution,jdbcType=VARCHAR},
+			</if>
+			<if test="requestId != null">
+				#{requestId,jdbcType=VARCHAR},
+			</if>
+			<if test="requestNo != null">
+				#{requestNo,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute01 != null">
+				#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute11 != null">
+				#{attribute11,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute12 != null">
+				#{attribute12,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute13 != null">
+				#{attribute13,jdbcType=DATE},
+			</if>
+			<if test="attribute14 != null">
+				#{attribute14,jdbcType=DATE},
+			</if>
+	</trim>
+</insert>
+<!-- 更新对象 HDKF_SUPPORT_FAULT_DETAIL -->
+<update id="updateHdkfSupportFaultDetailSensitive" parameterType="avicit.hdkf.support.hdkfsupportfaultdetail.dto.HdkfSupportFaultDetailDTO">
+	update hdkf_support_fault_detail t1
+	<set>
+			<if test="id != null">
+				t1.id                             =#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="batchNo != null">
+				t1.batch_no                       =#{batchNo,jdbcType=VARCHAR},
+			</if>
+			<if test="modelId != null">
+				t1.model_id                       =#{modelId,jdbcType=VARCHAR},
+			</if>
+			<if test="flightHours != null">
+				t1.flight_hours                   =#{flightHours,jdbcType=DECIMAL},
+			</if>
+			<if test="flightLanding != null">
+				t1.flight_landing                 =#{flightLanding,jdbcType=DECIMAL},
+			</if>
+			<if test="requestDate != null">
+				t1.request_date                   =#{requestDate,jdbcType=DATE},
+			</if>
+			<if test="occurrenceDate != null">
+				t1.occurrence_date                =#{occurrenceDate,jdbcType=DATE},
+			</if>
+			<if test="faultDesc != null">
+				t1.fault_desc                     =#{faultDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="dealSolution != null">
+				t1.deal_solution                  =#{dealSolution,jdbcType=VARCHAR},
+			</if>
+			<if test="requestId != null">
+				t1.request_id                     =#{requestId,jdbcType=VARCHAR},
+			</if>
+			<if test="requestNo != null">
+				t1.request_no                     =#{requestNo,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				t1.creation_date                  =#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				t1.last_update_date               =#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				t1.version                        =t1.version+1,
+			</if>
+			<if test="attribute01 != null">
+				t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute11 != null">
+				t1.attribute_11                   =#{attribute11,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute12 != null">
+				t1.attribute_12                   =#{attribute12,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute13 != null">
+				t1.attribute_13                   =#{attribute13,jdbcType=DATE},
+			</if>
+			<if test="attribute14 != null">
+				t1.attribute_14                   =#{attribute14,jdbcType=DATE},
+			</if>
+	</set>
+		where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 更新对象 HDKF_SUPPORT_FAULT_DETAIL -->
+<update id="updateHdkfSupportFaultDetailAll" parameterType="avicit.hdkf.support.hdkfsupportfaultdetail.dto.HdkfSupportFaultDetailDTO">
+	update hdkf_support_fault_detail t1
+		set
+			t1.id                             =#{id,jdbcType=VARCHAR},
+			t1.batch_no                       =#{batchNo,jdbcType=VARCHAR},
+			t1.model_id                       =#{modelId,jdbcType=VARCHAR},
+			t1.flight_hours                   =#{flightHours,jdbcType=DECIMAL},
+			t1.flight_landing                 =#{flightLanding,jdbcType=DECIMAL},
+			t1.request_date                   =#{requestDate,jdbcType=DATE},
+			t1.occurrence_date                =#{occurrenceDate,jdbcType=DATE},
+			t1.fault_desc                     =#{faultDesc,jdbcType=VARCHAR},
+			t1.deal_solution                  =#{dealSolution,jdbcType=VARCHAR},
+			t1.request_id                     =#{requestId,jdbcType=VARCHAR},
+			t1.request_no                     =#{requestNo,jdbcType=VARCHAR},
+			t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			t1.creation_date                  =#{creationDate},
+			t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			t1.last_update_date               =#{lastUpdateDate},
+			t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			t1.version                        =t1.version+1,
+			t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			t1.attribute_11                   =#{attribute11,jdbcType=DECIMAL},
+			t1.attribute_12                   =#{attribute12,jdbcType=DECIMAL},
+			t1.attribute_13                   =#{attribute13,jdbcType=DATE},
+			t1.attribute_14                   =#{attribute14,jdbcType=DATE},
+	where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 主键删除 HDKF_SUPPORT_FAULT_DETAIL -->
+<delete id="deleteHdkfSupportFaultDetailById" parameterType="java.lang.String">
+		delete from hdkf_support_fault_detail  where  id = #{id}
+</delete>
+<!--按机型统计查询  -->
+<select id="seachCsmpFmFaultreportToFlightModelQuery"  parameterType="java.util.Map" resultMap="HdkfSupportFaultDetailDTOMap">
+
+select count(1) as flightModelNum,t2.model_id as flightModelName from hdkf_support_fault_detail t2 
+
+    <where>
+     t2.attribute_02='Y'
+ 		<if test="beginDate != null">
+			<![CDATA[and t2.occurrence_date >= #{BeginDate}]]>
+		</if>
+		<if test="endDate != null">
+			<![CDATA[and t2.occurrence_date <= #{EndDate}]]>
+		</if>
+ 	</where>
+
+  group by t2.model_id
+ 	
+</select>
+<!--按批架次统计查询  -->
+<select id="seachBatchNoQueryFormByPage"  parameterType="java.util.Map" resultMap="HdkfSupportFaultDetailDTOMap">
+
+select count(1) as batchNoNum,t2.batch_no as batchNoName from hdkf_support_fault_detail t2  
+
+    <where>
+    t2.attribute_02='Y'
+ 	<if test="beginDate != null">
+			<![CDATA[and t2.occurrence_date >= #{BeginDate}]]>
+		</if>
+		<if test="endDate != null">
+			<![CDATA[and t2.occurrence_date <= #{EndDate}]]>
+		</if>
+ 	</where>
+
+  group by t2.batch_no
+ 	
+</select>
+<!--按客户名称统计查询  -->
+<select id="seachCsmpFmFaultreportToCustomerQuery"  parameterType="java.util.Map" resultMap="HdkfSupportFaultDetailDTOMap">
+select count(1) as customerNum,t1.company_name as cusName
+ 	from  hdkf_support_request_info  t,csmp_bd_companyinfo t1,HDKF_SUPPORT_FAULT_DETAIL t2 
+    <where>
+     t.id = t2.request_id  and  t.request_unit = t1.id  and  t2.attribute_02='Y'
+ 		<if test="beginDate != null">
+			<![CDATA[and t1.FAULT_DATE >= #{BeginDate}]]>
+		</if>
+		<if test="endDate != null">
+			<![CDATA[and t1.FAULT_DATE <= #{EndDate}]]>
+		</if>
+ 	</where>
+  group by t1.company_name
+</select>
+</mapper>

@@ -1,0 +1,1343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="avicit.hdkf.esnotice.hdkfesnoticeinfo.dao.HdkfEsNoticeinfoDao">
+
+<resultMap id="HdkfEsNoticeinfoDTOMap" type="avicit.hdkf.esnotice.hdkfesnoticeinfo.dto.HdkfEsNoticeinfoDTO">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="bulletinNo" column="BULLETIN_NO" jdbcType="VARCHAR" />
+		<result property="title" column="TITLE" jdbcType="VARCHAR" />
+		<result property="organContact" column="ORGAN_CONTACT" jdbcType="VARCHAR" />
+		<result property="telephone" column="TELEPHONE" jdbcType="VARCHAR" />
+		<result property="bulletinType" column="BULLETIN_TYPE" jdbcType="VARCHAR" />
+		<result property="materialSupply" column="MATERIAL_SUPPLY" jdbcType="VARCHAR" />
+		<result property="implementCompany" column="IMPLEMENT_COMPANY" jdbcType="VARCHAR" />
+		<result property="reportDate" column="REPORT_DATE" jdbcType="TIMESTAMP" />
+		<result property="author" column="AUTHOR" jdbcType="VARCHAR" />
+		<result property="fileCompany" column="FILE_COMPANY" jdbcType="VARCHAR" />
+		<result property="companyTel" column="COMPANY_TEL" jdbcType="VARCHAR" />
+		<result property="includeMars" column="INCLUDE_MARS" jdbcType="VARCHAR" />
+		<result property="publishDate" column="PUBLISH_DATE" jdbcType="TIMESTAMP" />
+		<result property="completeDate" column="COMPLETE_DATE" jdbcType="TIMESTAMP" />
+		<result property="changeNo" column="CHANGE_NO" jdbcType="VARCHAR" />
+		<result property="performRequirement" column="PERFORM_REQUIREMENT" jdbcType="VARCHAR" />
+		<result property="changeComment" column="CHANGE_COMMENT" jdbcType="VARCHAR" />
+		<result property="remark" column="REMARK" jdbcType="VARCHAR" />
+		<result property="reportNo" column="REPORT_NO" jdbcType="VARCHAR" />
+		<result property="reportTime" column="REPORT_TIME" jdbcType="TIMESTAMP" />
+		<result property="replyNo" column="REPLY_NO" jdbcType="VARCHAR" />
+		<result property="replyTime" column="REPLY_TIME" jdbcType="TIMESTAMP" />
+		<result property="completeTime" column="COMPLETE_TIME" jdbcType="TIMESTAMP" />
+		<result property="forwardNo" column="FORWARD_NO" jdbcType="VARCHAR" />
+		<result property="forwardTime" column="FORWARD_TIME" jdbcType="TIMESTAMP" />
+		<result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR" />
+		<result property="creationDate" column="CREATION_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdatedBy" column="LAST_UPDATED_BY" jdbcType="VARCHAR" />
+		<result property="lastUpdateDate" column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdateIp" column="LAST_UPDATE_IP" jdbcType="VARCHAR" />
+		<result property="version" column="VERSION" jdbcType="DECIMAL" />
+		<result property="attribute01" column="ATTRIBUTE_01" jdbcType="VARCHAR" />
+		<result property="attribute02" column="ATTRIBUTE_02" jdbcType="VARCHAR" />
+		<result property="attribute03" column="ATTRIBUTE_03" jdbcType="VARCHAR" />
+		<result property="attribute04" column="ATTRIBUTE_04" jdbcType="VARCHAR" />
+		<result property="attribute05" column="ATTRIBUTE_05" jdbcType="VARCHAR" />
+		<result property="attribute06" column="ATTRIBUTE_06" jdbcType="VARCHAR" />
+		<result property="attribute07" column="ATTRIBUTE_07" jdbcType="VARCHAR" />
+		<result property="attribute08" column="ATTRIBUTE_08" jdbcType="VARCHAR" />
+		<result property="attribute09" column="ATTRIBUTE_09" jdbcType="VARCHAR" />
+		<result property="attribute10" column="ATTRIBUTE_10" jdbcType="VARCHAR" />
+		<result property="attribute11" column="ATTRIBUTE_11" jdbcType="DECIMAL" />
+		<result property="attribute12" column="ATTRIBUTE_12" jdbcType="DECIMAL" />
+		<result property="attribute13" column="ATTRIBUTE_13" jdbcType="TIMESTAMP" />
+		<result property="attribute14" column="ATTRIBUTE_14" jdbcType="TIMESTAMP" />
+		<result property="activityalias_" column="activityalias_" jdbcType="VARCHAR" />
+		<result property="businessstate_" column="businessstate_" jdbcType="VARCHAR" />
+</resultMap>
+<!-- 分页查询 HDKF_ES_NOTICEINFO -->
+<select id="searchHdkfEsNoticeinfoAscByPage" parameterType="java.util.Map" resultMap="HdkfEsNoticeinfoDTOMap">
+	select
+		v.activityalias_                 ,
+		v.businessstate_                 ,
+		t1.id                             ,
+		t1.bulletin_no                    ,
+		t1.title                          ,
+		t1.organ_contact                  ,
+		t1.telephone                      ,
+		t1.bulletin_type                  ,
+		t1.material_supply                ,
+		t1.implement_company              ,
+		t1.report_date                    ,
+		t1.author                         ,
+		t1.file_company                   ,
+		t1.company_tel                    ,
+		t1.include_mars                   ,
+		t1.publish_date                   ,
+		t1.complete_date                  ,
+		t1.change_no                      ,
+		t1.perform_requirement            ,
+		t1.change_comment                 ,
+		t1.remark                         ,
+		t1.report_no                      ,
+		t1.report_time                    ,
+		t1.reply_no                       ,
+		t1.reply_time                     ,
+		t1.complete_time                  ,
+		t1.forward_no                     ,
+		t1.forward_time                   ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_es_noticeinfo 	t1 left join bpm_entry_v v on t1.id = v.formid_ 
+		<where>
+			<if test="bean != null">
+			<if test="bean.id != null and bean.id != ''">
+				and t1.ID like '%'||#{bean.id}||'%'
+			</if>
+			<if test="bean.bulletinNo != null and bean.bulletinNo != ''">
+				and t1.BULLETIN_NO like '%'||#{bean.bulletinNo}||'%'
+			</if>
+			<if test="bean.title != null and bean.title != ''">
+				and t1.TITLE like '%'||#{bean.title}||'%'
+			</if>
+			<if test="bean.organContact != null and bean.organContact != ''">
+				and t1.ORGAN_CONTACT like '%'||#{bean.organContact}||'%'
+			</if>
+			<if test="bean.telephone != null and bean.telephone != ''">
+				and t1.TELEPHONE like '%'||#{bean.telephone}||'%'
+			</if>
+			<if test="bean.bulletinType != null and bean.bulletinType != ''">
+				and t1.BULLETIN_TYPE like '%'||#{bean.bulletinType}||'%'
+			</if>
+			<if test="bean.materialSupply != null and bean.materialSupply != ''">
+				and t1.MATERIAL_SUPPLY like '%'||#{bean.materialSupply}||'%'
+			</if>
+			<if test="bean.implementCompany != null and bean.implementCompany != ''">
+				and t1.IMPLEMENT_COMPANY like '%'||#{bean.implementCompany}||'%'
+			</if>
+			<if test="bean.reportDateBegin != null and bean.reportDateBegin != ''">
+				and t1.REPORT_DATE &gt;= #{bean.reportDateBegin}
+			</if>
+			<if test="bean.reportDateEnd != null and bean.reportDateEnd != ''">
+				and t1.REPORT_DATE &lt;= #{bean.reportDateEnd}
+			</if>
+			<if test="bean.author != null and bean.author != ''">
+				and t1.AUTHOR like '%'||#{bean.author}||'%'
+			</if>
+			<if test="bean.fileCompany != null and bean.fileCompany != ''">
+				and t1.FILE_COMPANY like '%'||#{bean.fileCompany}||'%'
+			</if>
+			<if test="bean.companyTel != null and bean.companyTel != ''">
+				and t1.COMPANY_TEL like '%'||#{bean.companyTel}||'%'
+			</if>
+			<if test="bean.includeMars != null and bean.includeMars != ''">
+				and t1.INCLUDE_MARS like '%'||#{bean.includeMars}||'%'
+			</if>
+			<if test="bean.publishDateBegin != null and bean.publishDateBegin != ''">
+				and t1.PUBLISH_DATE &gt;= #{bean.publishDateBegin}
+			</if>
+			<if test="bean.publishDateEnd != null and bean.publishDateEnd != ''">
+				and t1.PUBLISH_DATE &lt;= #{bean.publishDateEnd}
+			</if>
+			<if test="bean.completeDateBegin != null and bean.completeDateBegin != ''">
+				and t1.COMPLETE_DATE &gt;= #{bean.completeDateBegin}
+			</if>
+			<if test="bean.completeDateEnd != null and bean.completeDateEnd != ''">
+				and t1.COMPLETE_DATE &lt;= #{bean.completeDateEnd}
+			</if>
+			<if test="bean.changeNo != null and bean.changeNo != ''">
+				and t1.CHANGE_NO like '%'||#{bean.changeNo}||'%'
+			</if>
+			<if test="bean.performRequirement != null and bean.performRequirement != ''">
+				and t1.PERFORM_REQUIREMENT like '%'||#{bean.performRequirement}||'%'
+			</if>
+			<if test="bean.changeComment != null and bean.changeComment != ''">
+				and t1.CHANGE_COMMENT like '%'||#{bean.changeComment}||'%'
+			</if>
+			<if test="bean.remark != null and bean.remark != ''">
+				and t1.REMARK like '%'||#{bean.remark}||'%'
+			</if>
+			<if test="bean.reportNo != null and bean.reportNo != ''">
+				and t1.REPORT_NO like '%'||#{bean.reportNo}||'%'
+			</if>
+			<if test="bean.reportTimeBegin != null and bean.reportTimeBegin != ''">
+				and t1.REPORT_TIME &gt;= #{bean.reportTimeBegin}
+			</if>
+			<if test="bean.reportTimeEnd != null and bean.reportTimeEnd != ''">
+				and t1.REPORT_TIME &lt;= #{bean.reportTimeEnd}
+			</if>
+			<if test="bean.replyNo != null and bean.replyNo != ''">
+				and t1.REPLY_NO like '%'||#{bean.replyNo}||'%'
+			</if>
+			<if test="bean.replyTimeBegin != null and bean.replyTimeBegin != ''">
+				and t1.REPLY_TIME &gt;= #{bean.replyTimeBegin}
+			</if>
+			<if test="bean.replyTimeEnd != null and bean.replyTimeEnd != ''">
+				and t1.REPLY_TIME &lt;= #{bean.replyTimeEnd}
+			</if>
+			<if test="bean.completeTimeBegin != null and bean.completeTimeBegin != ''">
+				and t1.COMPLETE_TIME &gt;= #{bean.completeTimeBegin}
+			</if>
+			<if test="bean.completeTimeEnd != null and bean.completeTimeEnd != ''">
+				and t1.COMPLETE_TIME &lt;= #{bean.completeTimeEnd}
+			</if>
+			<if test="bean.forwardNo != null and bean.forwardNo != ''">
+				and t1.FORWARD_NO like '%'||#{bean.forwardNo}||'%'
+			</if>
+			<if test="bean.forwardTimeBegin != null and bean.forwardTimeBegin != ''">
+				and t1.FORWARD_TIME &gt;= #{bean.forwardTimeBegin}
+			</if>
+			<if test="bean.forwardTimeEnd != null and bean.forwardTimeEnd != ''">
+				and t1.FORWARD_TIME &lt;= #{bean.forwardTimeEnd}
+			</if>
+			<if test="bean.createdBy != null and bean.createdBy != ''">
+				and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+			</if>
+			<if test="bean.creationDate != null and bean.creationDate != ''">
+				and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+			</if>
+			<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+			</if>
+			<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+			</if>
+			<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+			</if>
+			<if test="bean.version != null and bean.version != ''">
+				and t1.VERSION like '%'||#{bean.version}||'%'
+			</if>
+			<if test="bean.attribute01 != null and bean.attribute01 != ''">
+				and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+			</if>
+			<if test="bean.attribute02 != null and bean.attribute02 != ''">
+				and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+			</if>
+			<if test="bean.attribute03 != null and bean.attribute03 != ''">
+				and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+			</if>
+			<if test="bean.attribute04 != null and bean.attribute04 != ''">
+				and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+			</if>
+			<if test="bean.attribute05 != null and bean.attribute05 != ''">
+				and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+			</if>
+			<if test="bean.attribute06 != null and bean.attribute06 != ''">
+				and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+			</if>
+			<if test="bean.attribute07 != null and bean.attribute07 != ''">
+				and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+			</if>
+			<if test="bean.attribute08 != null and bean.attribute08 != ''">
+				and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+			</if>
+			<if test="bean.attribute09 != null and bean.attribute09 != ''">
+				and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+			</if>
+			<if test="bean.attribute10 != null and bean.attribute10 != ''">
+				and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+			</if>
+			<if test="bean.attribute11 != null and bean.attribute11 != ''">
+				and t1.ATTRIBUTE_11 like '%'||#{bean.attribute11}||'%'
+			</if>
+			<if test="bean.attribute12 != null and bean.attribute12 != ''">
+				and t1.ATTRIBUTE_12 like '%'||#{bean.attribute12}||'%'
+			</if>
+			
+			
+			<if test="bean.attribute13Begin != null and bean.attribute13Begin != ''">
+				and t1.attribute_13 &gt;= #{bean.attribute13Begin}
+			</if>
+			<if test="bean.attribute13End != null and bean.attribute13End != ''">
+				and t1.attribute_13 &lt;= #{bean.attribute13End}
+			</if>
+			
+			
+			<if test="bean.attribute14 != null and bean.attribute14 != ''">
+				and t1.ATTRIBUTE_14 like '%'||#{bean.attribute14}||'%'
+			</if>
+						<if test="bean.bpmType !=null and bean.bpmType == 'my'">
+				and t1.CREATED_BY = #{bean.currUserId} 
+			</if>
+			<if test="bean.bpmState != null and bean.bpmState != 'all'">
+				and v.businessstate_ = #{bean.bpmState}
+			</if>
+</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}			
+			</if>
+		</where>
+			order by t1.creation_date asc
+</select>
+<!-- 分页查询 HDKF_ES_NOTICEINFO -->
+<select id="searchHdkfEsNoticeinfoByPage" parameterType="java.util.Map" resultMap="HdkfEsNoticeinfoDTOMap">
+	select
+		v.activityalias_                 ,
+		v.businessstate_                 ,
+		t1.id                             ,
+		t1.bulletin_no                    ,
+		t1.title                          ,
+		t1.organ_contact                  ,
+		t1.telephone                      ,
+		t1.bulletin_type                  ,
+		t1.material_supply                ,
+		t1.implement_company              ,
+		t1.report_date                    ,
+		t1.author                         ,
+		t1.file_company                   ,
+		t1.company_tel                    ,
+		t1.include_mars                   ,
+		t1.publish_date                   ,
+		t1.complete_date                  ,
+		t1.change_no                      ,
+		t1.perform_requirement            ,
+		t1.change_comment                 ,
+		t1.remark                         ,
+		t1.report_no                      ,
+		t1.report_time                    ,
+		t1.reply_no                       ,
+		t1.reply_time                     ,
+		t1.complete_time                  ,
+		t1.forward_no                     ,
+		t1.forward_time                   ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_es_noticeinfo 	t1 left join bpm_entry_v v on t1.id = v.formid_ 
+		<where>
+			<if test="bean != null">
+			<if test="bean.id != null and bean.id != ''">
+				and t1.ID like '%'||#{bean.id}||'%'
+			</if>
+			<if test="bean.bulletinNo != null and bean.bulletinNo != ''">
+				and t1.BULLETIN_NO like '%'||#{bean.bulletinNo}||'%'
+			</if>
+			<if test="bean.title != null and bean.title != ''">
+				and t1.TITLE like '%'||#{bean.title}||'%'
+			</if>
+			<if test="bean.organContact != null and bean.organContact != ''">
+				and t1.ORGAN_CONTACT like '%'||#{bean.organContact}||'%'
+			</if>
+			<if test="bean.telephone != null and bean.telephone != ''">
+				and t1.TELEPHONE like '%'||#{bean.telephone}||'%'
+			</if>
+			<if test="bean.bulletinType != null and bean.bulletinType != ''">
+				and t1.BULLETIN_TYPE like '%'||#{bean.bulletinType}||'%'
+			</if>
+			<if test="bean.materialSupply != null and bean.materialSupply != ''">
+				and t1.MATERIAL_SUPPLY like '%'||#{bean.materialSupply}||'%'
+			</if>
+			<if test="bean.implementCompany != null and bean.implementCompany != ''">
+				and t1.IMPLEMENT_COMPANY like '%'||#{bean.implementCompany}||'%'
+			</if>
+			<if test="bean.reportDateBegin != null and bean.reportDateBegin != ''">
+				and t1.REPORT_DATE &gt;= #{bean.reportDateBegin}
+			</if>
+			<if test="bean.reportDateEnd != null and bean.reportDateEnd != ''">
+				and t1.REPORT_DATE &lt;= #{bean.reportDateEnd}
+			</if>
+			<if test="bean.author != null and bean.author != ''">
+				and t1.AUTHOR like '%'||#{bean.author}||'%'
+			</if>
+			<if test="bean.fileCompany != null and bean.fileCompany != ''">
+				and t1.FILE_COMPANY like '%'||#{bean.fileCompany}||'%'
+			</if>
+			<if test="bean.companyTel != null and bean.companyTel != ''">
+				and t1.COMPANY_TEL like '%'||#{bean.companyTel}||'%'
+			</if>
+			<if test="bean.includeMars != null and bean.includeMars != ''">
+				and t1.INCLUDE_MARS like '%'||#{bean.includeMars}||'%'
+			</if>
+			<if test="bean.publishDateBegin != null and bean.publishDateBegin != ''">
+				and t1.PUBLISH_DATE &gt;= #{bean.publishDateBegin}
+			</if>
+			<if test="bean.publishDateEnd != null and bean.publishDateEnd != ''">
+				and t1.PUBLISH_DATE &lt;= #{bean.publishDateEnd}
+			</if>
+			<if test="bean.completeDateBegin != null and bean.completeDateBegin != ''">
+				and t1.COMPLETE_DATE &gt;= #{bean.completeDateBegin}
+			</if>
+			<if test="bean.completeDateEnd != null and bean.completeDateEnd != ''">
+				and t1.COMPLETE_DATE &lt;= #{bean.completeDateEnd}
+			</if>
+			<if test="bean.changeNo != null and bean.changeNo != ''">
+				and t1.CHANGE_NO like '%'||#{bean.changeNo}||'%'
+			</if>
+			<if test="bean.performRequirement != null and bean.performRequirement != ''">
+				and t1.PERFORM_REQUIREMENT like '%'||#{bean.performRequirement}||'%'
+			</if>
+			<if test="bean.changeComment != null and bean.changeComment != ''">
+				and t1.CHANGE_COMMENT like '%'||#{bean.changeComment}||'%'
+			</if>
+			<if test="bean.remark != null and bean.remark != ''">
+				and t1.REMARK like '%'||#{bean.remark}||'%'
+			</if>
+			<if test="bean.reportNo != null and bean.reportNo != ''">
+				and t1.REPORT_NO like '%'||#{bean.reportNo}||'%'
+			</if>
+			<if test="bean.reportTimeBegin != null and bean.reportTimeBegin != ''">
+				and t1.REPORT_TIME &gt;= #{bean.reportTimeBegin}
+			</if>
+			<if test="bean.reportTimeEnd != null and bean.reportTimeEnd != ''">
+				and t1.REPORT_TIME &lt;= #{bean.reportTimeEnd}
+			</if>
+			<if test="bean.replyNo != null and bean.replyNo != ''">
+				and t1.REPLY_NO like '%'||#{bean.replyNo}||'%'
+			</if>
+			<if test="bean.replyTimeBegin != null and bean.replyTimeBegin != ''">
+				and t1.REPLY_TIME &gt;= #{bean.replyTimeBegin}
+			</if>
+			<if test="bean.replyTimeEnd != null and bean.replyTimeEnd != ''">
+				and t1.REPLY_TIME &lt;= #{bean.replyTimeEnd}
+			</if>
+			<if test="bean.completeTimeBegin != null and bean.completeTimeBegin != ''">
+				and t1.COMPLETE_TIME &gt;= #{bean.completeTimeBegin}
+			</if>
+			<if test="bean.completeTimeEnd != null and bean.completeTimeEnd != ''">
+				and t1.COMPLETE_TIME &lt;= #{bean.completeTimeEnd}
+			</if>
+			<if test="bean.forwardNo != null and bean.forwardNo != ''">
+				and t1.FORWARD_NO like '%'||#{bean.forwardNo}||'%'
+			</if>
+			<if test="bean.forwardTimeBegin != null and bean.forwardTimeBegin != ''">
+				and t1.FORWARD_TIME &gt;= #{bean.forwardTimeBegin}
+			</if>
+			<if test="bean.forwardTimeEnd != null and bean.forwardTimeEnd != ''">
+				and t1.FORWARD_TIME &lt;= #{bean.forwardTimeEnd}
+			</if>
+			<if test="bean.createdBy != null and bean.createdBy != ''">
+				and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+			</if>
+			<if test="bean.creationDate != null and bean.creationDate != ''">
+				and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+			</if>
+			<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+			</if>
+			<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+			</if>
+			<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+			</if>
+			<if test="bean.version != null and bean.version != ''">
+				and t1.VERSION like '%'||#{bean.version}||'%'
+			</if>
+			<if test="bean.attribute01 != null and bean.attribute01 != ''">
+				and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+			</if>
+			<if test="bean.attribute02 != null and bean.attribute02 != ''">
+				and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+			</if>
+			<if test="bean.attribute03 != null and bean.attribute03 != ''">
+				and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+			</if>
+			<if test="bean.attribute04 != null and bean.attribute04 != ''">
+				and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+			</if>
+			<if test="bean.attribute05 != null and bean.attribute05 != ''">
+				and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+			</if>
+			<if test="bean.attribute06 != null and bean.attribute06 != ''">
+				and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+			</if>
+			<if test="bean.attribute07 != null and bean.attribute07 != ''">
+				and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+			</if>
+			<if test="bean.attribute08 != null and bean.attribute08 != ''">
+				and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+			</if>
+			<if test="bean.attribute09 != null and bean.attribute09 != ''">
+				and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+			</if>
+			<if test="bean.attribute10 != null and bean.attribute10 != ''">
+				and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+			</if>
+			<if test="bean.attribute11 != null and bean.attribute11 != ''">
+				and t1.ATTRIBUTE_11 like '%'||#{bean.attribute11}||'%'
+			</if>
+			<if test="bean.attribute12 != null and bean.attribute12 != ''">
+				and t1.ATTRIBUTE_12 like '%'||#{bean.attribute12}||'%'
+			</if>
+			
+			
+			<if test="bean.attribute13Begin != null and bean.attribute13Begin != ''">
+				and t1.attribute_13 &gt;= #{bean.attribute13Begin}
+			</if>
+			<if test="bean.attribute13End != null and bean.attribute13End != ''">
+				and t1.attribute_13 &lt;= #{bean.attribute13End}
+			</if>
+			
+			
+			<if test="bean.attribute14 != null and bean.attribute14 != ''">
+				and t1.ATTRIBUTE_14 like '%'||#{bean.attribute14}||'%'
+			</if>
+						<if test="bean.bpmType !=null and bean.bpmType == 'my'">
+				and t1.CREATED_BY = #{bean.currUserId} 
+			</if>
+			<if test="bean.bpmState != null and bean.bpmState != 'all'">
+				and v.businessstate_ = #{bean.bpmState}
+			</if>
+</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}			
+			</if>
+		</where>
+			order by t1.creation_date desc
+</select>
+<!-- 查询列表 HDKF_ES_NOTICEINFO -->
+<select id="searchHdkfEsNoticeinfo" parameterType="java.util.Map" resultMap="HdkfEsNoticeinfoDTOMap">
+	select
+		t1.id                             ,
+		t1.bulletin_no                    ,
+		t1.title                          ,
+		t1.organ_contact                  ,
+		t1.telephone                      ,
+		t1.bulletin_type                  ,
+		t1.material_supply                ,
+		t1.implement_company              ,
+		t1.report_date                    ,
+		t1.author                         ,
+		t1.file_company                   ,
+		t1.company_tel                    ,
+		t1.include_mars                   ,
+		t1.publish_date                   ,
+		t1.complete_date                  ,
+		t1.change_no                      ,
+		t1.perform_requirement            ,
+		t1.change_comment                 ,
+		t1.remark                         ,
+		t1.report_no                      ,
+		t1.report_time                    ,
+		t1.reply_no                       ,
+		t1.reply_time                     ,
+		t1.complete_time                  ,
+		t1.forward_no                     ,
+		t1.forward_time                   ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_es_noticeinfo 	t1
+		<where>
+			<if test="id != null and id != ''">
+				and t1.ID =#{id}
+			</if>
+			<if test="bulletinNo != null and bulletinNo != ''">
+				and t1.BULLETIN_NO =#{bulletinNo}
+			</if>
+			<if test="title != null and title != ''">
+				and t1.TITLE =#{title}
+			</if>
+			<if test="organContact != null and organContact != ''">
+				and t1.ORGAN_CONTACT =#{organContact}
+			</if>
+			<if test="telephone != null and telephone != ''">
+				and t1.TELEPHONE =#{telephone}
+			</if>
+			<if test="bulletinType != null and bulletinType != ''">
+				and t1.BULLETIN_TYPE =#{bulletinType}
+			</if>
+			<if test="materialSupply != null and materialSupply != ''">
+				and t1.MATERIAL_SUPPLY =#{materialSupply}
+			</if>
+			<if test="implementCompany != null and implementCompany != ''">
+				and t1.IMPLEMENT_COMPANY =#{implementCompany}
+			</if>
+			<if test="bean.reportDateBegin != null and bean.reportDateBegin != ''">
+				and t1.REPORT_DATE &gt;= #{bean.reportDateBegin}
+			</if>
+			<if test="bean.reportDateEnd != null and bean.reportDateEnd != ''">
+				and t1.REPORT_DATE &lt;= #{bean.reportDateEnd}
+			</if>
+			<if test="author != null and author != ''">
+				and t1.AUTHOR =#{author}
+			</if>
+			<if test="fileCompany != null and fileCompany != ''">
+				and t1.FILE_COMPANY =#{fileCompany}
+			</if>
+			<if test="companyTel != null and companyTel != ''">
+				and t1.COMPANY_TEL =#{companyTel}
+			</if>
+			<if test="includeMars != null and includeMars != ''">
+				and t1.INCLUDE_MARS =#{includeMars}
+			</if>
+			<if test="bean.publishDateBegin != null and bean.publishDateBegin != ''">
+				and t1.PUBLISH_DATE &gt;= #{bean.publishDateBegin}
+			</if>
+			<if test="bean.publishDateEnd != null and bean.publishDateEnd != ''">
+				and t1.PUBLISH_DATE &lt;= #{bean.publishDateEnd}
+			</if>
+			<if test="bean.completeDateBegin != null and bean.completeDateBegin != ''">
+				and t1.COMPLETE_DATE &gt;= #{bean.completeDateBegin}
+			</if>
+			<if test="bean.completeDateEnd != null and bean.completeDateEnd != ''">
+				and t1.COMPLETE_DATE &lt;= #{bean.completeDateEnd}
+			</if>
+			<if test="changeNo != null and changeNo != ''">
+				and t1.CHANGE_NO =#{changeNo}
+			</if>
+			<if test="performRequirement != null and performRequirement != ''">
+				and t1.PERFORM_REQUIREMENT =#{performRequirement}
+			</if>
+			<if test="changeComment != null and changeComment != ''">
+				and t1.CHANGE_COMMENT =#{changeComment}
+			</if>
+			<if test="remark != null and remark != ''">
+				and t1.REMARK =#{remark}
+			</if>
+			<if test="reportNo != null and reportNo != ''">
+				and t1.REPORT_NO =#{reportNo}
+			</if>
+			<if test="bean.reportTimeBegin != null and bean.reportTimeBegin != ''">
+				and t1.REPORT_TIME &gt;= #{bean.reportTimeBegin}
+			</if>
+			<if test="bean.reportTimeEnd != null and bean.reportTimeEnd != ''">
+				and t1.REPORT_TIME &lt;= #{bean.reportTimeEnd}
+			</if>
+			<if test="replyNo != null and replyNo != ''">
+				and t1.REPLY_NO =#{replyNo}
+			</if>
+			<if test="bean.replyTimeBegin != null and bean.replyTimeBegin != ''">
+				and t1.REPLY_TIME &gt;= #{bean.replyTimeBegin}
+			</if>
+			<if test="bean.replyTimeEnd != null and bean.replyTimeEnd != ''">
+				and t1.REPLY_TIME &lt;= #{bean.replyTimeEnd}
+			</if>
+			<if test="bean.completeTimeBegin != null and bean.completeTimeBegin != ''">
+				and t1.COMPLETE_TIME &gt;= #{bean.completeTimeBegin}
+			</if>
+			<if test="bean.completeTimeEnd != null and bean.completeTimeEnd != ''">
+				and t1.COMPLETE_TIME &lt;= #{bean.completeTimeEnd}
+			</if>
+			<if test="forwardNo != null and forwardNo != ''">
+				and t1.FORWARD_NO =#{forwardNo}
+			</if>
+			<if test="bean.forwardTimeBegin != null and bean.forwardTimeBegin != ''">
+				and t1.FORWARD_TIME &gt;= #{bean.forwardTimeBegin}
+			</if>
+			<if test="bean.forwardTimeEnd != null and bean.forwardTimeEnd != ''">
+				and t1.FORWARD_TIME &lt;= #{bean.forwardTimeEnd}
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				and t1.CREATED_BY =#{createdBy}
+			</if>
+			<if test="creationDate != null and creationDate != ''">
+				and t1.CREATION_DATE =#{creationDate}
+			</if>
+			<if test="lastUpdatedBy != null and lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY =#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdateDate != null and lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE =#{lastUpdateDate}
+			</if>
+			<if test="lastUpdateIp != null and lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP =#{lastUpdateIp}
+			</if>
+			<if test="version != null and version != ''">
+				and t1.VERSION =#{version}
+			</if>
+			<if test="attribute01 != null and attribute01 != ''">
+				and t1.ATTRIBUTE_01 =#{attribute01}
+			</if>
+			<if test="attribute02 != null and attribute02 != ''">
+				and t1.ATTRIBUTE_02 =#{attribute02}
+			</if>
+			<if test="attribute03 != null and attribute03 != ''">
+				and t1.ATTRIBUTE_03 =#{attribute03}
+			</if>
+			<if test="attribute04 != null and attribute04 != ''">
+				and t1.ATTRIBUTE_04 =#{attribute04}
+			</if>
+			<if test="attribute05 != null and attribute05 != ''">
+				and t1.ATTRIBUTE_05 =#{attribute05}
+			</if>
+			<if test="attribute06 != null and attribute06 != ''">
+				and t1.ATTRIBUTE_06 =#{attribute06}
+			</if>
+			<if test="attribute07 != null and attribute07 != ''">
+				and t1.ATTRIBUTE_07 =#{attribute07}
+			</if>
+			<if test="attribute08 != null and attribute08 != ''">
+				and t1.ATTRIBUTE_08 =#{attribute08}
+			</if>
+			<if test="attribute09 != null and attribute09 != ''">
+				and t1.ATTRIBUTE_09 =#{attribute09}
+			</if>
+			<if test="attribute10 != null and attribute10 != ''">
+				and t1.ATTRIBUTE_10 =#{attribute10}
+			</if>
+			<if test="attribute11 != null and attribute11 != ''">
+				and t1.ATTRIBUTE_11 =#{attribute11}
+			</if>
+			<if test="attribute12 != null and attribute12 != ''">
+				and t1.ATTRIBUTE_12 =#{attribute12}
+			</if>
+			<if test="attribute13 != null and attribute13 != ''">
+				and t1.ATTRIBUTE_13 =#{attribute13}
+			</if>
+			<if test="attribute14 != null and attribute14 != ''">
+				and t1.ATTRIBUTE_14 =#{attribute14}
+			</if>
+		</where>
+</select>
+<!-- 主键查询对象 HDKF_ES_NOTICEINFO -->
+<select id="findHdkfEsNoticeinfoById" parameterType="java.util.Map" resultMap="HdkfEsNoticeinfoDTOMap">
+	select
+		t1.id                             ,
+		t1.bulletin_no                    ,
+		t1.title                          ,
+		t1.organ_contact                  ,
+		t1.telephone                      ,
+		t1.bulletin_type                  ,
+		t1.material_supply                ,
+		t1.implement_company              ,
+		t1.report_date                    ,
+		t1.author                         ,
+		t1.file_company                   ,
+		t1.company_tel                    ,
+		t1.include_mars                   ,
+		t1.publish_date                   ,
+		t1.complete_date                  ,
+		t1.change_no                      ,
+		t1.perform_requirement            ,
+		t1.change_comment                 ,
+		t1.remark                         ,
+		t1.report_no                      ,
+		t1.report_time                    ,
+		t1.reply_no                       ,
+		t1.reply_time                     ,
+		t1.complete_time                  ,
+		t1.forward_no                     ,
+		t1.forward_time                   ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_es_noticeinfo 	t1
+		where t1.id = #{id}
+</select><!-- 主键查询对象 HDKF_ES_NOTICEINFO -->
+<select id="findHdkfEsNoticeinfoByBulletinNo" parameterType="java.util.Map" resultMap="HdkfEsNoticeinfoDTOMap">
+	select
+		t1.id                             ,
+		t1.bulletin_no                    ,
+		t1.title                          ,
+		t1.organ_contact                  ,
+		t1.telephone                      ,
+		t1.bulletin_type                  ,
+		t1.material_supply                ,
+		t1.implement_company              ,
+		t1.report_date                    ,
+		t1.author                         ,
+		t1.file_company                   ,
+		t1.company_tel                    ,
+		t1.include_mars                   ,
+		t1.publish_date                   ,
+		t1.complete_date                  ,
+		t1.change_no                      ,
+		t1.perform_requirement            ,
+		t1.change_comment                 ,
+		t1.remark                         ,
+		t1.report_no                      ,
+		t1.report_time                    ,
+		t1.reply_no                       ,
+		t1.reply_time                     ,
+		t1.complete_time                  ,
+		t1.forward_no                     ,
+		t1.forward_time                   ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_es_noticeinfo 	t1
+		where t1.bulletin_no = #{bulletinNo}
+</select>
+
+<!-- 新增对象 HDKF_ES_NOTICEINFO -->
+<insert id="insertHdkfEsNoticeinfo" parameterType="avicit.hdkf.esnotice.hdkfesnoticeinfo.dto.HdkfEsNoticeinfoDTO">
+	insert into hdkf_es_noticeinfo
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="bulletinNo != null">
+				bulletin_no,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="organContact != null">
+				organ_contact,
+			</if>
+			<if test="telephone != null">
+				telephone,
+			</if>
+			<if test="bulletinType != null">
+				bulletin_type,
+			</if>
+			<if test="materialSupply != null">
+				material_supply,
+			</if>
+			<if test="implementCompany != null">
+				implement_company,
+			</if>
+			<if test="reportDate != null">
+				report_date,
+			</if>
+			<if test="author != null">
+				author,
+			</if>
+			<if test="fileCompany != null">
+				file_company,
+			</if>
+			<if test="companyTel != null">
+				company_tel,
+			</if>
+			<if test="includeMars != null">
+				include_mars,
+			</if>
+			<if test="publishDate != null">
+				publish_date,
+			</if>
+			<if test="completeDate != null">
+				complete_date,
+			</if>
+			<if test="changeNo != null">
+				change_no,
+			</if>
+			<if test="performRequirement != null">
+				perform_requirement,
+			</if>
+			<if test="changeComment != null">
+				change_comment,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="reportNo != null">
+				report_no,
+			</if>
+			<if test="reportTime != null">
+				report_time,
+			</if>
+			<if test="replyNo != null">
+				reply_no,
+			</if>
+			<if test="replyTime != null">
+				reply_time,
+			</if>
+			<if test="completeTime != null">
+				complete_time,
+			</if>
+			<if test="forwardNo != null">
+				forward_no,
+			</if>
+			<if test="forwardTime != null">
+				forward_time,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="creationDate != null">
+				creation_date,
+			</if>
+			<if test="lastUpdatedBy != null">
+				last_updated_by,
+			</if>
+			<if test="lastUpdateDate != null">
+				last_update_date,
+			</if>
+			<if test="lastUpdateIp != null">
+				last_update_ip,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+			<if test="attribute01 != null">
+				attribute_01,
+			</if>
+			<if test="attribute02 != null">
+				attribute_02,
+			</if>
+			<if test="attribute03 != null">
+				attribute_03,
+			</if>
+			<if test="attribute04 != null">
+				attribute_04,
+			</if>
+			<if test="attribute05 != null">
+				attribute_05,
+			</if>
+			<if test="attribute06 != null">
+				attribute_06,
+			</if>
+			<if test="attribute07 != null">
+				attribute_07,
+			</if>
+			<if test="attribute08 != null">
+				attribute_08,
+			</if>
+			<if test="attribute09 != null">
+				attribute_09,
+			</if>
+			<if test="attribute10 != null">
+				attribute_10,
+			</if>
+			<if test="attribute11 != null">
+				attribute_11,
+			</if>
+			<if test="attribute12 != null">
+				attribute_12,
+			</if>
+			<if test="attribute13 != null">
+				attribute_13,
+			</if>
+			<if test="attribute14 != null">
+				attribute_14,
+			</if>
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="bulletinNo != null">
+				#{bulletinNo,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="organContact != null">
+				#{organContact,jdbcType=VARCHAR},
+			</if>
+			<if test="telephone != null">
+				#{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="bulletinType != null">
+				#{bulletinType,jdbcType=VARCHAR},
+			</if>
+			<if test="materialSupply != null">
+				#{materialSupply,jdbcType=VARCHAR},
+			</if>
+			<if test="implementCompany != null">
+				#{implementCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="reportDate != null">
+				#{reportDate,jdbcType=DATE},
+			</if>
+			<if test="author != null">
+				#{author,jdbcType=VARCHAR},
+			</if>
+			<if test="fileCompany != null">
+				#{fileCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="companyTel != null">
+				#{companyTel,jdbcType=VARCHAR},
+			</if>
+			<if test="includeMars != null">
+				#{includeMars,jdbcType=VARCHAR},
+			</if>
+			<if test="publishDate != null">
+				#{publishDate,jdbcType=DATE},
+			</if>
+			<if test="completeDate != null">
+				#{completeDate,jdbcType=DATE},
+			</if>
+			<if test="changeNo != null">
+				#{changeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="performRequirement != null">
+				#{performRequirement,jdbcType=VARCHAR},
+			</if>
+			<if test="changeComment != null">
+				#{changeComment,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="reportNo != null">
+				#{reportNo,jdbcType=VARCHAR},
+			</if>
+			<if test="reportTime != null">
+				#{reportTime,jdbcType=DATE},
+			</if>
+			<if test="replyNo != null">
+				#{replyNo,jdbcType=VARCHAR},
+			</if>
+			<if test="replyTime != null">
+				#{replyTime,jdbcType=DATE},
+			</if>
+			<if test="completeTime != null">
+				#{completeTime,jdbcType=DATE},
+			</if>
+			<if test="forwardNo != null">
+				#{forwardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="forwardTime != null">
+				#{forwardTime,jdbcType=DATE},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute01 != null">
+				#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute11 != null">
+				#{attribute11,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute12 != null">
+				#{attribute12,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute13 != null">
+				#{attribute13,jdbcType=DATE},
+			</if>
+			<if test="attribute14 != null">
+				#{attribute14,jdbcType=DATE},
+			</if>
+	</trim>
+</insert>
+<!-- 更新对象 HDKF_ES_NOTICEINFO -->
+<update id="updateHdkfEsNoticeinfoSensitive" parameterType="avicit.hdkf.esnotice.hdkfesnoticeinfo.dto.HdkfEsNoticeinfoDTO">
+	update hdkf_es_noticeinfo t1
+	<set>
+			<if test="id != null">
+				t1.id                             =#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="bulletinNo != null">
+				t1.bulletin_no                    =#{bulletinNo,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				t1.title                          =#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="organContact != null">
+				t1.organ_contact                  =#{organContact,jdbcType=VARCHAR},
+			</if>
+			<if test="telephone != null">
+				t1.telephone                      =#{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="bulletinType != null">
+				t1.bulletin_type                  =#{bulletinType,jdbcType=VARCHAR},
+			</if>
+			<if test="materialSupply != null">
+				t1.material_supply                =#{materialSupply,jdbcType=VARCHAR},
+			</if>
+			<if test="implementCompany != null">
+				t1.implement_company              =#{implementCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="reportDate != null">
+				t1.report_date                    =#{reportDate,jdbcType=DATE},
+			</if>
+			<if test="author != null">
+				t1.author                         =#{author,jdbcType=VARCHAR},
+			</if>
+			<if test="fileCompany != null">
+				t1.file_company                   =#{fileCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="companyTel != null">
+				t1.company_tel                    =#{companyTel,jdbcType=VARCHAR},
+			</if>
+			<if test="includeMars != null">
+				t1.include_mars                   =#{includeMars,jdbcType=VARCHAR},
+			</if>
+			<if test="publishDate != null">
+				t1.publish_date                   =#{publishDate,jdbcType=DATE},
+			</if>
+			<if test="completeDate != null">
+				t1.complete_date                  =#{completeDate,jdbcType=DATE},
+			</if>
+			<if test="changeNo != null">
+				t1.change_no                      =#{changeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="performRequirement != null">
+				t1.perform_requirement            =#{performRequirement,jdbcType=VARCHAR},
+			</if>
+			<if test="changeComment != null">
+				t1.change_comment                 =#{changeComment,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				t1.remark                         =#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="reportNo != null">
+				t1.report_no                      =#{reportNo,jdbcType=VARCHAR},
+			</if>
+			<if test="reportTime != null">
+				t1.report_time                    =#{reportTime,jdbcType=DATE},
+			</if>
+			<if test="replyNo != null">
+				t1.reply_no                       =#{replyNo,jdbcType=VARCHAR},
+			</if>
+			<if test="replyTime != null">
+				t1.reply_time                     =#{replyTime,jdbcType=DATE},
+			</if>
+			<if test="completeTime != null">
+				t1.complete_time                  =#{completeTime,jdbcType=DATE},
+			</if>
+			<if test="forwardNo != null">
+				t1.forward_no                     =#{forwardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="forwardTime != null">
+				t1.forward_time                   =#{forwardTime,jdbcType=DATE},
+			</if>
+			<if test="createdBy != null">
+				t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				t1.creation_date                  =#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				t1.last_update_date               =#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				t1.version                        =t1.version+1,
+			</if>
+			<if test="attribute01 != null">
+				t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute11 != null">
+				t1.attribute_11                   =#{attribute11,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute12 != null">
+				t1.attribute_12                   =#{attribute12,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute13 != null">
+				t1.attribute_13                   =#{attribute13,jdbcType=DATE},
+			</if>
+			<if test="attribute14 != null">
+				t1.attribute_14                   =#{attribute14,jdbcType=DATE},
+			</if>
+	</set>
+		where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 更新对象 HDKF_ES_NOTICEINFO -->
+<update id="updateHdkfEsNoticeinfoAll" parameterType="avicit.hdkf.esnotice.hdkfesnoticeinfo.dto.HdkfEsNoticeinfoDTO">
+	update hdkf_es_noticeinfo t1
+		set
+			t1.id                             =#{id,jdbcType=VARCHAR},
+			t1.bulletin_no                    =#{bulletinNo,jdbcType=VARCHAR},
+			t1.title                          =#{title,jdbcType=VARCHAR},
+			t1.organ_contact                  =#{organContact,jdbcType=VARCHAR},
+			t1.telephone                      =#{telephone,jdbcType=VARCHAR},
+			t1.bulletin_type                  =#{bulletinType,jdbcType=VARCHAR},
+			t1.material_supply                =#{materialSupply,jdbcType=VARCHAR},
+			t1.implement_company              =#{implementCompany,jdbcType=VARCHAR},
+			t1.report_date                    =#{reportDate,jdbcType=DATE},
+			t1.author                         =#{author,jdbcType=VARCHAR},
+			t1.file_company                   =#{fileCompany,jdbcType=VARCHAR},
+			t1.company_tel                    =#{companyTel,jdbcType=VARCHAR},
+			t1.include_mars                   =#{includeMars,jdbcType=VARCHAR},
+			t1.publish_date                   =#{publishDate,jdbcType=DATE},
+			t1.complete_date                  =#{completeDate,jdbcType=DATE},
+			t1.change_no                      =#{changeNo,jdbcType=VARCHAR},
+			t1.perform_requirement            =#{performRequirement,jdbcType=VARCHAR},
+			t1.change_comment                 =#{changeComment,jdbcType=VARCHAR},
+			t1.remark                         =#{remark,jdbcType=VARCHAR},
+			t1.report_no                      =#{reportNo,jdbcType=VARCHAR},
+			t1.report_time                    =#{reportTime,jdbcType=DATE},
+			t1.reply_no                       =#{replyNo,jdbcType=VARCHAR},
+			t1.reply_time                     =#{replyTime,jdbcType=DATE},
+			t1.complete_time                  =#{completeTime,jdbcType=DATE},
+			t1.forward_no                     =#{forwardNo,jdbcType=VARCHAR},
+			t1.forward_time                   =#{forwardTime,jdbcType=DATE},
+			t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			t1.creation_date                  =#{creationDate},
+			t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			t1.last_update_date               =#{lastUpdateDate},
+			t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			t1.version                        =t1.version+1,
+			t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			t1.attribute_11                   =#{attribute11,jdbcType=DECIMAL},
+			t1.attribute_12                   =#{attribute12,jdbcType=DECIMAL},
+			t1.attribute_13                   =#{attribute13,jdbcType=DATE},
+			t1.attribute_14                   =#{attribute14,jdbcType=DATE},
+	where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 主键删除 HDKF_ES_NOTICEINFO -->
+<delete id="deleteHdkfEsNoticeinfoById" parameterType="java.lang.String">
+		delete from hdkf_es_noticeinfo  where  id = #{id}
+</delete>
+<!-- 传入的主表Id根据批架次分组统计查询子表数据  -->
+<select id="findCsmpEsNoticeinfoDetailByIdCountBatchNo" parameterType="java.lang.String" resultType="String">
+	 select count(distinct batch_no) as countBatchNo
+		  from  hdkf_ES_NOTICEINFO_EFFECTIVE eff 
+		   where eff.bulletin_id = #{id}
+</select>
+
+
+<!-- 传入的主表Id根据用户分组统计查询子表数据  -->
+<select id="findCsmpEsNoticeinfoDetailByIdCountName" parameterType="java.lang.String" resultType="String">
+		select count(distinct customer_name) as countName
+		  from  hdkf_ES_NOTICEINFO_EFFECTIVE eff 
+		   where eff.bulletin_id = #{id}
+</select>
+
+<!-- 传入的主表Id根据用户分组统计查询子表数据  -->
+<select id="findCsmpEsNoticeinfoDetailByIdCountNameYesNo" parameterType="java.lang.String" resultType="String">
+		select count(distinct batch_no) as countName
+		  from  hdkf_ES_NOTICEINFO_EFFECTIVE eff 
+		   where eff.bulletin_id = #{id}  and eff.do_flag is not null
+</select>
+</mapper>

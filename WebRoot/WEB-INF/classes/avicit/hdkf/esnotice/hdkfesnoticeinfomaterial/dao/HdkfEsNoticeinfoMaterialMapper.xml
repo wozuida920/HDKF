@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="avicit.hdkf.esnotice.hdkfesnoticeinfomaterial.dao.HdkfEsNoticeinfoMaterialDao">
+
+<resultMap id="HdkfEsNoticeinfoMaterialDTOMap" type="avicit.hdkf.esnotice.hdkfesnoticeinfomaterial.dto.HdkfEsNoticeinfoMaterialDTO">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="bulletinId" column="BULLETIN_ID" jdbcType="VARCHAR" />
+		<result property="bulletinNo" column="BULLETIN_NO" jdbcType="VARCHAR" />
+		<result property="sparepartId" column="SPAREPART_ID" jdbcType="VARCHAR" />
+		<result property="sparepartName" column="SPAREPART_NAME" jdbcType="VARCHAR" />
+		<result property="qty" column="QTY" jdbcType="DECIMAL" />
+		<result property="seq" column="SEQ" jdbcType="DECIMAL" />
+		<result property="pmodel" column="PMODEL" jdbcType="VARCHAR" />
+		<result property="pname" column="PNAME" jdbcType="VARCHAR" />
+		<result property="unitPrice" column="UNIT_PRICE" jdbcType="DECIMAL" />
+		<result property="equippedByUser" column="EQUIPPED_BY_USER" jdbcType="VARCHAR" />
+		<result property="oldPmodel" column="OLD_PMODEL" jdbcType="VARCHAR" />
+		<result property="disposition" column="DISPOSITION" jdbcType="VARCHAR" />
+		<result property="processRoute" column="PROCESS_ROUTE" jdbcType="VARCHAR" />
+		<result property="unitName" column="UNIT_NAME" jdbcType="VARCHAR" />
+		<result property="sortKind" column="SORT_KIND" jdbcType="VARCHAR" />
+		<result property="validFlag" column="VALID_FLAG" jdbcType="VARCHAR" />
+		<result property="remark" column="REMARK" jdbcType="VARCHAR" />
+		<result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR" />
+		<result property="creationDate" column="CREATION_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdatedBy" column="LAST_UPDATED_BY" jdbcType="VARCHAR" />
+		<result property="lastUpdateDate" column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdateIp" column="LAST_UPDATE_IP" jdbcType="VARCHAR" />
+		<result property="version" column="VERSION" jdbcType="DECIMAL" />
+		<result property="attribute01" column="ATTRIBUTE_01" jdbcType="VARCHAR" />
+		<result property="attribute02" column="ATTRIBUTE_02" jdbcType="VARCHAR" />
+		<result property="attribute03" column="ATTRIBUTE_03" jdbcType="VARCHAR" />
+		<result property="attribute04" column="ATTRIBUTE_04" jdbcType="VARCHAR" />
+		<result property="attribute05" column="ATTRIBUTE_05" jdbcType="VARCHAR" />
+		<result property="attribute06" column="ATTRIBUTE_06" jdbcType="VARCHAR" />
+		<result property="attribute07" column="ATTRIBUTE_07" jdbcType="VARCHAR" />
+		<result property="attribute08" column="ATTRIBUTE_08" jdbcType="VARCHAR" />
+		<result property="attribute09" column="ATTRIBUTE_09" jdbcType="VARCHAR" />
+		<result property="attribute10" column="ATTRIBUTE_10" jdbcType="VARCHAR" />
+		<result property="attribute11" column="ATTRIBUTE_11" jdbcType="DECIMAL" />
+		<result property="attribute12" column="ATTRIBUTE_12" jdbcType="DECIMAL" />
+		<result property="attribute13" column="ATTRIBUTE_13" jdbcType="TIMESTAMP" />
+		<result property="attribute14" column="ATTRIBUTE_14" jdbcType="TIMESTAMP" />
+</resultMap>
+<!-- 分页查询 HDKF_ES_NOTICEINFO_MATERIAL -->
+<select id="searchHdkfEsNoticeinfoMaterialByPage" parameterType="java.util.Map" resultMap="HdkfEsNoticeinfoMaterialDTOMap">
+	select
+		t1.id                             ,
+		t1.bulletin_id                    ,
+		t1.bulletin_no                    ,
+		t1.sparepart_id                   ,
+		t1.sparepart_name                 ,
+		t1.qty                            ,
+		t1.seq                            ,
+		t1.pmodel                         ,
+		t1.pname                          ,
+		t1.unit_price                     ,
+		t1.equipped_by_user               ,
+		t1.old_pmodel                     ,
+		t1.disposition                    ,
+		t1.process_route                  ,
+		t1.unit_name                      ,
+		t1.sort_kind                      ,
+		t1.valid_flag                     ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_es_noticeinfo_material 	t1
+		<where>
+			<if test="bean != null">
+			<if test="bean.id != null and bean.id != ''">
+				and t1.ID like '%'||#{bean.id}||'%'
+			</if>
+			<if test="bean.bulletinId != null and bean.bulletinId != ''">
+				and t1.BULLETIN_ID like '%'||#{bean.bulletinId}||'%'
+			</if>
+			<if test="bean.bulletinNo != null and bean.bulletinNo != ''">
+				and t1.BULLETIN_NO like '%'||#{bean.bulletinNo}||'%'
+			</if>
+			<if test="bean.sparepartId != null and bean.sparepartId != ''">
+				and t1.SPAREPART_ID like '%'||#{bean.sparepartId}||'%'
+			</if>
+			<if test="bean.sparepartName != null and bean.sparepartName != ''">
+				and t1.SPAREPART_NAME like '%'||#{bean.sparepartName}||'%'
+			</if>
+			<if test="bean.qty != null and bean.qty != ''">
+				and t1.QTY like '%'||#{bean.qty}||'%'
+			</if>
+			<if test="bean.seq != null and bean.seq != ''">
+				and t1.SEQ like '%'||#{bean.seq}||'%'
+			</if>
+			<if test="bean.pmodel != null and bean.pmodel != ''">
+				and t1.PMODEL like '%'||#{bean.pmodel}||'%'
+			</if>
+			<if test="bean.pname != null and bean.pname != ''">
+				and t1.PNAME like '%'||#{bean.pname}||'%'
+			</if>
+			<if test="bean.unitPrice != null and bean.unitPrice != ''">
+				and t1.UNIT_PRICE like '%'||#{bean.unitPrice}||'%'
+			</if>
+			<if test="bean.equippedByUser != null and bean.equippedByUser != ''">
+				and t1.EQUIPPED_BY_USER like '%'||#{bean.equippedByUser}||'%'
+			</if>
+			<if test="bean.oldPmodel != null and bean.oldPmodel != ''">
+				and t1.OLD_PMODEL like '%'||#{bean.oldPmodel}||'%'
+			</if>
+			<if test="bean.disposition != null and bean.disposition != ''">
+				and t1.DISPOSITION like '%'||#{bean.disposition}||'%'
+			</if>
+			<if test="bean.processRoute != null and bean.processRoute != ''">
+				and t1.PROCESS_ROUTE like '%'||#{bean.processRoute}||'%'
+			</if>
+			<if test="bean.unitName != null and bean.unitName != ''">
+				and t1.UNIT_NAME like '%'||#{bean.unitName}||'%'
+			</if>
+			<if test="bean.sortKind != null and bean.sortKind != ''">
+				and t1.SORT_KIND like '%'||#{bean.sortKind}||'%'
+			</if>
+			<if test="bean.validFlag != null and bean.validFlag != ''">
+				and t1.VALID_FLAG like '%'||#{bean.validFlag}||'%'
+			</if>
+			<if test="bean.remark != null and bean.remark != ''">
+				and t1.REMARK like '%'||#{bean.remark}||'%'
+			</if>
+			<if test="bean.createdBy != null and bean.createdBy != ''">
+				and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+			</if>
+			<if test="bean.creationDate != null and bean.creationDate != ''">
+				and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+			</if>
+			<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+			</if>
+			<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+			</if>
+			<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+			</if>
+			<if test="bean.version != null and bean.version != ''">
+				and t1.VERSION like '%'||#{bean.version}||'%'
+			</if>
+			<if test="bean.attribute01 != null and bean.attribute01 != ''">
+				and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+			</if>
+			<if test="bean.attribute02 != null and bean.attribute02 != ''">
+				and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+			</if>
+			<if test="bean.attribute03 != null and bean.attribute03 != ''">
+				and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+			</if>
+			<if test="bean.attribute04 != null and bean.attribute04 != ''">
+				and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+			</if>
+			<if test="bean.attribute05 != null and bean.attribute05 != ''">
+				and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+			</if>
+			<if test="bean.attribute06 != null and bean.attribute06 != ''">
+				and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+			</if>
+			<if test="bean.attribute07 != null and bean.attribute07 != ''">
+				and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+			</if>
+			<if test="bean.attribute08 != null and bean.attribute08 != ''">
+				and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+			</if>
+			<if test="bean.attribute09 != null and bean.attribute09 != ''">
+				and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+			</if>
+			<if test="bean.attribute10 != null and bean.attribute10 != ''">
+				and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+			</if>
+			<if test="bean.attribute11 != null and bean.attribute11 != ''">
+				and t1.ATTRIBUTE_11 like '%'||#{bean.attribute11}||'%'
+			</if>
+			<if test="bean.attribute12 != null and bean.attribute12 != ''">
+				and t1.ATTRIBUTE_12 like '%'||#{bean.attribute12}||'%'
+			</if>
+			<if test="bean.attribute13 != null and bean.attribute13 != ''">
+				and t1.ATTRIBUTE_13 like '%'||#{bean.attribute13}||'%'
+			</if>
+			<if test="bean.attribute14 != null and bean.attribute14 != ''">
+				and t1.ATTRIBUTE_14 like '%'||#{bean.attribute14}||'%'
+			</if>
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}			
+			</if>
+		</where>
+			order by t1.creation_date desc
+</select>
+<!-- 查询列表 HDKF_ES_NOTICEINFO_MATERIAL -->
+<select id="searchHdkfEsNoticeinfoMaterial" parameterType="java.util.Map" resultMap="HdkfEsNoticeinfoMaterialDTOMap">
+	select
+		t1.id                             ,
+		t1.bulletin_id                    ,
+		t1.bulletin_no                    ,
+		t1.sparepart_id                   ,
+		t1.sparepart_name                 ,
+		t1.qty                            ,
+		t1.seq                            ,
+		t1.pmodel                         ,
+		t1.pname                          ,
+		t1.unit_price                     ,
+		t1.equipped_by_user               ,
+		t1.old_pmodel                     ,
+		t1.disposition                    ,
+		t1.process_route                  ,
+		t1.unit_name                      ,
+		t1.sort_kind                      ,
+		t1.valid_flag                     ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_es_noticeinfo_material 	t1
+		<where>
+			<if test="id != null and id != ''">
+				and t1.ID =#{id}
+			</if>
+			<if test="bulletinId != null and bulletinId != ''">
+				and t1.BULLETIN_ID =#{bulletinId}
+			</if>
+			<if test="bulletinNo != null and bulletinNo != ''">
+				and t1.BULLETIN_NO =#{bulletinNo}
+			</if>
+			<if test="sparepartId != null and sparepartId != ''">
+				and t1.SPAREPART_ID =#{sparepartId}
+			</if>
+			<if test="sparepartName != null and sparepartName != ''">
+				and t1.SPAREPART_NAME =#{sparepartName}
+			</if>
+			<if test="qty != null and qty != ''">
+				and t1.QTY =#{qty}
+			</if>
+			<if test="seq != null and seq != ''">
+				and t1.SEQ =#{seq}
+			</if>
+			<if test="pmodel != null and pmodel != ''">
+				and t1.PMODEL =#{pmodel}
+			</if>
+			<if test="pname != null and pname != ''">
+				and t1.PNAME =#{pname}
+			</if>
+			<if test="unitPrice != null and unitPrice != ''">
+				and t1.UNIT_PRICE =#{unitPrice}
+			</if>
+			<if test="equippedByUser != null and equippedByUser != ''">
+				and t1.EQUIPPED_BY_USER =#{equippedByUser}
+			</if>
+			<if test="oldPmodel != null and oldPmodel != ''">
+				and t1.OLD_PMODEL =#{oldPmodel}
+			</if>
+			<if test="disposition != null and disposition != ''">
+				and t1.DISPOSITION =#{disposition}
+			</if>
+			<if test="processRoute != null and processRoute != ''">
+				and t1.PROCESS_ROUTE =#{processRoute}
+			</if>
+			<if test="unitName != null and unitName != ''">
+				and t1.UNIT_NAME =#{unitName}
+			</if>
+			<if test="sortKind != null and sortKind != ''">
+				and t1.SORT_KIND =#{sortKind}
+			</if>
+			<if test="validFlag != null and validFlag != ''">
+				and t1.VALID_FLAG =#{validFlag}
+			</if>
+			<if test="remark != null and remark != ''">
+				and t1.REMARK =#{remark}
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				and t1.CREATED_BY =#{createdBy}
+			</if>
+			<if test="creationDate != null and creationDate != ''">
+				and t1.CREATION_DATE =#{creationDate}
+			</if>
+			<if test="lastUpdatedBy != null and lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY =#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdateDate != null and lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE =#{lastUpdateDate}
+			</if>
+			<if test="lastUpdateIp != null and lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP =#{lastUpdateIp}
+			</if>
+			<if test="version != null and version != ''">
+				and t1.VERSION =#{version}
+			</if>
+			<if test="attribute01 != null and attribute01 != ''">
+				and t1.ATTRIBUTE_01 =#{attribute01}
+			</if>
+			<if test="attribute02 != null and attribute02 != ''">
+				and t1.ATTRIBUTE_02 =#{attribute02}
+			</if>
+			<if test="attribute03 != null and attribute03 != ''">
+				and t1.ATTRIBUTE_03 =#{attribute03}
+			</if>
+			<if test="attribute04 != null and attribute04 != ''">
+				and t1.ATTRIBUTE_04 =#{attribute04}
+			</if>
+			<if test="attribute05 != null and attribute05 != ''">
+				and t1.ATTRIBUTE_05 =#{attribute05}
+			</if>
+			<if test="attribute06 != null and attribute06 != ''">
+				and t1.ATTRIBUTE_06 =#{attribute06}
+			</if>
+			<if test="attribute07 != null and attribute07 != ''">
+				and t1.ATTRIBUTE_07 =#{attribute07}
+			</if>
+			<if test="attribute08 != null and attribute08 != ''">
+				and t1.ATTRIBUTE_08 =#{attribute08}
+			</if>
+			<if test="attribute09 != null and attribute09 != ''">
+				and t1.ATTRIBUTE_09 =#{attribute09}
+			</if>
+			<if test="attribute10 != null and attribute10 != ''">
+				and t1.ATTRIBUTE_10 =#{attribute10}
+			</if>
+			<if test="attribute11 != null and attribute11 != ''">
+				and t1.ATTRIBUTE_11 =#{attribute11}
+			</if>
+			<if test="attribute12 != null and attribute12 != ''">
+				and t1.ATTRIBUTE_12 =#{attribute12}
+			</if>
+			<if test="attribute13 != null and attribute13 != ''">
+				and t1.ATTRIBUTE_13 =#{attribute13}
+			</if>
+			<if test="attribute14 != null and attribute14 != ''">
+				and t1.ATTRIBUTE_14 =#{attribute14}
+			</if>
+		</where>
+</select>
+<!-- 主键查询对象 HDKF_ES_NOTICEINFO_MATERIAL -->
+<select id="findHdkfEsNoticeinfoMaterialById" parameterType="java.util.Map" resultMap="HdkfEsNoticeinfoMaterialDTOMap">
+	select
+		t1.id                             ,
+		t1.bulletin_id                    ,
+		t1.bulletin_no                    ,
+		t1.sparepart_id                   ,
+		t1.sparepart_name                 ,
+		t1.qty                            ,
+		t1.seq                            ,
+		t1.pmodel                         ,
+		t1.pname                          ,
+		t1.unit_price                     ,
+		t1.equipped_by_user               ,
+		t1.old_pmodel                     ,
+		t1.disposition                    ,
+		t1.process_route                  ,
+		t1.unit_name                      ,
+		t1.sort_kind                      ,
+		t1.valid_flag                     ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_es_noticeinfo_material 	t1
+		where t1.id = #{id}
+</select>
+<!-- 新增对象 HDKF_ES_NOTICEINFO_MATERIAL -->
+<insert id="insertHdkfEsNoticeinfoMaterial" parameterType="avicit.hdkf.esnotice.hdkfesnoticeinfomaterial.dto.HdkfEsNoticeinfoMaterialDTO">
+	insert into hdkf_es_noticeinfo_material
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="bulletinId != null">
+				bulletin_id,
+			</if>
+			<if test="bulletinNo != null">
+				bulletin_no,
+			</if>
+			<if test="sparepartId != null">
+				sparepart_id,
+			</if>
+			<if test="sparepartName != null">
+				sparepart_name,
+			</if>
+			<if test="qty != null">
+				qty,
+			</if>
+			<if test="seq != null">
+				seq,
+			</if>
+			<if test="pmodel != null">
+				pmodel,
+			</if>
+			<if test="pname != null">
+				pname,
+			</if>
+			<if test="unitPrice != null">
+				unit_price,
+			</if>
+			<if test="equippedByUser != null">
+				equipped_by_user,
+			</if>
+			<if test="oldPmodel != null">
+				old_pmodel,
+			</if>
+			<if test="disposition != null">
+				disposition,
+			</if>
+			<if test="processRoute != null">
+				process_route,
+			</if>
+			<if test="unitName != null">
+				unit_name,
+			</if>
+			<if test="sortKind != null">
+				sort_kind,
+			</if>
+			<if test="validFlag != null">
+				valid_flag,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="creationDate != null">
+				creation_date,
+			</if>
+			<if test="lastUpdatedBy != null">
+				last_updated_by,
+			</if>
+			<if test="lastUpdateDate != null">
+				last_update_date,
+			</if>
+			<if test="lastUpdateIp != null">
+				last_update_ip,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+			<if test="attribute01 != null">
+				attribute_01,
+			</if>
+			<if test="attribute02 != null">
+				attribute_02,
+			</if>
+			<if test="attribute03 != null">
+				attribute_03,
+			</if>
+			<if test="attribute04 != null">
+				attribute_04,
+			</if>
+			<if test="attribute05 != null">
+				attribute_05,
+			</if>
+			<if test="attribute06 != null">
+				attribute_06,
+			</if>
+			<if test="attribute07 != null">
+				attribute_07,
+			</if>
+			<if test="attribute08 != null">
+				attribute_08,
+			</if>
+			<if test="attribute09 != null">
+				attribute_09,
+			</if>
+			<if test="attribute10 != null">
+				attribute_10,
+			</if>
+			<if test="attribute11 != null">
+				attribute_11,
+			</if>
+			<if test="attribute12 != null">
+				attribute_12,
+			</if>
+			<if test="attribute13 != null">
+				attribute_13,
+			</if>
+			<if test="attribute14 != null">
+				attribute_14,
+			</if>
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="bulletinId != null">
+				#{bulletinId,jdbcType=VARCHAR},
+			</if>
+			<if test="bulletinNo != null">
+				#{bulletinNo,jdbcType=VARCHAR},
+			</if>
+			<if test="sparepartId != null">
+				#{sparepartId,jdbcType=VARCHAR},
+			</if>
+			<if test="sparepartName != null">
+				#{sparepartName,jdbcType=VARCHAR},
+			</if>
+			<if test="qty != null">
+				#{qty,jdbcType=DECIMAL},
+			</if>
+			<if test="seq != null">
+				#{seq,jdbcType=DECIMAL},
+			</if>
+			<if test="pmodel != null">
+				#{pmodel,jdbcType=VARCHAR},
+			</if>
+			<if test="pname != null">
+				#{pname,jdbcType=VARCHAR},
+			</if>
+			<if test="unitPrice != null">
+				#{unitPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="equippedByUser != null">
+				#{equippedByUser,jdbcType=VARCHAR},
+			</if>
+			<if test="oldPmodel != null">
+				#{oldPmodel,jdbcType=VARCHAR},
+			</if>
+			<if test="disposition != null">
+				#{disposition,jdbcType=VARCHAR},
+			</if>
+			<if test="processRoute != null">
+				#{processRoute,jdbcType=VARCHAR},
+			</if>
+			<if test="unitName != null">
+				#{unitName,jdbcType=VARCHAR},
+			</if>
+			<if test="sortKind != null">
+				#{sortKind,jdbcType=VARCHAR},
+			</if>
+			<if test="validFlag != null">
+				#{validFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute01 != null">
+				#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute11 != null">
+				#{attribute11,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute12 != null">
+				#{attribute12,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute13 != null">
+				#{attribute13,jdbcType=DATE},
+			</if>
+			<if test="attribute14 != null">
+				#{attribute14,jdbcType=DATE},
+			</if>
+	</trim>
+</insert>
+<!-- 更新对象 HDKF_ES_NOTICEINFO_MATERIAL -->
+<update id="updateHdkfEsNoticeinfoMaterialSensitive" parameterType="avicit.hdkf.esnotice.hdkfesnoticeinfomaterial.dto.HdkfEsNoticeinfoMaterialDTO">
+	update hdkf_es_noticeinfo_material t1
+	<set>
+			<if test="id != null">
+				t1.id                             =#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="bulletinId != null">
+				t1.bulletin_id                    =#{bulletinId,jdbcType=VARCHAR},
+			</if>
+			<if test="bulletinNo != null">
+				t1.bulletin_no                    =#{bulletinNo,jdbcType=VARCHAR},
+			</if>
+			<if test="sparepartId != null">
+				t1.sparepart_id                   =#{sparepartId,jdbcType=VARCHAR},
+			</if>
+			<if test="sparepartName != null">
+				t1.sparepart_name                 =#{sparepartName,jdbcType=VARCHAR},
+			</if>
+			<if test="qty != null">
+				t1.qty                            =#{qty,jdbcType=DECIMAL},
+			</if>
+			<if test="seq != null">
+				t1.seq                            =#{seq,jdbcType=DECIMAL},
+			</if>
+			<if test="pmodel != null">
+				t1.pmodel                         =#{pmodel,jdbcType=VARCHAR},
+			</if>
+			<if test="pname != null">
+				t1.pname                          =#{pname,jdbcType=VARCHAR},
+			</if>
+			<if test="unitPrice != null">
+				t1.unit_price                     =#{unitPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="equippedByUser != null">
+				t1.equipped_by_user               =#{equippedByUser,jdbcType=VARCHAR},
+			</if>
+			<if test="oldPmodel != null">
+				t1.old_pmodel                     =#{oldPmodel,jdbcType=VARCHAR},
+			</if>
+			<if test="disposition != null">
+				t1.disposition                    =#{disposition,jdbcType=VARCHAR},
+			</if>
+			<if test="processRoute != null">
+				t1.process_route                  =#{processRoute,jdbcType=VARCHAR},
+			</if>
+			<if test="unitName != null">
+				t1.unit_name                      =#{unitName,jdbcType=VARCHAR},
+			</if>
+			<if test="sortKind != null">
+				t1.sort_kind                      =#{sortKind,jdbcType=VARCHAR},
+			</if>
+			<if test="validFlag != null">
+				t1.valid_flag                     =#{validFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				t1.remark                         =#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				t1.creation_date                  =#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				t1.last_update_date               =#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				t1.version                        =t1.version+1,
+			</if>
+			<if test="attribute01 != null">
+				t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute11 != null">
+				t1.attribute_11                   =#{attribute11,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute12 != null">
+				t1.attribute_12                   =#{attribute12,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute13 != null">
+				t1.attribute_13                   =#{attribute13,jdbcType=DATE},
+			</if>
+			<if test="attribute14 != null">
+				t1.attribute_14                   =#{attribute14,jdbcType=DATE},
+			</if>
+	</set>
+		where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 更新对象 HDKF_ES_NOTICEINFO_MATERIAL -->
+<update id="updateHdkfEsNoticeinfoMaterialAll" parameterType="avicit.hdkf.esnotice.hdkfesnoticeinfomaterial.dto.HdkfEsNoticeinfoMaterialDTO">
+	update hdkf_es_noticeinfo_material t1
+		set
+			t1.id                             =#{id,jdbcType=VARCHAR},
+			t1.bulletin_id                    =#{bulletinId,jdbcType=VARCHAR},
+			t1.bulletin_no                    =#{bulletinNo,jdbcType=VARCHAR},
+			t1.sparepart_id                   =#{sparepartId,jdbcType=VARCHAR},
+			t1.sparepart_name                 =#{sparepartName,jdbcType=VARCHAR},
+			t1.qty                            =#{qty,jdbcType=DECIMAL},
+			t1.seq                            =#{seq,jdbcType=DECIMAL},
+			t1.pmodel                         =#{pmodel,jdbcType=VARCHAR},
+			t1.pname                          =#{pname,jdbcType=VARCHAR},
+			t1.unit_price                     =#{unitPrice,jdbcType=DECIMAL},
+			t1.equipped_by_user               =#{equippedByUser,jdbcType=VARCHAR},
+			t1.old_pmodel                     =#{oldPmodel,jdbcType=VARCHAR},
+			t1.disposition                    =#{disposition,jdbcType=VARCHAR},
+			t1.process_route                  =#{processRoute,jdbcType=VARCHAR},
+			t1.unit_name                      =#{unitName,jdbcType=VARCHAR},
+			t1.sort_kind                      =#{sortKind,jdbcType=VARCHAR},
+			t1.valid_flag                     =#{validFlag,jdbcType=VARCHAR},
+			t1.remark                         =#{remark,jdbcType=VARCHAR},
+			t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			t1.creation_date                  =#{creationDate},
+			t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			t1.last_update_date               =#{lastUpdateDate},
+			t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			t1.version                        =t1.version+1,
+			t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			t1.attribute_11                   =#{attribute11,jdbcType=DECIMAL},
+			t1.attribute_12                   =#{attribute12,jdbcType=DECIMAL},
+			t1.attribute_13                   =#{attribute13,jdbcType=DATE},
+			t1.attribute_14                   =#{attribute14,jdbcType=DATE},
+	where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 主键删除 HDKF_ES_NOTICEINFO_MATERIAL -->
+<delete id="deleteHdkfEsNoticeinfoMaterialById" parameterType="java.lang.String">
+		delete from hdkf_es_noticeinfo_material  where  id = #{id}
+</delete>
+</mapper>

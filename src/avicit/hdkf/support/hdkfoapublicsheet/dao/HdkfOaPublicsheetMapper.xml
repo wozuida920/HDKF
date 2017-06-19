@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="avicit.hdkf.support.hdkfoapublicsheet.dao.HdkfOaPublicsheetDao">
+
+<resultMap id="HdkfOaPublicsheetDTOMap" type="avicit.hdkf.support.hdkfoapublicsheet.dto.HdkfOaPublicsheetDTO">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="sheetno" column="SHEETNO" jdbcType="VARCHAR" />
+		<result property="sendDep" column="SEND_DEP" jdbcType="VARCHAR" />
+		<result property="sentdate" column="SENTDATE" jdbcType="TIMESTAMP" />
+		<result property="receiveDep" column="RECEIVE_DEP" jdbcType="VARCHAR" />
+		<result property="planetype" column="PLANETYPE" jdbcType="VARCHAR" />
+		<result property="batchNo" column="BATCH_NO" jdbcType="VARCHAR" />
+		<result property="sortieNo" column="SORTIE_NO" jdbcType="VARCHAR" />
+		<result property="sheetcontent" column="SHEETCONTENT" jdbcType="VARCHAR" />
+		<result property="sendreason" column="SENDREASON" jdbcType="VARCHAR" />
+		<result property="recorder" column="RECORDER" jdbcType="VARCHAR" />
+		<result property="proofreader" column="PROOFREADER" jdbcType="VARCHAR" />
+		<result property="reviewer" column="REVIEWER" jdbcType="VARCHAR" />
+		<result property="approver" column="APPROVER" jdbcType="VARCHAR" />
+		<result property="remarks" column="REMARKS" jdbcType="VARCHAR" />
+		<result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR" />
+		<result property="creationDate" column="CREATION_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdatedBy" column="LAST_UPDATED_BY" jdbcType="VARCHAR" />
+		<result property="lastUpdateDate" column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdateIp" column="LAST_UPDATE_IP" jdbcType="VARCHAR" />
+		<result property="version" column="VERSION" jdbcType="DECIMAL" />
+		<result property="attribute01" column="ATTRIBUTE_01" jdbcType="VARCHAR" />
+		<result property="attribute02" column="ATTRIBUTE_02" jdbcType="VARCHAR" />
+		<result property="attribute03" column="ATTRIBUTE_03" jdbcType="VARCHAR" />
+		<result property="attribute04" column="ATTRIBUTE_04" jdbcType="VARCHAR" />
+		<result property="attribute05" column="ATTRIBUTE_05" jdbcType="VARCHAR" />
+		<result property="attribute06" column="ATTRIBUTE_06" jdbcType="VARCHAR" />
+		<result property="attribute07" column="ATTRIBUTE_07" jdbcType="VARCHAR" />
+		<result property="attribute08" column="ATTRIBUTE_08" jdbcType="VARCHAR" />
+		<result property="attribute09" column="ATTRIBUTE_09" jdbcType="VARCHAR" />
+		<result property="attribute10" column="ATTRIBUTE_10" jdbcType="VARCHAR" />
+		<result property="attribute11" column="ATTRIBUTE_11" jdbcType="DECIMAL" />
+		<result property="attribute12" column="ATTRIBUTE_12" jdbcType="DECIMAL" />
+		<result property="attribute13" column="ATTRIBUTE_13" jdbcType="TIMESTAMP" />
+		<result property="attribute14" column="ATTRIBUTE_14" jdbcType="TIMESTAMP" />
+		<result property="activityalias_" column="activityalias_" jdbcType="VARCHAR" />
+		<result property="businessstate_" column="businessstate_" jdbcType="VARCHAR" />
+</resultMap>
+<!-- 分页查询 HDKF_OA_PUBLICSHEET -->
+<select id="searchHdkfOaPublicsheetByPage" parameterType="java.util.Map" resultMap="HdkfOaPublicsheetDTOMap">
+	select
+		v.activityalias_                 ,
+		v.businessstate_                 ,
+		t1.id                             ,
+		t1.sheetno                        ,
+		t1.send_dep                       ,
+		t1.sentdate                       ,
+		t1.receive_dep                    ,
+		t1.planetype                      ,
+		t1.batch_no                       ,
+		t1.sortie_no                      ,
+		t1.sheetcontent                   ,
+		t1.sendreason                     ,
+		t1.recorder                       ,
+		t1.proofreader                    ,
+		t1.reviewer                       ,
+		t1.approver                       ,
+		t1.remarks                        ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_oa_publicsheet 	t1 left join BPM_CLIENT_HIST_PROCINST_V v on t1.id = v.formid_
+		<where>
+			<if test="bean != null">
+			<if test="bean.id != null and bean.id != ''">
+				and t1.ID like '%'||#{bean.id}||'%'
+			</if>
+			<if test="bean.sheetno != null and bean.sheetno != ''">
+				and t1.SHEETNO like '%'||#{bean.sheetno}||'%'
+			</if>
+			<if test="bean.sendDep != null and bean.sendDep != ''">
+				and t1.SEND_DEP like '%'||#{bean.sendDep}||'%'
+			</if>
+			<if test="bean.sentdateBegin != null and bean.sentdateBegin != ''">
+				and t1.SENTDATE &gt;= #{bean.sentdateBegin}
+			</if>
+			<if test="bean.sentdateEnd != null and bean.sentdateEnd != ''">
+				and t1.SENTDATE &lt;= #{bean.sentdateEnd}
+			</if>
+			<if test="bean.receiveDep != null and bean.receiveDep != ''">
+				and t1.RECEIVE_DEP like '%'||#{bean.receiveDep}||'%'
+			</if>
+			<if test="bean.planetype != null and bean.planetype != ''">
+				and t1.PLANETYPE like '%'||#{bean.planetype}||'%'
+			</if>
+			<if test="bean.batchNo != null and bean.batchNo != ''">
+				and t1.BATCH_NO like '%'||#{bean.batchNo}||'%'
+			</if>
+			<if test="bean.sortieNo != null and bean.sortieNo != ''">
+				and t1.SORTIE_NO like '%'||#{bean.sortieNo}||'%'
+			</if>
+			<if test="bean.sheetcontent != null and bean.sheetcontent != ''">
+				and t1.SHEETCONTENT like '%'||#{bean.sheetcontent}||'%'
+			</if>
+			<if test="bean.sendreason != null and bean.sendreason != ''">
+				and t1.SENDREASON like '%'||#{bean.sendreason}||'%'
+			</if>
+			<if test="bean.recorder != null and bean.recorder != ''">
+				and t1.RECORDER like '%'||#{bean.recorder}||'%'
+			</if>
+			<if test="bean.proofreader != null and bean.proofreader != ''">
+				and t1.PROOFREADER like '%'||#{bean.proofreader}||'%'
+			</if>
+			<if test="bean.reviewer != null and bean.reviewer != ''">
+				and t1.REVIEWER like '%'||#{bean.reviewer}||'%'
+			</if>
+			<if test="bean.approver != null and bean.approver != ''">
+				and t1.APPROVER like '%'||#{bean.approver}||'%'
+			</if>
+			<if test="bean.remarks != null and bean.remarks != ''">
+				and t1.REMARKS like '%'||#{bean.remarks}||'%'
+			</if>
+			<if test="bean.createdBy != null and bean.createdBy != ''">
+				and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+			</if>
+			<if test="bean.creationDate != null and bean.creationDate != ''">
+				and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+			</if>
+			<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+			</if>
+			<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+			</if>
+			<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+			</if>
+			<if test="bean.version != null and bean.version != ''">
+				and t1.VERSION like '%'||#{bean.version}||'%'
+			</if>
+			<if test="bean.attribute01 != null and bean.attribute01 != ''">
+				and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+			</if>
+			<if test="bean.attribute02 != null and bean.attribute02 != ''">
+				and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+			</if>
+			<if test="bean.attribute03 != null and bean.attribute03 != ''">
+				and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+			</if>
+			<if test="bean.attribute04 != null and bean.attribute04 != ''">
+				and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+			</if>
+			<if test="bean.attribute05 != null and bean.attribute05 != ''">
+				and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+			</if>
+			<if test="bean.attribute06 != null and bean.attribute06 != ''">
+				and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+			</if>
+			<if test="bean.attribute07 != null and bean.attribute07 != ''">
+				and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+			</if>
+			<if test="bean.attribute08 != null and bean.attribute08 != ''">
+				and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+			</if>
+			<if test="bean.attribute09 != null and bean.attribute09 != ''">
+				and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+			</if>
+			<if test="bean.attribute10 != null and bean.attribute10 != ''">
+				and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+			</if>
+			<if test="bean.attribute11 != null and bean.attribute11 != ''">
+				and t1.ATTRIBUTE_11 like '%'||#{bean.attribute11}||'%'
+			</if>
+			<if test="bean.attribute12 != null and bean.attribute12 != ''">
+				and t1.ATTRIBUTE_12 like '%'||#{bean.attribute12}||'%'
+			</if>
+			<if test="bean.attribute13 != null and bean.attribute13 != ''">
+				and t1.ATTRIBUTE_13 like '%'||#{bean.attribute13}||'%'
+			</if>
+			<if test="bean.attribute14 != null and bean.attribute14 != ''">
+				and t1.ATTRIBUTE_14 like '%'||#{bean.attribute14}||'%'
+			</if>
+			</if>
+			<if test="bean.bpmType == 'my'">
+				and exists (select 1 from BPM_CLIENT_HIST_TASK_V os where os.task_b_id_ = t1.id and os.assignee_ = #{bean.currUserId})
+			</if>
+			<if test="bean.bpmState != null and bean.bpmState != 'all'">
+				and v.businessstate_ = #{bean.bpmState}
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}			
+			</if>
+		</where>
+			order by t1.creation_date desc
+</select>
+<!-- 查询列表 HDKF_OA_PUBLICSHEET -->
+<select id="searchHdkfOaPublicsheet" parameterType="java.util.Map" resultMap="HdkfOaPublicsheetDTOMap">
+	select
+		t1.id                             ,
+		t1.sheetno                        ,
+		t1.send_dep                       ,
+		t1.sentdate                       ,
+		t1.receive_dep                    ,
+		t1.planetype                      ,
+		t1.batch_no                       ,
+		t1.sortie_no                      ,
+		t1.sheetcontent                   ,
+		t1.sendreason                     ,
+		t1.recorder                       ,
+		t1.proofreader                    ,
+		t1.reviewer                       ,
+		t1.approver                       ,
+		t1.remarks                        ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_oa_publicsheet 	t1
+		<where>
+			<if test="id != null and id != ''">
+				and t1.ID =#{id}
+			</if>
+			<if test="sheetno != null and sheetno != ''">
+				and t1.SHEETNO =#{sheetno}
+			</if>
+			<if test="sendDep != null and sendDep != ''">
+				and t1.SEND_DEP =#{sendDep}
+			</if>
+			<if test="bean.sentdateBegin != null and bean.sentdateBegin != ''">
+				and t1.SENTDATE &gt;= #{bean.sentdateBegin}
+			</if>
+			<if test="bean.sentdateEnd != null and bean.sentdateEnd != ''">
+				and t1.SENTDATE &lt;= #{bean.sentdateEnd}
+			</if>
+			<if test="receiveDep != null and receiveDep != ''">
+				and t1.RECEIVE_DEP =#{receiveDep}
+			</if>
+			<if test="planetype != null and planetype != ''">
+				and t1.PLANETYPE =#{planetype}
+			</if>
+			<if test="batchNo != null and batchNo != ''">
+				and t1.BATCH_NO =#{batchNo}
+			</if>
+			<if test="sortieNo != null and sortieNo != ''">
+				and t1.SORTIE_NO =#{sortieNo}
+			</if>
+			<if test="sheetcontent != null and sheetcontent != ''">
+				and t1.SHEETCONTENT =#{sheetcontent}
+			</if>
+			<if test="sendreason != null and sendreason != ''">
+				and t1.SENDREASON =#{sendreason}
+			</if>
+			<if test="recorder != null and recorder != ''">
+				and t1.RECORDER =#{recorder}
+			</if>
+			<if test="proofreader != null and proofreader != ''">
+				and t1.PROOFREADER =#{proofreader}
+			</if>
+			<if test="reviewer != null and reviewer != ''">
+				and t1.REVIEWER =#{reviewer}
+			</if>
+			<if test="approver != null and approver != ''">
+				and t1.APPROVER =#{approver}
+			</if>
+			<if test="remarks != null and remarks != ''">
+				and t1.REMARKS =#{remarks}
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				and t1.CREATED_BY =#{createdBy}
+			</if>
+			<if test="creationDate != null and creationDate != ''">
+				and t1.CREATION_DATE =#{creationDate}
+			</if>
+			<if test="lastUpdatedBy != null and lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY =#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdateDate != null and lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE =#{lastUpdateDate}
+			</if>
+			<if test="lastUpdateIp != null and lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP =#{lastUpdateIp}
+			</if>
+			<if test="version != null and version != ''">
+				and t1.VERSION =#{version}
+			</if>
+			<if test="attribute01 != null and attribute01 != ''">
+				and t1.ATTRIBUTE_01 =#{attribute01}
+			</if>
+			<if test="attribute02 != null and attribute02 != ''">
+				and t1.ATTRIBUTE_02 =#{attribute02}
+			</if>
+			<if test="attribute03 != null and attribute03 != ''">
+				and t1.ATTRIBUTE_03 =#{attribute03}
+			</if>
+			<if test="attribute04 != null and attribute04 != ''">
+				and t1.ATTRIBUTE_04 =#{attribute04}
+			</if>
+			<if test="attribute05 != null and attribute05 != ''">
+				and t1.ATTRIBUTE_05 =#{attribute05}
+			</if>
+			<if test="attribute06 != null and attribute06 != ''">
+				and t1.ATTRIBUTE_06 =#{attribute06}
+			</if>
+			<if test="attribute07 != null and attribute07 != ''">
+				and t1.ATTRIBUTE_07 =#{attribute07}
+			</if>
+			<if test="attribute08 != null and attribute08 != ''">
+				and t1.ATTRIBUTE_08 =#{attribute08}
+			</if>
+			<if test="attribute09 != null and attribute09 != ''">
+				and t1.ATTRIBUTE_09 =#{attribute09}
+			</if>
+			<if test="attribute10 != null and attribute10 != ''">
+				and t1.ATTRIBUTE_10 =#{attribute10}
+			</if>
+			<if test="attribute11 != null and attribute11 != ''">
+				and t1.ATTRIBUTE_11 =#{attribute11}
+			</if>
+			<if test="attribute12 != null and attribute12 != ''">
+				and t1.ATTRIBUTE_12 =#{attribute12}
+			</if>
+			<if test="attribute13 != null and attribute13 != ''">
+				and t1.ATTRIBUTE_13 =#{attribute13}
+			</if>
+			<if test="attribute14 != null and attribute14 != ''">
+				and t1.ATTRIBUTE_14 =#{attribute14}
+			</if>
+		</where>
+</select>
+<!-- 主键查询对象 HDKF_OA_PUBLICSHEET -->
+<select id="findHdkfOaPublicsheetById" parameterType="java.util.Map" resultMap="HdkfOaPublicsheetDTOMap">
+	select
+		t1.id                             ,
+		t1.sheetno                        ,
+		t1.send_dep                       ,
+		t1.sentdate                       ,
+		t1.receive_dep                    ,
+		t1.planetype                      ,
+		t1.batch_no                       ,
+		t1.sortie_no                      ,
+		t1.sheetcontent                   ,
+		t1.sendreason                     ,
+		t1.recorder                       ,
+		t1.proofreader                    ,
+		t1.reviewer                       ,
+		t1.approver                       ,
+		t1.remarks                        ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.attribute_11                   ,
+		t1.attribute_12                   ,
+		t1.attribute_13                   ,
+		t1.attribute_14                   
+	from hdkf_oa_publicsheet 	t1
+		where t1.id = #{id}
+</select>
+<!-- 新增对象 HDKF_OA_PUBLICSHEET -->
+<insert id="insertHdkfOaPublicsheet" parameterType="avicit.hdkf.support.hdkfoapublicsheet.dto.HdkfOaPublicsheetDTO">
+	insert into hdkf_oa_publicsheet
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="sheetno != null">
+				sheetno,
+			</if>
+			<if test="sendDep != null">
+				send_dep,
+			</if>
+			<if test="sentdate != null">
+				sentdate,
+			</if>
+			<if test="receiveDep != null">
+				receive_dep,
+			</if>
+			<if test="planetype != null">
+				planetype,
+			</if>
+			<if test="batchNo != null">
+				batch_no,
+			</if>
+			<if test="sortieNo != null">
+				sortie_no,
+			</if>
+			<if test="sheetcontent != null">
+				sheetcontent,
+			</if>
+			<if test="sendreason != null">
+				sendreason,
+			</if>
+			<if test="recorder != null">
+				recorder,
+			</if>
+			<if test="proofreader != null">
+				proofreader,
+			</if>
+			<if test="reviewer != null">
+				reviewer,
+			</if>
+			<if test="approver != null">
+				approver,
+			</if>
+			<if test="remarks != null">
+				remarks,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="creationDate != null">
+				creation_date,
+			</if>
+			<if test="lastUpdatedBy != null">
+				last_updated_by,
+			</if>
+			<if test="lastUpdateDate != null">
+				last_update_date,
+			</if>
+			<if test="lastUpdateIp != null">
+				last_update_ip,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+			<if test="attribute01 != null">
+				attribute_01,
+			</if>
+			<if test="attribute02 != null">
+				attribute_02,
+			</if>
+			<if test="attribute03 != null">
+				attribute_03,
+			</if>
+			<if test="attribute04 != null">
+				attribute_04,
+			</if>
+			<if test="attribute05 != null">
+				attribute_05,
+			</if>
+			<if test="attribute06 != null">
+				attribute_06,
+			</if>
+			<if test="attribute07 != null">
+				attribute_07,
+			</if>
+			<if test="attribute08 != null">
+				attribute_08,
+			</if>
+			<if test="attribute09 != null">
+				attribute_09,
+			</if>
+			<if test="attribute10 != null">
+				attribute_10,
+			</if>
+			<if test="attribute11 != null">
+				attribute_11,
+			</if>
+			<if test="attribute12 != null">
+				attribute_12,
+			</if>
+			<if test="attribute13 != null">
+				attribute_13,
+			</if>
+			<if test="attribute14 != null">
+				attribute_14,
+			</if>
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="sheetno != null">
+				#{sheetno,jdbcType=VARCHAR},
+			</if>
+			<if test="sendDep != null">
+				#{sendDep,jdbcType=VARCHAR},
+			</if>
+			<if test="sentdate != null">
+				#{sentdate,jdbcType=DATE},
+			</if>
+			<if test="receiveDep != null">
+				#{receiveDep,jdbcType=VARCHAR},
+			</if>
+			<if test="planetype != null">
+				#{planetype,jdbcType=VARCHAR},
+			</if>
+			<if test="batchNo != null">
+				#{batchNo,jdbcType=VARCHAR},
+			</if>
+			<if test="sortieNo != null">
+				#{sortieNo,jdbcType=VARCHAR},
+			</if>
+			<if test="sheetcontent != null">
+				#{sheetcontent,jdbcType=VARCHAR},
+			</if>
+			<if test="sendreason != null">
+				#{sendreason,jdbcType=VARCHAR},
+			</if>
+			<if test="recorder != null">
+				#{recorder,jdbcType=VARCHAR},
+			</if>
+			<if test="proofreader != null">
+				#{proofreader,jdbcType=VARCHAR},
+			</if>
+			<if test="reviewer != null">
+				#{reviewer,jdbcType=VARCHAR},
+			</if>
+			<if test="approver != null">
+				#{approver,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute01 != null">
+				#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute11 != null">
+				#{attribute11,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute12 != null">
+				#{attribute12,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute13 != null">
+				#{attribute13,jdbcType=DATE},
+			</if>
+			<if test="attribute14 != null">
+				#{attribute14,jdbcType=DATE},
+			</if>
+	</trim>
+</insert>
+<!-- 更新对象 HDKF_OA_PUBLICSHEET -->
+<update id="updateHdkfOaPublicsheetSensitive" parameterType="avicit.hdkf.support.hdkfoapublicsheet.dto.HdkfOaPublicsheetDTO">
+	update hdkf_oa_publicsheet t1
+	<set>
+			<if test="id != null">
+				t1.id                             =#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="sheetno != null">
+				t1.sheetno                        =#{sheetno,jdbcType=VARCHAR},
+			</if>
+			<if test="sendDep != null">
+				t1.send_dep                       =#{sendDep,jdbcType=VARCHAR},
+			</if>
+			<if test="sentdate != null">
+				t1.sentdate                       =#{sentdate,jdbcType=DATE},
+			</if>
+			<if test="receiveDep != null">
+				t1.receive_dep                    =#{receiveDep,jdbcType=VARCHAR},
+			</if>
+			<if test="planetype != null">
+				t1.planetype                      =#{planetype,jdbcType=VARCHAR},
+			</if>
+			<if test="batchNo != null">
+				t1.batch_no                       =#{batchNo,jdbcType=VARCHAR},
+			</if>
+			<if test="sortieNo != null">
+				t1.sortie_no                      =#{sortieNo,jdbcType=VARCHAR},
+			</if>
+			<if test="sheetcontent != null">
+				t1.sheetcontent                   =#{sheetcontent,jdbcType=VARCHAR},
+			</if>
+			<if test="sendreason != null">
+				t1.sendreason                     =#{sendreason,jdbcType=VARCHAR},
+			</if>
+			<if test="recorder != null">
+				t1.recorder                       =#{recorder,jdbcType=VARCHAR},
+			</if>
+			<if test="proofreader != null">
+				t1.proofreader                    =#{proofreader,jdbcType=VARCHAR},
+			</if>
+			<if test="reviewer != null">
+				t1.reviewer                       =#{reviewer,jdbcType=VARCHAR},
+			</if>
+			<if test="approver != null">
+				t1.approver                       =#{approver,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				t1.remarks                        =#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				t1.creation_date                  =#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				t1.last_update_date               =#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				t1.version                        =t1.version+1,
+			</if>
+			<if test="attribute01 != null">
+				t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute11 != null">
+				t1.attribute_11                   =#{attribute11,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute12 != null">
+				t1.attribute_12                   =#{attribute12,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute13 != null">
+				t1.attribute_13                   =#{attribute13,jdbcType=DATE},
+			</if>
+			<if test="attribute14 != null">
+				t1.attribute_14                   =#{attribute14,jdbcType=DATE},
+			</if>
+	</set>
+		where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 更新对象 HDKF_OA_PUBLICSHEET -->
+<update id="updateHdkfOaPublicsheetAll" parameterType="avicit.hdkf.support.hdkfoapublicsheet.dto.HdkfOaPublicsheetDTO">
+	update hdkf_oa_publicsheet t1
+		set
+			t1.id                             =#{id,jdbcType=VARCHAR},
+			t1.sheetno                        =#{sheetno,jdbcType=VARCHAR},
+			t1.send_dep                       =#{sendDep,jdbcType=VARCHAR},
+			t1.sentdate                       =#{sentdate,jdbcType=DATE},
+			t1.receive_dep                    =#{receiveDep,jdbcType=VARCHAR},
+			t1.planetype                      =#{planetype,jdbcType=VARCHAR},
+			t1.batch_no                       =#{batchNo,jdbcType=VARCHAR},
+			t1.sortie_no                      =#{sortieNo,jdbcType=VARCHAR},
+			t1.sheetcontent                   =#{sheetcontent,jdbcType=VARCHAR},
+			t1.sendreason                     =#{sendreason,jdbcType=VARCHAR},
+			t1.recorder                       =#{recorder,jdbcType=VARCHAR},
+			t1.proofreader                    =#{proofreader,jdbcType=VARCHAR},
+			t1.reviewer                       =#{reviewer,jdbcType=VARCHAR},
+			t1.approver                       =#{approver,jdbcType=VARCHAR},
+			t1.remarks                        =#{remarks,jdbcType=VARCHAR},
+			t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			t1.creation_date                  =#{dto.creationDate},
+			t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			t1.last_update_date               =#{dto.lastUpdateDate},
+			t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			t1.version                        =t1.version+1,
+			t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			t1.attribute_11                   =#{attribute11,jdbcType=DECIMAL},
+			t1.attribute_12                   =#{attribute12,jdbcType=DECIMAL},
+			t1.attribute_13                   =#{attribute13,jdbcType=DATE},
+			t1.attribute_14                   =#{attribute14,jdbcType=DATE},
+	where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 主键删除 HDKF_OA_PUBLICSHEET -->
+<delete id="deleteHdkfOaPublicsheetById" parameterType="java.lang.String">
+		delete from hdkf_oa_publicsheet  where  id = #{id}
+</delete>
+</mapper>

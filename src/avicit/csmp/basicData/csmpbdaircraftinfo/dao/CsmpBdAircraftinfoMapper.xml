@@ -1,0 +1,1773 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="avicit.csmp.basicData.csmpbdaircraftinfo.dao.CsmpBdAircraftinfoDao">
+
+<resultMap id="CsmpBdAircraftinfoDTOMap" type="avicit.csmp.basicData.csmpbdaircraftinfo.dto.CsmpBdAircraftinfoDTO">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="modelId" column="MODEL_ID" jdbcType="VARCHAR" />
+		<result property="batchNo" column="BATCH_NO" jdbcType="VARCHAR" />
+		<result property="subType" column="SUB_TYPE" jdbcType="VARCHAR" />
+		<result property="desigeBy" column="DESIGE_BY" jdbcType="VARCHAR" />
+		<result property="productBy" column="PRODUCT_BY" jdbcType="VARCHAR" />
+		<result property="contractNo" column="CONTRACT_NO" jdbcType="VARCHAR" />
+		<result property="registraterNo" column="REGISTRATER_NO" jdbcType="VARCHAR" />
+		<result property="registraterDate" column="REGISTRATER_DATE" jdbcType="TIMESTAMP" />
+		<result property="finishedDate" column="FINISHED_DATE" jdbcType="TIMESTAMP" />
+		<result property="businessPeriodYear" column="BUSINESS_PERIOD_YEAR" jdbcType="DECIMAL" />
+		<result property="businessPeriodHour" column="BUSINESS_PERIOD_HOUR" jdbcType="DECIMAL" />
+		<result property="isBusinessPeriod" column="IS_BUSINESS_PERIOD" jdbcType="VARCHAR" />
+		<result property="startOperateDate" column="START_OPERATE_DATE" jdbcType="TIMESTAMP" />
+		<result property="operateStatus" column="OPERATE_STATUS" jdbcType="VARCHAR" />
+		<result property="engine1" column="ENGINE1" jdbcType="VARCHAR" />
+		<result property="engine2" column="ENGINE2" jdbcType="VARCHAR" />
+		<result property="numberOfFlight" column="NUMBER_OF_FLIGHT" jdbcType="DECIMAL" />
+		<result property="flightNum" column="FLIGHT_NUM" jdbcType="DECIMAL" />
+		<result property="takeoffLandingNum" column="TAKEOFF_LANDING_NUM" jdbcType="DECIMAL" />
+		<result property="custumerName" column="CUSTUMER_NAME" jdbcType="VARCHAR" />
+		<result property="operator" column="OPERATOR" jdbcType="VARCHAR" />
+		<result property="remark" column="REMARK" jdbcType="VARCHAR" />
+		<result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR" />
+		<result property="creationDate" column="CREATION_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdatedBy" column="LAST_UPDATED_BY" jdbcType="VARCHAR" />
+		<result property="lastUpdateDate" column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdateIp" column="LAST_UPDATE_IP" jdbcType="VARCHAR" />
+		<result property="version" column="VERSION" jdbcType="DECIMAL" />
+		<result property="attribute01" column="ATTRIBUTE_01" jdbcType="VARCHAR" />
+		<result property="attribute02" column="ATTRIBUTE_02" jdbcType="VARCHAR" />
+		<result property="attribute03" column="ATTRIBUTE_03" jdbcType="VARCHAR" />
+		<result property="attribute04" column="ATTRIBUTE_04" jdbcType="VARCHAR" />
+		<result property="attribute05" column="ATTRIBUTE_05" jdbcType="VARCHAR" />
+		<result property="attribute06" column="ATTRIBUTE_06" jdbcType="VARCHAR" />
+		<result property="attribute07" column="ATTRIBUTE_07" jdbcType="VARCHAR" />
+		<result property="attribute08" column="ATTRIBUTE_08" jdbcType="VARCHAR" />
+		<result property="attribute09" column="ATTRIBUTE_09" jdbcType="VARCHAR" />
+		<result property="attribute10" column="ATTRIBUTE_10" jdbcType="VARCHAR" />
+		<result property="companyId" column="COMPANY_ID" jdbcType="VARCHAR" />
+		<result property="totalFlightDays" column="TOTAL_FLIGHT_DAYS" jdbcType="DECIMAL" />
+		<result property="statisticalDate" column="STATISTICAL_DATE" jdbcType="TIMESTAMP" />
+		<result property="statisticalPerson" column="STATISTICAL_PERSON" jdbcType="VARCHAR" />
+		
+</resultMap>
+<!-- 分页查询 CSMP_BD_AIRCRAFTINFO -->
+<select id="searchCsmpBdAircraftinfoByPage" parameterType="java.util.Map" resultMap="CsmpBdAircraftinfoDTOMap">
+	select
+		t1.id                             ,
+		t1.model_id                       ,
+		t2.model_name  as modelIdAlias    ,
+		t1.batch_no                       ,
+		t1.sub_type                       ,
+		t1.desige_by                      ,
+		t1.product_by                     ,
+		t1.contract_no                    ,
+		t1.registrater_no                 ,
+		t1.registrater_date               ,
+		t1.finished_date                  ,
+		t1.business_period_year           ,
+		t1.business_period_hour           ,
+		t1.is_business_period             ,
+		t1.start_operate_date             ,
+		t1.operate_status                 ,
+		t1.engine1                        ,
+		t1.engine2                        ,
+		t1.number_of_flight               ,
+		t1.flight_num                     ,
+		t1.takeoff_landing_num            ,
+		t1.custumer_name                  ,
+		t1.operator                       ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.company_id                     ,
+		t1.statistical_date                ,
+		t1.statistical_person                ,
+		t1.total_flight_days               
+	from csmp_bd_aircraftinfo 	t1  left join csmp_bd_aricarftmodel t2 on t1.model_id =t2.id
+		<where>
+			<if test="bean != null">
+			<if test="bean.id != null and bean.id != ''">
+				and t1.ID like '%'||#{bean.id}||'%'
+			</if>
+			<if test="bean.modelId != null and bean.modelId != ''">
+				and t1.MODEL_ID like '%'||#{bean.modelId}||'%'
+			</if>
+			<if test="bean.batchNo != null and bean.batchNo != ''">
+				and t1.BATCH_NO like '%'||#{bean.batchNo}||'%'
+			</if>
+			<if test="bean.subType != null and bean.subType != ''">
+				and t1.SUB_TYPE like '%'||#{bean.subType}||'%'
+			</if>
+			<if test="bean.desigeBy != null and bean.desigeBy != ''">
+				and t1.DESIGE_BY like '%'||#{bean.desigeBy}||'%'
+			</if>
+			<if test="bean.productBy != null and bean.productBy != ''">
+				and t1.PRODUCT_BY like '%'||#{bean.productBy}||'%'
+			</if>
+			<if test="bean.contractNo != null and bean.contractNo != ''">
+				and t1.CONTRACT_NO like '%'||#{bean.contractNo}||'%'
+			</if>
+			<if test="bean.registraterNo != null and bean.registraterNo != ''">
+				and t1.REGISTRATER_NO like '%'||#{bean.registraterNo}||'%'
+			</if>
+			<if test="bean.registraterDateBegin != null and bean.registraterDateBegin != ''">
+				and t1.REGISTRATER_DATE &gt;= #{bean.registraterDateBegin}
+			</if>
+			<if test="bean.registraterDateEnd != null and bean.registraterDateEnd != ''">
+				and t1.REGISTRATER_DATE &lt;= #{bean.registraterDateEnd}
+			</if>
+			<if test="bean.finishedDateBegin != null and bean.finishedDateBegin != ''">
+				and t1.FINISHED_DATE &gt;= #{bean.finishedDateBegin}
+			</if>
+			<if test="bean.finishedDateEnd != null and bean.finishedDateEnd != ''">
+				and t1.FINISHED_DATE &lt;= #{bean.finishedDateEnd}
+			</if>
+			<if test="bean.businessPeriodYear != null and bean.businessPeriodYear != ''">
+				and t1.BUSINESS_PERIOD_YEAR like '%'||#{bean.businessPeriodYear}||'%'
+			</if>
+			<if test="bean.businessPeriodHour != null and bean.businessPeriodHour != ''">
+				and t1.BUSINESS_PERIOD_HOUR like '%'||#{bean.businessPeriodHour}||'%'
+			</if>
+			<if test="bean.isBusinessPeriod != null and bean.isBusinessPeriod != ''">
+				and t1.IS_BUSINESS_PERIOD like '%'||#{bean.isBusinessPeriod}||'%'
+			</if>
+			<if test="bean.startOperateDateBegin != null and bean.startOperateDateBegin != ''">
+				and t1.START_OPERATE_DATE &gt;= #{bean.startOperateDateBegin}
+			</if>
+			<if test="bean.startOperateDateEnd != null and bean.startOperateDateEnd != ''">
+				and t1.START_OPERATE_DATE &lt;= #{bean.startOperateDateEnd}
+			</if>
+			<if test="bean.operateStatus != null and bean.operateStatus != ''">
+				and t1.OPERATE_STATUS like '%'||#{bean.operateStatus}||'%'
+			</if>
+			<if test="bean.engine1 != null and bean.engine1 != ''">
+				and t1.ENGINE1 like '%'||#{bean.engine1}||'%'
+			</if>
+			<if test="bean.engine2 != null and bean.engine2 != ''">
+				and t1.ENGINE2 like '%'||#{bean.engine2}||'%'
+			</if>
+			<if test="bean.numberOfFlight != null and bean.numberOfFlight != ''">
+				and t1.NUMBER_OF_FLIGHT like '%'||#{bean.numberOfFlight}||'%'
+			</if>
+			<if test="bean.flightNum != null and bean.flightNum != ''">
+				and t1.FLIGHT_NUM like '%'||#{bean.flightNum}||'%'
+			</if>
+			<if test="bean.takeoffLandingNum != null and bean.takeoffLandingNum != ''">
+				and t1.TAKEOFF_LANDING_NUM like '%'||#{bean.takeoffLandingNum}||'%'
+			</if>
+			<if test="bean.custumerName != null and bean.custumerName != ''">
+				and t1.CUSTUMER_NAME like '%'||#{bean.custumerName}||'%'
+			</if>
+			<if test="bean.operator != null and bean.operator != ''">
+				and t1.OPERATOR like '%'||#{bean.operator}||'%'
+			</if>
+			<if test="bean.remark != null and bean.remark != ''">
+				and t1.REMARK like '%'||#{bean.remark}||'%'
+			</if>
+			<if test="bean.createdBy != null and bean.createdBy != ''">
+				and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+			</if>
+			<if test="bean.creationDate != null and bean.creationDate != ''">
+				and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+			</if>
+			<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+			</if>
+			<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+			</if>
+			<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+			</if>
+			<if test="bean.version != null and bean.version != ''">
+				and t1.VERSION like '%'||#{bean.version}||'%'
+			</if>
+			<if test="bean.attribute01 != null and bean.attribute01 != ''">
+				and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+			</if>
+			<if test="bean.attribute02 != null and bean.attribute02 != ''">
+				and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+			</if>
+			<if test="bean.attribute03 != null and bean.attribute03 != ''">
+				and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+			</if>
+			<if test="bean.attribute04 != null and bean.attribute04 != ''">
+				and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+			</if>
+			<if test="bean.attribute05 != null and bean.attribute05 != ''">
+				and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+			</if>
+			<if test="bean.attribute06 != null and bean.attribute06 != ''">
+				and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+			</if>
+			<if test="bean.attribute07 != null and bean.attribute07 != ''">
+				and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+			</if>
+			<if test="bean.attribute08 != null and bean.attribute08 != ''">
+				and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+			</if>
+			<if test="bean.attribute09 != null and bean.attribute09 != ''">
+				and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+			</if>
+			<if test="bean.attribute10 != null and bean.attribute10 != ''">
+				and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+			</if>
+			<if test="bean.companyId != null and bean.companyId !=''">
+				and t1.COMPANY_ID like '%'||#{bean.companyId}||'%'
+			</if>
+			
+			<if test="bean.totalFlightDays != null and bean.totalFlightDays !=''">
+				and t1.total_flight_days like '%'||#{bean.totalFlightDays}||'%'
+			</if>
+			<if test="bean.statisticalDate != null and bean.statisticalDate !=''">
+				and t1.statistical_date like '%'||#{bean.statisticalDate}||'%'
+			</if>
+			<if test="bean.statisticalPerson != null and bean.statisticalPerson !=''">
+				and t1.statistical_person like '%'||#{bean.statisticalPerson}||'%'
+			</if>
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}			
+			</if>
+		</where>
+			order by t1.finished_date DESC
+</select>
+
+
+<select id="searchGenByPage"  parameterType="java.util.Map" resultMap="CsmpBdAircraftinfoDTOMap" >
+		select
+		t1.id                             ,
+		t1.model_id                       ,
+		t2.model_name  as modelIdAlias    ,
+		t1.batch_no                       ,
+		t1.sub_type                       ,
+		t1.desige_by                      ,
+		t1.product_by                     ,
+		t1.contract_no                    ,
+		t1.registrater_no                 ,
+		t1.registrater_date               ,
+		t1.finished_date                  ,
+		t1.business_period_year           ,
+		t1.business_period_hour           ,
+		t1.is_business_period             ,
+		t1.start_operate_date             ,
+		t1.operate_status                 ,
+		t1.engine1                        ,
+		t1.engine2                        ,
+		t1.number_of_flight               ,
+		t1.flight_num                     ,
+		t1.takeoff_landing_num            ,
+		t1.custumer_name                  ,
+		t1.operator                       ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.company_id                     ,
+		t1.statistical_date                ,
+		t1.statistical_person                ,
+		t1.total_flight_days               
+	from csmp_bd_aircraftinfo 	t1  left join csmp_bd_aricarftmodel t2 on t1.model_id =t2.id
+		<where>
+		  and t1.company_id is null  
+			<if test="bean1 != null">
+			<if test="bean1.id != null and bean1.id != ''">
+				and t1.ID like '%'||#{bean1.id}||'%'
+			</if>
+			<if test="bean1.modelId != null and bean1.modelId != ''">
+				and t1.MODEL_ID like '%'||#{bean1.modelId}||'%'
+			</if>
+			<if test="bean1.batchNo != null and bean1.batchNo != ''">
+				and t1.BATCH_NO like '%'||#{bean1.batchNo}||'%'
+			</if>
+			<if test="bean1.subType != null and bean1.subType != ''">
+				and t1.SUB_TYPE like '%'||#{bean1.subType}||'%'
+			</if>
+			<if test="bean1.desigeBy != null and bean1.desigeBy != ''">
+				and t1.DESIGE_BY like '%'||#{bean1.desigeBy}||'%'
+			</if>
+			<if test="bean1.productBy != null and bean1.productBy != ''">
+				and t1.PRODUCT_BY like '%'||#{bean1.productBy}||'%'
+			</if>
+			<if test="bean1.contractNo != null and bean1.contractNo != ''">
+				and t1.CONTRACT_NO like '%'||#{bean1.contractNo}||'%'
+			</if>
+			<if test="bean1.registraterNo != null and bean1.registraterNo != ''">
+				and t1.REGISTRATER_NO like '%'||#{bean1.registraterNo}||'%'
+			</if>
+			<if test="bean1.registraterDateBegin != null and bean1.registraterDateBegin != ''">
+				and t1.REGISTRATER_DATE &gt;= #{bean1.registraterDateBegin}
+			</if>
+			<if test="bean1.registraterDateEnd != null and bean1.registraterDateEnd != ''">
+				and t1.REGISTRATER_DATE &lt;= #{bean1.registraterDateEnd}
+			</if>
+			<if test="bean1.finishedDateBegin != null and bean1.finishedDateBegin != ''">
+				and t1.FINISHED_DATE &gt;= #{bean1.finishedDateBegin}
+			</if>
+			<if test="bean1.finishedDateEnd != null and bean1.finishedDateEnd != ''">
+				and t1.FINISHED_DATE &lt;= #{bean1.finishedDateEnd}
+			</if>
+			<if test="bean1.businessPeriodYear != null and bean1.businessPeriodYear != ''">
+				and t1.BUSINESS_PERIOD_YEAR like '%'||#{bean1.businessPeriodYear}||'%'
+			</if>
+			<if test="bean1.businessPeriodHour != null and bean1.businessPeriodHour != ''">
+				and t1.BUSINESS_PERIOD_HOUR like '%'||#{bean1.businessPeriodHour}||'%'
+			</if>
+			<if test="bean1.isBusinessPeriod != null and bean1.isBusinessPeriod != ''">
+				and t1.IS_BUSINESS_PERIOD like '%'||#{bean1.isBusinessPeriod}||'%'
+			</if>
+			<if test="bean1.startOperateDateBegin != null and bean1.startOperateDateBegin != ''">
+				and t1.START_OPERATE_DATE &gt;= #{bean1.startOperateDateBegin}
+			</if>
+			<if test="bean1.startOperateDateEnd != null and bean1.startOperateDateEnd != ''">
+				and t1.START_OPERATE_DATE &lt;= #{bean1.startOperateDateEnd}
+			</if>
+			<if test="bean1.operateStatus != null and bean1.operateStatus != ''">
+				and t1.OPERATE_STATUS like '%'||#{bean1.operateStatus}||'%'
+			</if>
+			<if test="bean1.engine1 != null and bean1.engine1 != ''">
+				and t1.ENGINE1 like '%'||#{bean1.engine1}||'%'
+			</if>
+			<if test="bean1.engine2 != null and bean1.engine2 != ''">
+				and t1.ENGINE2 like '%'||#{bean1.engine2}||'%'
+			</if>
+			<if test="bean1.numberOfFlight != null and bean1.numberOfFlight != ''">
+				and t1.NUMBER_OF_FLIGHT like '%'||#{bean1.numberOfFlight}||'%'
+			</if>
+			<if test="bean1.flightNum != null and bean1.flightNum != ''">
+				and t1.FLIGHT_NUM like '%'||#{bean1.flightNum}||'%'
+			</if>
+			<if test="bean1.takeoffLandingNum != null and bean1.takeoffLandingNum != ''">
+				and t1.TAKEOFF_LANDING_NUM like '%'||#{bean1.takeoffLandingNum}||'%'
+			</if>
+			<if test="bean1.custumerName != null and bean1.custumerName != ''">
+				and t1.CUSTUMER_NAME like '%'||#{bean1.custumerName}||'%'
+			</if>
+			<if test="bean1.operator != null and bean1.operator != ''">
+				and t1.OPERATOR like '%'||#{bean1.operator}||'%'
+			</if>
+			<if test="bean1.remark != null and bean1.remark != ''">
+				and t1.REMARK like '%'||#{bean1.remark}||'%'
+			</if>
+			<if test="bean1.createdBy != null and bean1.createdBy != ''">
+				and t1.CREATED_BY like '%'||#{bean1.createdBy}||'%'
+			</if>
+			<if test="bean1.creationDate != null and bean1.creationDate != ''">
+				and t1.CREATION_DATE like '%'||#{bean1.creationDate}||'%'
+			</if>
+			<if test="bean1.lastUpdatedBy != null and bean1.lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY like '%'||#{bean1.lastUpdatedBy}||'%'
+			</if>
+			<if test="bean1.lastUpdateDate != null and bean1.lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE like '%'||#{bean1.lastUpdateDate}||'%'
+			</if>
+			<if test="bean1.lastUpdateIp != null and bean1.lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP like '%'||#{bean1.lastUpdateIp}||'%'
+			</if>
+			<if test="bean1.version != null and bean1.version != ''">
+				and t1.VERSION like '%'||#{bean1.version}||'%'
+			</if>
+			<if test="bean1.attribute01 != null and bean1.attribute01 != ''">
+				and t1.ATTRIBUTE_01 like '%'||#{bean1.attribute01}||'%'
+			</if>
+			<if test="bean1.attribute02 != null and bean1.attribute02 != ''">
+				and t1.ATTRIBUTE_02 like '%'||#{bean1.attribute02}||'%'
+			</if>
+			<if test="bean1.attribute03 != null and bean1.attribute03 != ''">
+				and t1.ATTRIBUTE_03 like '%'||#{bean1.attribute03}||'%'
+			</if>
+			<if test="bean1.attribute04 != null and bean1.attribute04 != ''">
+				and t1.ATTRIBUTE_04 like '%'||#{bean1.attribute04}||'%'
+			</if>
+			<if test="bean1.attribute05 != null and bean1.attribute05 != ''">
+				and t1.ATTRIBUTE_05 like '%'||#{bean1.attribute05}||'%'
+			</if>
+			<if test="bean1.attribute06 != null and bean1.attribute06 != ''">
+				and t1.ATTRIBUTE_06 like '%'||#{bean1.attribute06}||'%'
+			</if>
+			<if test="bean1.attribute07 != null and bean1.attribute07 != ''">
+				and t1.ATTRIBUTE_07 like '%'||#{bean1.attribute07}||'%'
+			</if>
+			<if test="bean1.attribute08 != null and bean1.attribute08 != ''">
+				and t1.ATTRIBUTE_08 like '%'||#{bean1.attribute08}||'%'
+			</if>
+			<if test="bean1.attribute09 != null and bean1.attribute09 != ''">
+				and t1.ATTRIBUTE_09 like '%'||#{bean1.attribute09}||'%'
+			</if>
+			<if test="bean1.attribute10 != null and bean1.attribute10 != ''">
+				and t1.ATTRIBUTE_10 like '%'||#{bean1.attribute10}||'%'
+			</if>
+			<if test="bean1.companyId != null and bean1.companyId !=''">
+				and t1.COMPANY_ID = #{bean1.companyId}||'%'
+			</if>
+			
+			<if test="bean1.totalFlightDays != null and bean1.totalFlightDays !=''">
+				and t1.total_flight_days like '%'||#{bean1.totalFlightDays}||'%'
+			</if>
+			<if test="bean1.statisticalDate != null and bean1.statisticalDate !=''">
+				and t1.statistical_date like '%'||#{bean1.statisticalDate}||'%'
+			</if>
+			<if test="bean1.statisticalPerson != null and bean1.statisticalPerson !=''">
+				and t1.statistical_person like '%'||#{bean1.statisticalPerson}||'%'
+			</if>
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}			
+			</if>
+		</where>
+			order by t1.finished_date DESC
+
+
+
+</select>
+
+
+
+
+<select id="searchGenModelByPage"  parameterType="java.util.Map" resultMap="CsmpBdAircraftinfoDTOMap" >
+		select
+		t1.model_id                       ,
+		t2.model_name  as modelIdAlias          
+	from csmp_bd_aircraftinfo 	t1  left join csmp_bd_aricarftmodel t2 on t1.model_id =t2.id
+		<where>
+		  and t1.company_id is null  
+			<if test="bean1 != null">
+			<if test="bean1.id != null and bean1.id != ''">
+				and t1.ID like '%'||#{bean1.id}||'%'
+			</if>
+			<if test="bean1.modelId != null and bean1.modelId != ''">
+				and t1.MODEL_ID like '%'||#{bean1.modelId}||'%'
+			</if>
+			<if test="bean1.batchNo != null and bean1.batchNo != ''">
+				and t1.BATCH_NO like '%'||#{bean1.batchNo}||'%'
+			</if>
+			<if test="bean1.subType != null and bean1.subType != ''">
+				and t1.SUB_TYPE like '%'||#{bean1.subType}||'%'
+			</if>
+			<if test="bean1.desigeBy != null and bean1.desigeBy != ''">
+				and t1.DESIGE_BY like '%'||#{bean1.desigeBy}||'%'
+			</if>
+			<if test="bean1.productBy != null and bean1.productBy != ''">
+				and t1.PRODUCT_BY like '%'||#{bean1.productBy}||'%'
+			</if>
+			<if test="bean1.contractNo != null and bean1.contractNo != ''">
+				and t1.CONTRACT_NO like '%'||#{bean1.contractNo}||'%'
+			</if>
+			<if test="bean1.registraterNo != null and bean1.registraterNo != ''">
+				and t1.REGISTRATER_NO like '%'||#{bean1.registraterNo}||'%'
+			</if>
+			<if test="bean1.registraterDateBegin != null and bean1.registraterDateBegin != ''">
+				and t1.REGISTRATER_DATE &gt;= #{bean1.registraterDateBegin}
+			</if>
+			<if test="bean1.registraterDateEnd != null and bean1.registraterDateEnd != ''">
+				and t1.REGISTRATER_DATE &lt;= #{bean1.registraterDateEnd}
+			</if>
+			<if test="bean1.finishedDateBegin != null and bean1.finishedDateBegin != ''">
+				and t1.FINISHED_DATE &gt;= #{bean1.finishedDateBegin}
+			</if>
+			<if test="bean1.finishedDateEnd != null and bean1.finishedDateEnd != ''">
+				and t1.FINISHED_DATE &lt;= #{bean1.finishedDateEnd}
+			</if>
+			<if test="bean1.businessPeriodYear != null and bean1.businessPeriodYear != ''">
+				and t1.BUSINESS_PERIOD_YEAR like '%'||#{bean1.businessPeriodYear}||'%'
+			</if>
+			<if test="bean1.businessPeriodHour != null and bean1.businessPeriodHour != ''">
+				and t1.BUSINESS_PERIOD_HOUR like '%'||#{bean1.businessPeriodHour}||'%'
+			</if>
+			<if test="bean1.isBusinessPeriod != null and bean1.isBusinessPeriod != ''">
+				and t1.IS_BUSINESS_PERIOD like '%'||#{bean1.isBusinessPeriod}||'%'
+			</if>
+			<if test="bean1.startOperateDateBegin != null and bean1.startOperateDateBegin != ''">
+				and t1.START_OPERATE_DATE &gt;= #{bean1.startOperateDateBegin}
+			</if>
+			<if test="bean1.startOperateDateEnd != null and bean1.startOperateDateEnd != ''">
+				and t1.START_OPERATE_DATE &lt;= #{bean1.startOperateDateEnd}
+			</if>
+			<if test="bean1.operateStatus != null and bean1.operateStatus != ''">
+				and t1.OPERATE_STATUS like '%'||#{bean1.operateStatus}||'%'
+			</if>
+			<if test="bean1.engine1 != null and bean1.engine1 != ''">
+				and t1.ENGINE1 like '%'||#{bean1.engine1}||'%'
+			</if>
+			<if test="bean1.engine2 != null and bean1.engine2 != ''">
+				and t1.ENGINE2 like '%'||#{bean1.engine2}||'%'
+			</if>
+			<if test="bean1.numberOfFlight != null and bean1.numberOfFlight != ''">
+				and t1.NUMBER_OF_FLIGHT like '%'||#{bean1.numberOfFlight}||'%'
+			</if>
+			<if test="bean1.flightNum != null and bean1.flightNum != ''">
+				and t1.FLIGHT_NUM like '%'||#{bean1.flightNum}||'%'
+			</if>
+			<if test="bean1.takeoffLandingNum != null and bean1.takeoffLandingNum != ''">
+				and t1.TAKEOFF_LANDING_NUM like '%'||#{bean1.takeoffLandingNum}||'%'
+			</if>
+			<if test="bean1.custumerName != null and bean1.custumerName != ''">
+				and t1.CUSTUMER_NAME like '%'||#{bean1.custumerName}||'%'
+			</if>
+			<if test="bean1.operator != null and bean1.operator != ''">
+				and t1.OPERATOR like '%'||#{bean1.operator}||'%'
+			</if>
+			<if test="bean1.remark != null and bean1.remark != ''">
+				and t1.REMARK like '%'||#{bean1.remark}||'%'
+			</if>
+			<if test="bean1.createdBy != null and bean1.createdBy != ''">
+				and t1.CREATED_BY like '%'||#{bean1.createdBy}||'%'
+			</if>
+			<if test="bean1.creationDate != null and bean1.creationDate != ''">
+				and t1.CREATION_DATE like '%'||#{bean1.creationDate}||'%'
+			</if>
+			<if test="bean1.lastUpdatedBy != null and bean1.lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY like '%'||#{bean1.lastUpdatedBy}||'%'
+			</if>
+			<if test="bean1.lastUpdateDate != null and bean1.lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE like '%'||#{bean1.lastUpdateDate}||'%'
+			</if>
+			<if test="bean1.lastUpdateIp != null and bean1.lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP like '%'||#{bean1.lastUpdateIp}||'%'
+			</if>
+			<if test="bean1.version != null and bean1.version != ''">
+				and t1.VERSION like '%'||#{bean1.version}||'%'
+			</if>
+			<if test="bean1.attribute01 != null and bean1.attribute01 != ''">
+				and t1.ATTRIBUTE_01 like '%'||#{bean1.attribute01}||'%'
+			</if>
+			<if test="bean1.attribute02 != null and bean1.attribute02 != ''">
+				and t1.ATTRIBUTE_02 like '%'||#{bean1.attribute02}||'%'
+			</if>
+			<if test="bean1.attribute03 != null and bean1.attribute03 != ''">
+				and t1.ATTRIBUTE_03 like '%'||#{bean1.attribute03}||'%'
+			</if>
+			<if test="bean1.attribute04 != null and bean1.attribute04 != ''">
+				and t1.ATTRIBUTE_04 like '%'||#{bean1.attribute04}||'%'
+			</if>
+			<if test="bean1.attribute05 != null and bean1.attribute05 != ''">
+				and t1.ATTRIBUTE_05 like '%'||#{bean1.attribute05}||'%'
+			</if>
+			<if test="bean1.attribute06 != null and bean1.attribute06 != ''">
+				and t1.ATTRIBUTE_06 like '%'||#{bean1.attribute06}||'%'
+			</if>
+			<if test="bean1.attribute07 != null and bean1.attribute07 != ''">
+				and t1.ATTRIBUTE_07 like '%'||#{bean1.attribute07}||'%'
+			</if>
+			<if test="bean1.attribute08 != null and bean1.attribute08 != ''">
+				and t1.ATTRIBUTE_08 like '%'||#{bean1.attribute08}||'%'
+			</if>
+			<if test="bean1.attribute09 != null and bean1.attribute09 != ''">
+				and t1.ATTRIBUTE_09 like '%'||#{bean1.attribute09}||'%'
+			</if>
+			<if test="bean1.attribute10 != null and bean1.attribute10 != ''">
+				and t1.ATTRIBUTE_10 like '%'||#{bean1.attribute10}||'%'
+			</if>
+			<if test="bean1.companyId != null and bean1.companyId !=''">
+				and t1.COMPANY_ID = #{bean1.companyId}||'%'
+			</if>
+			
+			<if test="bean1.totalFlightDays != null and bean1.totalFlightDays !=''">
+				and t1.total_flight_days like '%'||#{bean1.totalFlightDays}||'%'
+			</if>
+			<if test="bean1.statisticalDate != null and bean1.statisticalDate !=''">
+				and t1.statistical_date like '%'||#{bean1.statisticalDate}||'%'
+			</if>
+			<if test="bean1.statisticalPerson != null and bean1.statisticalPerson !=''">
+				and t1.statistical_person like '%'||#{bean1.statisticalPerson}||'%'
+			</if>
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}			
+			</if>
+		</where>
+			group by t1.model_id,t2.model_name
+
+</select>
+
+<select id="searchCsmpBdAircraftModelinfoByPage" parameterType="java.util.Map" resultMap="CsmpBdAircraftinfoDTOMap">
+	select
+		t1.model_id                       ,
+		t2.model_name  as modelIdAlias          
+	from csmp_bd_aircraftinfo 	t1  left join csmp_bd_aricarftmodel t2 on t1.model_id =t2.id
+		<where>
+			<if test="bean != null">
+			<if test="bean.id != null and bean.id != ''">
+				and t1.ID like '%'||#{bean.id}||'%'
+			</if>
+			<if test="bean.modelId != null and bean.modelId != ''">
+				and t1.MODEL_ID like '%'||#{bean.modelId}||'%'
+			</if>
+			<if test="bean.modelIdAlias != null and bean.modelIdAlias != ''">
+				and t2.model_name like '%'||#{bean.modelIdAlias}||'%'
+			</if>
+			<if test="bean.batchNo != null and bean.batchNo != ''">
+				and t1.BATCH_NO like '%'||#{bean.batchNo}||'%'
+			</if>
+			<if test="bean.subType != null and bean.subType != ''">
+				and t1.SUB_TYPE like '%'||#{bean.subType}||'%'
+			</if>
+			<if test="bean.desigeBy != null and bean.desigeBy != ''">
+				and t1.DESIGE_BY like '%'||#{bean.desigeBy}||'%'
+			</if>
+			<if test="bean.productBy != null and bean.productBy != ''">
+				and t1.PRODUCT_BY like '%'||#{bean.productBy}||'%'
+			</if>
+			<if test="bean.contractNo != null and bean.contractNo != ''">
+				and t1.CONTRACT_NO like '%'||#{bean.contractNo}||'%'
+			</if>
+			<if test="bean.registraterNo != null and bean.registraterNo != ''">
+				and t1.REGISTRATER_NO like '%'||#{bean.registraterNo}||'%'
+			</if>
+			<if test="bean.registraterDateBegin != null and bean.registraterDateBegin != ''">
+				and t1.REGISTRATER_DATE &gt;= #{bean.registraterDateBegin}
+			</if>
+			<if test="bean.registraterDateEnd != null and bean.registraterDateEnd != ''">
+				and t1.REGISTRATER_DATE &lt;= #{bean.registraterDateEnd}
+			</if>
+			<if test="bean.finishedDateBegin != null and bean.finishedDateBegin != ''">
+				and t1.FINISHED_DATE &gt;= #{bean.finishedDateBegin}
+			</if>
+			<if test="bean.finishedDateEnd != null and bean.finishedDateEnd != ''">
+				and t1.FINISHED_DATE &lt;= #{bean.finishedDateEnd}
+			</if>
+			<if test="bean.businessPeriodYear != null and bean.businessPeriodYear != ''">
+				and t1.BUSINESS_PERIOD_YEAR like '%'||#{bean.businessPeriodYear}||'%'
+			</if>
+			<if test="bean.businessPeriodHour != null and bean.businessPeriodHour != ''">
+				and t1.BUSINESS_PERIOD_HOUR like '%'||#{bean.businessPeriodHour}||'%'
+			</if>
+			<if test="bean.isBusinessPeriod != null and bean.isBusinessPeriod != ''">
+				and t1.IS_BUSINESS_PERIOD like '%'||#{bean.isBusinessPeriod}||'%'
+			</if>
+			<if test="bean.startOperateDateBegin != null and bean.startOperateDateBegin != ''">
+				and t1.START_OPERATE_DATE &gt;= #{bean.startOperateDateBegin}
+			</if>
+			<if test="bean.startOperateDateEnd != null and bean.startOperateDateEnd != ''">
+				and t1.START_OPERATE_DATE &lt;= #{bean.startOperateDateEnd}
+			</if>
+			<if test="bean.operateStatus != null and bean.operateStatus != ''">
+				and t1.OPERATE_STATUS like '%'||#{bean.operateStatus}||'%'
+			</if>
+			<if test="bean.engine1 != null and bean.engine1 != ''">
+				and t1.ENGINE1 like '%'||#{bean.engine1}||'%'
+			</if>
+			<if test="bean.engine2 != null and bean.engine2 != ''">
+				and t1.ENGINE2 like '%'||#{bean.engine2}||'%'
+			</if>
+			<if test="bean.numberOfFlight != null and bean.numberOfFlight != ''">
+				and t1.NUMBER_OF_FLIGHT like '%'||#{bean.numberOfFlight}||'%'
+			</if>
+			<if test="bean.flightNum != null and bean.flightNum != ''">
+				and t1.FLIGHT_NUM like '%'||#{bean.flightNum}||'%'
+			</if>
+			<if test="bean.takeoffLandingNum != null and bean.takeoffLandingNum != ''">
+				and t1.TAKEOFF_LANDING_NUM like '%'||#{bean.takeoffLandingNum}||'%'
+			</if>
+			<if test="bean.custumerName != null and bean.custumerName != ''">
+				and t1.CUSTUMER_NAME like '%'||#{bean.custumerName}||'%'
+			</if>
+			<if test="bean.operator != null and bean.operator != ''">
+				and t1.OPERATOR like '%'||#{bean.operator}||'%'
+			</if>
+			<if test="bean.remark != null and bean.remark != ''">
+				and t1.REMARK like '%'||#{bean.remark}||'%'
+			</if>
+			<if test="bean.createdBy != null and bean.createdBy != ''">
+				and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+			</if>
+			<if test="bean.creationDate != null and bean.creationDate != ''">
+				and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+			</if>
+			<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+			</if>
+			<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+			</if>
+			<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+			</if>
+			<if test="bean.version != null and bean.version != ''">
+				and t1.VERSION like '%'||#{bean.version}||'%'
+			</if>
+			<if test="bean.attribute01 != null and bean.attribute01 != ''">
+				and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+			</if>
+			<if test="bean.attribute02 != null and bean.attribute02 != ''">
+				and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+			</if>
+			<if test="bean.attribute03 != null and bean.attribute03 != ''">
+				and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+			</if>
+			<if test="bean.attribute04 != null and bean.attribute04 != ''">
+				and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+			</if>
+			<if test="bean.attribute05 != null and bean.attribute05 != ''">
+				and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+			</if>
+			<if test="bean.attribute06 != null and bean.attribute06 != ''">
+				and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+			</if>
+			<if test="bean.attribute07 != null and bean.attribute07 != ''">
+				and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+			</if>
+			<if test="bean.attribute08 != null and bean.attribute08 != ''">
+				and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+			</if>
+			<if test="bean.attribute09 != null and bean.attribute09 != ''">
+				and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+			</if>
+			<if test="bean.attribute10 != null and bean.attribute10 != ''">
+				and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+			</if>
+			<if test="bean.companyId != null and bean.companyId !=''">
+				and t1.COMPANY_ID like '%'||#{bean.companyId}||'%'
+			</if>
+			
+			<if test="bean.totalFlightDays != null and bean.totalFlightDays !=''">
+				and t1.total_flight_days like '%'||#{bean.totalFlightDays}||'%'
+			</if>
+			<if test="bean.statisticalDate != null and bean.statisticalDate !=''">
+				and t1.statistical_date like '%'||#{bean.statisticalDate}||'%'
+			</if>
+			<if test="bean.statisticalPerson != null and bean.statisticalPerson !=''">
+				and t1.statistical_person like '%'||#{bean.statisticalPerson}||'%'
+			</if>
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}			
+			</if>
+		</where>
+			group by t1.model_id,t2.model_name
+</select>
+
+
+
+
+
+<!-- 查询有效的机型架次分页查询 CSMP_BD_AIRCRAFTINFO -->
+<select id="searchCsmpBdAircraftinfoValidFlagByPage" parameterType="java.util.Map" resultMap="CsmpBdAircraftinfoDTOMap">
+	select
+		t1.id                             ,
+		t1.model_id                       ,
+		t2.model_name  as modelIdAlias    ,
+		t1.batch_no                       ,
+		t1.sub_type                       ,
+		t1.desige_by                      ,
+		t1.product_by                     ,
+		t1.contract_no                    ,
+		t1.registrater_no                 ,
+		t1.registrater_date               ,
+		t1.finished_date                  ,
+		t1.business_period_year           ,
+		t1.business_period_hour           ,
+		t1.is_business_period             ,
+		t1.start_operate_date             ,
+		t1.operate_status                 ,
+		t1.engine1                        ,
+		t1.engine2                        ,
+		t1.number_of_flight               ,
+		t1.flight_num                     ,
+		t1.takeoff_landing_num            ,
+		t1.custumer_name                  ,
+		t1.operator                       ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.company_id                     ,
+		t1.statistical_date                ,
+		t1.statistical_person                ,
+		t1.total_flight_days               
+	from csmp_bd_aircraftinfo t1  left join csmp_bd_aricarftmodel t2 on t1.model_id =t2.id
+		<where>
+			<if test="bean != null">
+				and t2.valid_flag = '1'
+			<if test="bean.id != null and bean.id != ''">
+				and t1.ID like '%'||#{bean.id}||'%'
+			</if>
+			<if test="bean.modelId != null and bean.modelId != ''">
+				and t1.MODEL_ID like '%'||#{bean.modelId}||'%'
+			</if>
+			<if test="bean.batchNo != null and bean.batchNo != ''">
+				and t1.BATCH_NO like '%'||#{bean.batchNo}||'%'
+			</if>
+			<if test="bean.subType != null and bean.subType != ''">
+				and t1.SUB_TYPE like '%'||#{bean.subType}||'%'
+			</if>
+			<if test="bean.desigeBy != null and bean.desigeBy != ''">
+				and t1.DESIGE_BY like '%'||#{bean.desigeBy}||'%'
+			</if>
+			<if test="bean.productBy != null and bean.productBy != ''">
+				and t1.PRODUCT_BY like '%'||#{bean.productBy}||'%'
+			</if>
+			<if test="bean.contractNo != null and bean.contractNo != ''">
+				and t1.CONTRACT_NO like '%'||#{bean.contractNo}||'%'
+			</if>
+			<if test="bean.registraterNo != null and bean.registraterNo != ''">
+				and t1.REGISTRATER_NO like '%'||#{bean.registraterNo}||'%'
+			</if>
+			<if test="bean.registraterDateBegin != null and bean.registraterDateBegin != ''">
+				and t1.REGISTRATER_DATE &gt;= #{bean.registraterDateBegin}
+			</if>
+			<if test="bean.registraterDateEnd != null and bean.registraterDateEnd != ''">
+				and t1.REGISTRATER_DATE &lt;= #{bean.registraterDateEnd}
+			</if>
+			<if test="bean.finishedDateBegin != null and bean.finishedDateBegin != ''">
+				and t1.FINISHED_DATE &gt;= #{bean.finishedDateBegin}
+			</if>
+			<if test="bean.finishedDateEnd != null and bean.finishedDateEnd != ''">
+				and t1.FINISHED_DATE &lt;= #{bean.finishedDateEnd}
+			</if>
+			<if test="bean.businessPeriodYear != null and bean.businessPeriodYear != ''">
+				and t1.BUSINESS_PERIOD_YEAR like '%'||#{bean.businessPeriodYear}||'%'
+			</if>
+			<if test="bean.businessPeriodHour != null and bean.businessPeriodHour != ''">
+				and t1.BUSINESS_PERIOD_HOUR like '%'||#{bean.businessPeriodHour}||'%'
+			</if>
+			<if test="bean.isBusinessPeriod != null and bean.isBusinessPeriod != ''">
+				and t1.IS_BUSINESS_PERIOD like '%'||#{bean.isBusinessPeriod}||'%'
+			</if>
+			<if test="bean.startOperateDateBegin != null and bean.startOperateDateBegin != ''">
+				and t1.START_OPERATE_DATE &gt;= #{bean.startOperateDateBegin}
+			</if>
+			<if test="bean.startOperateDateEnd != null and bean.startOperateDateEnd != ''">
+				and t1.START_OPERATE_DATE &lt;= #{bean.startOperateDateEnd}
+			</if>
+			<if test="bean.operateStatus != null and bean.operateStatus != ''">
+				and t1.OPERATE_STATUS like '%'||#{bean.operateStatus}||'%'
+			</if>
+			<if test="bean.engine1 != null and bean.engine1 != ''">
+				and t1.ENGINE1 like '%'||#{bean.engine1}||'%'
+			</if>
+			<if test="bean.engine2 != null and bean.engine2 != ''">
+				and t1.ENGINE2 like '%'||#{bean.engine2}||'%'
+			</if>
+			<if test="bean.numberOfFlight != null and bean.numberOfFlight != ''">
+				and t1.NUMBER_OF_FLIGHT like '%'||#{bean.numberOfFlight}||'%'
+			</if>
+			<if test="bean.flightNum != null and bean.flightNum != ''">
+				and t1.FLIGHT_NUM like '%'||#{bean.flightNum}||'%'
+			</if>
+			<if test="bean.takeoffLandingNum != null and bean.takeoffLandingNum != ''">
+				and t1.TAKEOFF_LANDING_NUM like '%'||#{bean.takeoffLandingNum}||'%'
+			</if>
+			<if test="bean.custumerName != null and bean.custumerName != ''">
+				and t1.CUSTUMER_NAME like '%'||#{bean.custumerName}||'%'
+			</if>
+			<if test="bean.operator != null and bean.operator != ''">
+				and t1.OPERATOR like '%'||#{bean.operator}||'%'
+			</if>
+			<if test="bean.remark != null and bean.remark != ''">
+				and t1.REMARK like '%'||#{bean.remark}||'%'
+			</if>
+			<if test="bean.createdBy != null and bean.createdBy != ''">
+				and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+			</if>
+			<if test="bean.creationDate != null and bean.creationDate != ''">
+				and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+			</if>
+			<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+			</if>
+			<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+			</if>
+			<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+			</if>
+			<if test="bean.version != null and bean.version != ''">
+				and t1.VERSION like '%'||#{bean.version}||'%'
+			</if>
+			<if test="bean.attribute01 != null and bean.attribute01 != ''">
+				and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+			</if>
+			<if test="bean.attribute02 != null and bean.attribute02 != ''">
+				and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+			</if>
+			<if test="bean.attribute03 != null and bean.attribute03 != ''">
+				and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+			</if>
+			<if test="bean.attribute04 != null and bean.attribute04 != ''">
+				and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+			</if>
+			<if test="bean.attribute05 != null and bean.attribute05 != ''">
+				and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+			</if>
+			<if test="bean.attribute06 != null and bean.attribute06 != ''">
+				and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+			</if>
+			<if test="bean.attribute07 != null and bean.attribute07 != ''">
+				and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+			</if>
+			<if test="bean.attribute08 != null and bean.attribute08 != ''">
+				and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+			</if>
+			<if test="bean.attribute09 != null and bean.attribute09 != ''">
+				and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+			</if>
+			<if test="bean.attribute10 != null and bean.attribute10 != ''">
+				and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+			</if>
+			<if test="bean.companyId != null and bean.companyId !=''">
+				and t1.COMPANY_ID like '%'||#{bean.companyId}||'%'
+			</if>
+			
+			<if test="bean.totalFlightDays != null and bean.totalFlightDays !=''">
+				and t1.total_flight_days like '%'||#{bean.totalFlightDays}||'%'
+			</if>
+			<if test="bean.statisticalDate != null and bean.statisticalDate !=''">
+				and t1.statistical_date like '%'||#{bean.statisticalDate}||'%'
+			</if>
+			<if test="bean.statisticalPerson != null and bean.statisticalPerson !=''">
+				and t1.statistical_person like '%'||#{bean.statisticalPerson}||'%'
+			</if>
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}			
+			</if>
+		</where>
+			order by t1.finished_date DESC
+</select>
+
+
+
+
+<!-- 查询列表 CSMP_BD_AIRCRAFTINFO -->
+<select id="searchCsmpBdAircraftinfoById" parameterType="java.lang.String" resultMap="CsmpBdAircraftinfoDTOMap">
+	select
+		t1.id                             ,
+		t1.model_id                       ,
+		t1.batch_no                       ,
+		t1.sub_type                       ,
+		t1.desige_by                      ,
+		t1.product_by                     ,
+		t1.contract_no                    ,
+		t1.registrater_no                 ,
+		t1.registrater_date               ,
+		t1.finished_date                  ,
+		t1.business_period_year           ,
+		t1.business_period_hour           ,
+		t1.is_business_period             ,
+		t1.start_operate_date             ,
+		t1.operate_status                 ,
+		t1.engine1                        ,
+		t1.engine2                        ,
+		t1.number_of_flight               ,
+		t1.flight_num                     ,
+		t1.takeoff_landing_num            ,
+		t1.custumer_name                  ,
+		t1.operator                       ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.company_id                     ,
+		t1.total_flight_days              ,                     
+		t1.statistical_date               ,                     
+		t1.statistical_person                     
+	from csmp_bd_aircraftinfo 	t1
+	where  t1.MODEL_ID =#{id}
+	
+</select>
+
+<!-- 查询列表 CSMP_BD_AIRCRAFTINFO -->
+<select id="searchCsmpBdAircraftinfo" parameterType="java.util.Map" resultMap="CsmpBdAircraftinfoDTOMap">
+	select
+		t1.id                             ,
+		t1.model_id                       ,
+		t1.batch_no                       ,
+		t1.sub_type                       ,
+		t1.desige_by                      ,
+		t1.product_by                     ,
+		t1.contract_no                    ,
+		t1.registrater_no                 ,
+		t1.registrater_date               ,
+		t1.finished_date                  ,
+		t1.business_period_year           ,
+		t1.business_period_hour           ,
+		t1.is_business_period             ,
+		t1.start_operate_date             ,
+		t1.operate_status                 ,
+		t1.engine1                        ,
+		t1.engine2                        ,
+		t1.number_of_flight               ,
+		t1.flight_num                     ,
+		t1.takeoff_landing_num            ,
+		t1.custumer_name                  ,
+		t1.operator                       ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.company_id                     ,
+		t1.total_flight_days                    ,
+		t1.statistical_date                     ,
+		t1.statistical_person                    
+	from csmp_bd_aircraftinfo 	t1
+		<where>
+			<if test="id != null and id != ''">
+				and t1.ID =#{id}
+			</if>
+			<if test="modelId != null and modelId != ''">
+				and t1.MODEL_ID =#{modelId}
+			</if>
+			<if test="batchNo != null and batchNo != ''">
+				and t1.BATCH_NO =#{batchNo}
+			</if>
+			<if test="subType != null and subType != ''">
+				and t1.SUB_TYPE =#{subType}
+			</if>
+			<if test="desigeBy != null and desigeBy != ''">
+				and t1.DESIGE_BY =#{desigeBy}
+			</if>
+			<if test="productBy != null and productBy != ''">
+				and t1.PRODUCT_BY =#{productBy}
+			</if>
+			<if test="contractNo != null and contractNo != ''">
+				and t1.CONTRACT_NO =#{contractNo}
+			</if>
+			<if test="registraterNo != null and registraterNo != ''">
+				and t1.REGISTRATER_NO =#{registraterNo}
+			</if>
+			<if test="bean.registraterDateBegin != null and bean.registraterDateBegin != ''">
+				and t1.REGISTRATER_DATE &gt;= #{bean.registraterDateBegin}
+			</if>
+			<if test="bean.registraterDateEnd != null and bean.registraterDateEnd != ''">
+				and t1.REGISTRATER_DATE &lt;= #{bean.registraterDateEnd}
+			</if>
+			<if test="bean.finishedDateBegin != null and bean.finishedDateBegin != ''">
+				and t1.FINISHED_DATE &gt;= #{bean.finishedDateBegin}
+			</if>
+			<if test="bean.finishedDateEnd != null and bean.finishedDateEnd != ''">
+				and t1.FINISHED_DATE &lt;= #{bean.finishedDateEnd}
+			</if>
+			<if test="businessPeriodYear != null and businessPeriodYear != ''">
+				and t1.BUSINESS_PERIOD_YEAR =#{businessPeriodYear}
+			</if>
+			<if test="businessPeriodHour != null and businessPeriodHour != ''">
+				and t1.BUSINESS_PERIOD_HOUR =#{businessPeriodHour}
+			</if>
+			<if test="isBusinessPeriod != null and isBusinessPeriod != ''">
+				and t1.IS_BUSINESS_PERIOD =#{isBusinessPeriod}
+			</if>
+			<if test="bean.startOperateDateBegin != null and bean.startOperateDateBegin != ''">
+				and t1.START_OPERATE_DATE &gt;= #{bean.startOperateDateBegin}
+			</if>
+			<if test="bean.startOperateDateEnd != null and bean.startOperateDateEnd != ''">
+				and t1.START_OPERATE_DATE &lt;= #{bean.startOperateDateEnd}
+			</if>
+			<if test="operateStatus != null and operateStatus != ''">
+				and t1.OPERATE_STATUS =#{operateStatus}
+			</if>
+			<if test="engine1 != null and engine1 != ''">
+				and t1.ENGINE1 =#{engine1}
+			</if>
+			<if test="engine2 != null and engine2 != ''">
+				and t1.ENGINE2 =#{engine2}
+			</if>
+			<if test="numberOfFlight != null and numberOfFlight != ''">
+				and t1.NUMBER_OF_FLIGHT =#{numberOfFlight}
+			</if>
+			<if test="flightNum != null and flightNum != ''">
+				and t1.FLIGHT_NUM =#{flightNum}
+			</if>
+			<if test="takeoffLandingNum != null and takeoffLandingNum != ''">
+				and t1.TAKEOFF_LANDING_NUM =#{takeoffLandingNum}
+			</if>
+			<if test="custumerName != null and custumerName != ''">
+				and t1.CUSTUMER_NAME =#{custumerName}
+			</if>
+			<if test="operator != null and operator != ''">
+				and t1.OPERATOR =#{operator}
+			</if>
+			<if test="remark != null and remark != ''">
+				and t1.REMARK =#{remark}
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				and t1.CREATED_BY =#{createdBy}
+			</if>
+			<if test="creationDate != null and creationDate != ''">
+				and t1.CREATION_DATE =#{creationDate}
+			</if>
+			<if test="lastUpdatedBy != null and lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY =#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdateDate != null and lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE =#{lastUpdateDate}
+			</if>
+			<if test="lastUpdateIp != null and lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP =#{lastUpdateIp}
+			</if>
+			<if test="version != null and version != ''">
+				and t1.VERSION =#{version}
+			</if>
+			<if test="attribute01 != null and attribute01 != ''">
+				and t1.ATTRIBUTE_01 =#{attribute01}
+			</if>
+			<if test="attribute02 != null and attribute02 != ''">
+				and t1.ATTRIBUTE_02 =#{attribute02}
+			</if>
+			<if test="attribute03 != null and attribute03 != ''">
+				and t1.ATTRIBUTE_03 =#{attribute03}
+			</if>
+			<if test="attribute04 != null and attribute04 != ''">
+				and t1.ATTRIBUTE_04 =#{attribute04}
+			</if>
+			<if test="attribute05 != null and attribute05 != ''">
+				and t1.ATTRIBUTE_05 =#{attribute05}
+			</if>
+			<if test="attribute06 != null and attribute06 != ''">
+				and t1.ATTRIBUTE_06 =#{attribute06}
+			</if>
+			<if test="attribute07 != null and attribute07 != ''">
+				and t1.ATTRIBUTE_07 =#{attribute07}
+			</if>
+			<if test="attribute08 != null and attribute08 != ''">
+				and t1.ATTRIBUTE_08 =#{attribute08}
+			</if>
+			<if test="attribute09 != null and attribute09 != ''">
+				and t1.ATTRIBUTE_09 =#{attribute09}
+			</if>
+			<if test="attribute10 != null and attribute10 != ''">
+				and t1.ATTRIBUTE_10 =#{attribute10}
+			</if>
+			<if test="companyId != null and companyId != ''">
+				and t1.COMPANY_ID =#{companyId}
+			</if>
+			<if test="totalFlightDays != null and totalFlightDays != ''">
+				and t1.total_flight_days =#{totalFlightDays}
+			</if>
+			<if test="statisticalDate != null and statisticalDate != ''">
+				and t1.statistical_date =#{statisticalDate}
+			</if>
+			<if test="statisticalPerson != null and statisticalPerson != ''">
+				and t1.statistical_person =#{statisticalPerson}
+			</if>
+		</where>
+</select>
+<!-- 主键查询对象 CSMP_BD_AIRCRAFTINFO -->
+<select id="findCsmpBdAircraftinfoById" parameterType="java.util.Map" resultMap="CsmpBdAircraftinfoDTOMap">
+	select
+		t1.id                             ,
+		t1.model_id                       ,
+		t1.batch_no                       ,
+		t1.sub_type                       ,
+		t1.desige_by                      ,
+		t1.product_by                     ,
+		t1.contract_no                    ,
+		t1.registrater_no                 ,
+		t1.registrater_date               ,
+		t1.finished_date                  ,
+		t1.business_period_year           ,
+		t1.business_period_hour           ,
+		t1.is_business_period             ,
+		t1.start_operate_date             ,
+		t1.operate_status                 ,
+		t1.engine1                        ,
+		t1.engine2                        ,
+		t1.number_of_flight               ,
+		t1.flight_num                     ,
+		t1.takeoff_landing_num            ,
+		t1.custumer_name                  ,
+		t1.operator                       ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.company_id                     ,
+		t1.total_flight_days               ,      
+		t1.statistical_date               ,      
+		t1.statistical_person                    
+	from csmp_bd_aircraftinfo 	t1
+		where t1.id = #{id}
+</select>
+<!-- 新增对象 CSMP_BD_AIRCRAFTINFO -->
+<insert id="insertCsmpBdAircraftinfo" parameterType="avicit.csmp.basicData.csmpbdaircraftinfo.dto.CsmpBdAircraftinfoDTO">
+	insert into csmp_bd_aircraftinfo
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="modelId != null">
+				model_id,
+			</if>
+			<if test="batchNo != null">
+				batch_no,
+			</if>
+			<if test="subType != null">
+				sub_type,
+			</if>
+			<if test="desigeBy != null">
+				desige_by,
+			</if>
+			<if test="productBy != null">
+				product_by,
+			</if>
+			<if test="contractNo != null">
+				contract_no,
+			</if>
+			<if test="registraterNo != null">
+				registrater_no,
+			</if>
+			<if test="registraterDate != null">
+				registrater_date,
+			</if>
+			<if test="finishedDate != null">
+				finished_date,
+			</if>
+			<if test="businessPeriodYear != null">
+				business_period_year,
+			</if>
+			<if test="businessPeriodHour != null">
+				business_period_hour,
+			</if>
+			<if test="isBusinessPeriod != null">
+				is_business_period,
+			</if>
+			<if test="startOperateDate != null">
+				start_operate_date,
+			</if>
+			<if test="operateStatus != null">
+				operate_status,
+			</if>
+			<if test="engine1 != null">
+				engine1,
+			</if>
+			<if test="engine2 != null">
+				engine2,
+			</if>
+			<if test="numberOfFlight != null">
+				number_of_flight,
+			</if>
+			<if test="flightNum != null">
+				flight_num,
+			</if>
+			<if test="takeoffLandingNum != null">
+				takeoff_landing_num,
+			</if>
+			<if test="custumerName != null">
+				custumer_name,
+			</if>
+			<if test="operator != null">
+				operator,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="creationDate != null">
+				creation_date,
+			</if>
+			<if test="lastUpdatedBy != null">
+				last_updated_by,
+			</if>
+			<if test="lastUpdateDate != null">
+				last_update_date,
+			</if>
+			<if test="lastUpdateIp != null">
+				last_update_ip,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+			<if test="attribute01 != null">
+				attribute_01,
+			</if>
+			<if test="attribute02 != null">
+				attribute_02,
+			</if>
+			<if test="attribute03 != null">
+				attribute_03,
+			</if>
+			<if test="attribute04 != null">
+				attribute_04,
+			</if>
+			<if test="attribute05 != null">
+				attribute_05,
+			</if>
+			<if test="attribute06 != null">
+				attribute_06,
+			</if>
+			<if test="attribute07 != null">
+				attribute_07,
+			</if>
+			<if test="attribute08 != null">
+				attribute_08,
+			</if>
+			<if test="attribute09 != null">
+				attribute_09,
+			</if>
+			<if test="attribute10 != null">
+				attribute_10,
+			</if>
+			<if test="companyId != null">
+				company_id,
+			</if>
+				<if test="totalFlightDays != null">
+				total_flight_days,
+			</if>
+				<if test="statisticalDate != null">
+				statistical_date,
+			</if>
+				<if test="statisticalPerson != null">
+				statistical_person,
+			</if>
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="modelId != null">
+				#{modelId,jdbcType=VARCHAR},
+			</if>
+			<if test="batchNo != null">
+				#{batchNo,jdbcType=VARCHAR},
+			</if>
+			<if test="subType != null">
+				#{subType,jdbcType=VARCHAR},
+			</if>
+			<if test="desigeBy != null">
+				#{desigeBy,jdbcType=VARCHAR},
+			</if>
+			<if test="productBy != null">
+				#{productBy,jdbcType=VARCHAR},
+			</if>
+			<if test="contractNo != null">
+				#{contractNo,jdbcType=VARCHAR},
+			</if>
+			<if test="registraterNo != null">
+				#{registraterNo,jdbcType=VARCHAR},
+			</if>
+			<if test="registraterDate != null">
+				#{registraterDate,jdbcType=DATE},
+			</if>
+			<if test="finishedDate != null">
+				#{finishedDate,jdbcType=DATE},
+			</if>
+			<if test="businessPeriodYear != null">
+				#{businessPeriodYear,jdbcType=DECIMAL},
+			</if>
+			<if test="businessPeriodHour != null">
+				#{businessPeriodHour,jdbcType=DECIMAL},
+			</if>
+			<if test="isBusinessPeriod != null">
+				#{isBusinessPeriod,jdbcType=VARCHAR},
+			</if>
+			<if test="startOperateDate != null">
+				#{startOperateDate,jdbcType=DATE},
+			</if>
+			<if test="operateStatus != null">
+				#{operateStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="engine1 != null">
+				#{engine1,jdbcType=VARCHAR},
+			</if>
+			<if test="engine2 != null">
+				#{engine2,jdbcType=VARCHAR},
+			</if>
+			<if test="numberOfFlight != null">
+				#{numberOfFlight,jdbcType=DECIMAL},
+			</if>
+			<if test="flightNum != null">
+				#{flightNum,jdbcType=DECIMAL},
+			</if>
+			<if test="takeoffLandingNum != null">
+				#{takeoffLandingNum,jdbcType=DECIMAL},
+			</if>
+			<if test="custumerName != null">
+				#{custumerName,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute01 != null">
+				#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="companyId != null">
+				#{companyId,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="totalFlightDays != null">
+				#{totalFlightDays,jdbcType=DECIMAL},
+			</if>
+				<if test="statisticalDate != null">
+				#{statisticalDate},
+			</if>
+			<if test="statisticalPerson != null">
+				#{statisticalPerson,jdbcType=VARCHAR},
+			</if>
+	</trim>
+</insert>
+<!-- 更新对象 CSMP_BD_AIRCRAFTINFO -->
+<update id="updateCsmpBdAircraftinfoSensitive" parameterType="avicit.csmp.basicData.csmpbdaircraftinfo.dto.CsmpBdAircraftinfoDTO">
+	update csmp_bd_aircraftinfo t1
+	<set>
+			<if test="id != null">
+				t1.id                             =#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="modelId != null">
+				t1.model_id                       =#{modelId,jdbcType=VARCHAR},
+			</if>
+			<if test="batchNo != null">
+				t1.batch_no                       =#{batchNo,jdbcType=VARCHAR},
+			</if>
+			<if test="subType != null">
+				t1.sub_type                       =#{subType,jdbcType=VARCHAR},
+			</if>
+			<if test="desigeBy != null">
+				t1.desige_by                      =#{desigeBy,jdbcType=VARCHAR},
+			</if>
+			<if test="productBy != null">
+				t1.product_by                     =#{productBy,jdbcType=VARCHAR},
+			</if>
+			<if test="contractNo != null">
+				t1.contract_no                    =#{contractNo,jdbcType=VARCHAR},
+			</if>
+			<if test="registraterNo != null">
+				t1.registrater_no                 =#{registraterNo,jdbcType=VARCHAR},
+			</if>
+			<if test="registraterDate != null">
+				t1.registrater_date               =#{registraterDate,jdbcType=DATE},
+			</if>
+			<if test="finishedDate != null">
+				t1.finished_date                  =#{finishedDate,jdbcType=DATE},
+			</if>
+			<if test="businessPeriodYear != null">
+				t1.business_period_year           =#{businessPeriodYear,jdbcType=DECIMAL},
+			</if>
+			<if test="businessPeriodHour != null">
+				t1.business_period_hour           =#{businessPeriodHour,jdbcType=DECIMAL},
+			</if>
+			<if test="isBusinessPeriod != null">
+				t1.is_business_period             =#{isBusinessPeriod,jdbcType=VARCHAR},
+			</if>
+			<if test="startOperateDate != null">
+				t1.start_operate_date             =#{startOperateDate,jdbcType=DATE},
+			</if>
+			<if test="operateStatus != null">
+				t1.operate_status                 =#{operateStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="engine1 != null">
+				t1.engine1                        =#{engine1,jdbcType=VARCHAR},
+			</if>
+			<if test="engine2 != null">
+				t1.engine2                        =#{engine2,jdbcType=VARCHAR},
+			</if>
+			<if test="numberOfFlight != null">
+				t1.number_of_flight               =#{numberOfFlight,jdbcType=DECIMAL},
+			</if>
+			<if test="flightNum != null">
+				t1.flight_num                     =#{flightNum,jdbcType=DECIMAL},
+			</if>
+			<if test="takeoffLandingNum != null">
+				t1.takeoff_landing_num            =#{takeoffLandingNum,jdbcType=DECIMAL},
+			</if>
+			<if test="custumerName != null">
+				t1.custumer_name                  =#{custumerName,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				t1.operator                       =#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				t1.remark                         =#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				t1.creation_date                  =#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				t1.last_update_date               =#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				t1.version                        =t1.version+1,
+			</if>
+			<if test="attribute01 != null">
+				t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="companyId != null">
+				t1.company_id                     =#{companyId,jdbcType=VARCHAR},
+			</if>
+				<if test="totalFlightDays != null">
+				t1.total_flight_days                    =#{totalFlightDays,jdbcType=DECIMAL},
+			</if>
+				<if test="statisticalDate != null">
+				t1.statistical_date                     =#{statisticalDate},
+			</if>
+				<if test="statisticalPerson != null">
+				t1.statistical_person                     =#{statisticalPerson,jdbcType=VARCHAR},
+			</if>
+	</set>
+		where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 更新对象 CSMP_BD_AIRCRAFTINFO -->
+<update id="updateCsmpBdAircraftinfoAll" parameterType="avicit.csmp.basicData.csmpbdaircraftinfo.dto.CsmpBdAircraftinfoDTO">
+	update csmp_bd_aircraftinfo t1
+		set
+			t1.id                             =#{id,jdbcType=VARCHAR},
+			t1.model_id                       =#{modelId,jdbcType=VARCHAR},
+			t1.batch_no                       =#{batchNo,jdbcType=VARCHAR},
+			t1.sub_type                       =#{subType,jdbcType=VARCHAR},
+			t1.desige_by                      =#{desigeBy,jdbcType=VARCHAR},
+			t1.product_by                     =#{productBy,jdbcType=VARCHAR},
+			t1.contract_no                    =#{contractNo,jdbcType=VARCHAR},
+			t1.registrater_no                 =#{registraterNo,jdbcType=VARCHAR},
+			t1.registrater_date               =#{registraterDate,jdbcType=DATE},
+			t1.finished_date                  =#{finishedDate,jdbcType=DATE},
+			t1.business_period_year           =#{businessPeriodYear,jdbcType=DECIMAL},
+			t1.business_period_hour           =#{businessPeriodHour,jdbcType=DECIMAL},
+			t1.is_business_period             =#{isBusinessPeriod,jdbcType=VARCHAR},
+			t1.start_operate_date             =#{startOperateDate,jdbcType=DATE},
+			t1.operate_status                 =#{operateStatus,jdbcType=VARCHAR},
+			t1.engine1                        =#{engine1,jdbcType=VARCHAR},
+			t1.engine2                        =#{engine2,jdbcType=VARCHAR},
+			t1.number_of_flight               =#{numberOfFlight,jdbcType=DECIMAL},
+			t1.flight_num                     =#{flightNum,jdbcType=DECIMAL},
+			t1.takeoff_landing_num            =#{takeoffLandingNum,jdbcType=DECIMAL},
+			t1.custumer_name                  =#{custumerName,jdbcType=VARCHAR},
+			t1.operator                       =#{operator,jdbcType=VARCHAR},
+			t1.remark                         =#{remark,jdbcType=VARCHAR},
+			t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			t1.creation_date                  =#{creationDate},
+			t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			t1.last_update_date               =#{lastUpdateDate},
+			t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			t1.version                        =t1.version+1,
+			t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			t1.company_id                     =#{companyId,jdbcType=VARCHAR},
+			t1.total_flight_days                    =#{totalFlightDays,jdbcType=DECIMAL},
+			t1.statistical_date                     =#{statisticalDate},
+			t1.statistical_person                     =#{statisticalPerson,jdbcType=VARCHAR}
+	where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 主键删除 CSMP_BD_AIRCRAFTINFO -->
+<delete id="deleteCsmpBdAircraftinfoById" parameterType="java.lang.String">
+		delete from csmp_bd_aircraftinfo  where  id = #{id}
+</delete>
+<!-- 按照id来查找并进行判断是飞机架批次 -->
+<select id="countBatchno" parameterType="java.lang.String" resultType="java.lang.Integer">
+	select count(t.batch_no) from  CSMP_BD_AIRCRAFTINFO t  where  t.model_id = #{id}
+</select>
+
+
+<!-- 按照公司表的id来查询器对应下面得飞机信息 -->
+<select id="CompanyIdInfoByAircraft" parameterType="string" resultMap="CsmpBdAircraftinfoDTOMap">
+
+	select
+		t1.id                             ,
+		t1.model_id                       ,
+		t2.model_name as modelIdAlias     ,
+		t1.batch_no                       ,
+		t1.sub_type                       ,
+		t1.desige_by                      ,
+		t1.product_by                     ,
+		t1.contract_no                    ,
+		t1.registrater_no                 ,
+		t1.registrater_date               ,
+		t1.finished_date                  ,
+		t1.business_period_year           ,
+		t1.business_period_hour           ,
+		t1.is_business_period             ,
+		t1.start_operate_date             ,
+		t1.operate_status                 ,
+		t1.engine1                        ,
+		t1.engine2                        ,
+		t1.number_of_flight               ,
+		t1.flight_num                     ,
+		t1.takeoff_landing_num            ,
+		t1.custumer_name                  ,
+		t1.operator                       ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   ,
+		t1.company_id                     ,
+		t1.total_flight_days             ,
+			t1.statistical_date           ,
+			t1.statistical_person                   
+	 from CSMP_BD_AIRCRAFTINFO t1 inner join csmp_bd_aricarftmodel t2 on t1.model_id = t2.id
+	 where t1.company_id=#{comId}
+</select>
+
+
+</mapper>

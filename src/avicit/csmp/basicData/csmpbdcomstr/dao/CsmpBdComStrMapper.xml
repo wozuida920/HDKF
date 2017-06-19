@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="avicit.csmp.basicData.csmpbdcomstr.dao.CsmpBdComStrDao">
+
+	<resultMap id="CsmpBdComStrDTOMap"
+		type="avicit.csmp.basicData.csmpbdcomstr.dto.CsmpBdComStrDTO">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="strId" column="STR_ID" jdbcType="VARCHAR" />
+		<result property="comId" column="COM_ID" jdbcType="VARCHAR" />
+		<result property="comType" column="COM_TYPE" jdbcType="VARCHAR" />
+		<result property="remark" column="REMARK" jdbcType="VARCHAR" />
+		<result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR" />
+		<result property="creationDate" column="CREATION_DATE"
+			jdbcType="TIMESTAMP" />
+		<result property="lastUpdatedBy" column="LAST_UPDATED_BY"
+			jdbcType="VARCHAR" />
+		<result property="lastUpdateDate" column="LAST_UPDATE_DATE"
+			jdbcType="TIMESTAMP" />
+		<result property="lastUpdateIp" column="LAST_UPDATE_IP"
+			jdbcType="VARCHAR" />
+		<result property="version" column="VERSION" jdbcType="DECIMAL" />
+	</resultMap>
+	<!-- 封装关系查询从3张表联合查询的数据集 -->
+	<resultMap type="avicit.csmp.basicData.csmpbdcomstr.dto.CsmpBdStrVo"
+		id="CsmpBdComStrDTOMap1">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="strId" column="STR_ID" jdbcType="VARCHAR" />
+		<result property="comId" column="COM_ID" jdbcType="VARCHAR" />
+		<result property="companyCode" column="company_code" jdbcType="VARCHAR" />
+		<result property="companyName" column="company_name" jdbcType="VARCHAR" />
+		<result property="catalogType" column="catalog_type" jdbcType="VARCHAR" />
+		<result property="remark" column="REMARK" jdbcType="VARCHAR" />
+		<result property="catalogName" column="catalog_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!--节点下信息表中有数据,不能删除 -->
+	<select id="searchDel" parameterType="java.lang.String" resultType="int">
+		select count(*) from csmp_bd_com_str where str_id = #{id} and com_id is not null
+	</select>
+
+
+
+	<!--关系表删除时先查询有几个str -->
+	<select id="searchStrByComId" parameterType="java.lang.String" resultType="int">
+		select count(str_id)  from  csmp_bd_com_str  where  com_id  = #{id}
+	</select>
+
+
+
+	<select id="searchComStrAndCompByPage" parameterType="avicit.csmp.basicData.csmpbdcomstr.dto.CsmpBdStrVo" resultMap="CsmpBdComStrDTOMap1">
+		select
+		t1.company_code,t1.company_name,
+		t2.remark,t2.str_id,t2.com_id,t2.id,
+		t3.catalog_type,t3.catalog_Name
+		from csmp_bd_companyinfo t1 inner join csmp_bd_com_str t2
+		inner join csmp_bd_companystructure t3 on t3.id = t2.str_id
+		on t1.id = t2.com_id where t2.com_id = #{treeBean.comId}
+	</select>
+
+	
+	<!-- 查询列表 CSMP_BD_COM_STR -->
+	<select id="searchCsmpBdComStr" parameterType="java.util.Map"
+		resultMap="CsmpBdComStrDTOMap">
+		select
+		t1.id ,
+		t1.str_id ,
+		t1.com_id ,
+		t1.com_type ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.version
+		from csmp_bd_com_str t1
+		<where>
+			<if test="id != null and id != ''">
+				and t1.ID =#{id}
+			</if>
+			<if test="strId != null and strId != ''">
+				and t1.STR_ID =#{strId}
+			</if>
+			<if test="comId != null and comId != ''">
+				and t1.COM_ID =#{comId}
+			</if>
+			<if test="comType != null and comType != ''">
+				and t1.COM_TYPE =#{comType}
+			</if>
+			<if test="remark != null and remark != ''">
+				and t1.REMARK =#{remark}
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				and t1.CREATED_BY =#{createdBy}
+			</if>
+			<if test="creationDate != null and creationDate != ''">
+				and t1.CREATION_DATE =#{creationDate}
+			</if>
+			<if test="lastUpdatedBy != null and lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY =#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdateDate != null and lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE =#{lastUpdateDate}
+			</if>
+			<if test="lastUpdateIp != null and lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP =#{lastUpdateIp}
+			</if>
+			<if test="version != null and version != ''">
+				and t1.VERSION =#{version}
+			</if>
+		</where>
+	</select>
+	<!-- 主键查询对象 CSMP_BD_COM_STR -->
+	<select id="findCsmpBdComStrById" parameterType="java.util.Map"
+		resultMap="CsmpBdComStrDTOMap">
+		select
+		t1.id ,
+		t1.str_id ,
+		t1.com_id ,
+		t1.com_type ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.version
+		from csmp_bd_com_str t1
+		where t1.id = #{id}
+	</select>
+	<!-- 分页查询 CSMP_BD_COM_STR  -->
+	<select id="searchCsmpBdComStrByPage" parameterType="java.util.Map"
+		resultMap="CsmpBdComStrDTOMap">
+		select
+		t1.id ,
+		t1.str_id ,
+		t1.com_id ,
+		t1.com_type ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.version
+		from csmp_bd_com_str t1
+		<where>
+			<if test="bean != null">
+				<if test="bean.id != null and bean.id != ''">
+					and t1.ID like '%'||#{bean.id}||'%'
+				</if>
+				<if test="bean.strId != null and bean.strId != ''">
+					and t1.STR_ID like '%'||#{bean.strId}||'%'
+				</if>
+				<if test="bean.comId != null and bean.comId != ''">
+					and t1.COM_ID like '%'||#{bean.comId}||'%'
+				</if>
+				<if test="bean.comType != null and bean.comType != ''">
+					and t1.COM_TYPE like '%'||#{bean.comType}||'%'
+				</if>
+				<if test="bean.remark != null and bean.remark != ''">
+					and t1.REMARK like '%'||#{bean.remark}||'%'
+				</if>
+				<if test="bean.createdBy != null and bean.createdBy != ''">
+					and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+				</if>
+				<if test="bean.creationDate != null and bean.creationDate != ''">
+					and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+				</if>
+				<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+					and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+				</if>
+				<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+					and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+				</if>
+				<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+					and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+				</if>
+				<if test="bean.version != null and bean.version != ''">
+					and t1.VERSION like '%'||#{bean.version}||'%'
+				</if>
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}
+			</if>
+		</where>
+		order by t1.creation_date desc
+	</select>
+	
+	<!-- 新增对象 CSMP_BD_COM_STR -->
+	<insert id="insertCsmpBdComStr"
+		parameterType="avicit.csmp.basicData.csmpbdcomstr.dto.CsmpBdComStrDTO">
+		insert into csmp_bd_com_str
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="strId != null">
+				str_id,
+			</if>
+			<if test="comId != null">
+				com_id,
+			</if>
+			<if test="comType != null">
+				com_type,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="creationDate != null">
+				creation_date,
+			</if>
+			<if test="lastUpdatedBy != null">
+				last_updated_by,
+			</if>
+			<if test="lastUpdateDate != null">
+				last_update_date,
+			</if>
+			<if test="lastUpdateIp != null">
+				last_update_ip,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="strId != null">
+				#{strId,jdbcType=VARCHAR},
+			</if>
+			<if test="comId != null">
+				#{comId,jdbcType=VARCHAR},
+			</if>
+			<if test="comType != null">
+				#{comType,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<!-- 更新对象 CSMP_BD_COM_STR -->
+	<update id="updateCsmpBdComStrSensitive" parameterType="avicit.csmp.basicData.csmpbdcomstr.dto.CsmpBdComStrDTO">
+		update csmp_bd_com_str t1
+		<set>
+			<if test="id != null">
+				t1.id =#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="strId != null">
+				t1.str_id =#{strId,jdbcType=VARCHAR},
+			</if>
+			<if test="comId != null">
+				t1.com_id =#{comId,jdbcType=VARCHAR},
+			</if>
+			<if test="comType != null">
+				t1.com_type =#{comType,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				t1.remark =#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				t1.created_by =#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				t1.creation_date =#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				t1.last_updated_by =#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				t1.last_update_date =#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				t1.last_update_ip =#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				t1.version =t1.version+1,
+			</if>
+		</set>
+		where t1.id = #{id} and t1.version =#{version}
+	</update>
+	<!-- 更新对象 CSMP_BD_COM_STR -->
+	<update id="updateCsmpBdComStrAll"
+		parameterType="avicit.csmp.basicData.csmpbdcomstr.dto.CsmpBdComStrDTO">
+		update csmp_bd_com_str t1
+		set
+		t1.id =#{id,jdbcType=VARCHAR},
+		t1.str_id =#{strId,jdbcType=VARCHAR},
+		t1.com_id =#{comId,jdbcType=VARCHAR},
+		t1.com_type =#{comType,jdbcType=VARCHAR},
+		t1.remark =#{remark,jdbcType=VARCHAR},
+		t1.created_by =#{createdBy,jdbcType=VARCHAR},
+		t1.creation_date =#{dto.creationDate},
+		t1.last_updated_by =#{lastUpdatedBy,jdbcType=VARCHAR},
+		t1.last_update_date =#{dto.lastUpdateDate},
+		t1.last_update_ip =#{lastUpdateIp,jdbcType=VARCHAR},
+		t1.version =t1.version+1,
+		where t1.id = #{id} and t1.version =#{version}
+	</update>
+	<!-- 主键删除 CSMP_BD_COM_STR -->
+	<delete id="deleteCsmpBdComStrById" parameterType="java.lang.String">
+		delete from
+		csmp_bd_com_str where id = #{id}
+	</delete>
+	<!-- 结构id str_id键删除 CSMP_BD_COM_STR -->
+	<delete id="deleteCsmpBdComStrByStrId" parameterType="java.lang.String">
+		delete from
+		csmp_bd_com_str where str_id = #{id}
+	</delete>
+		<!-- 信息表删除 同时删除CSMP_BD_COM_STR通过comIds -->
+	<delete id="deleteCsmpBdComStrBycomIds" parameterType="java.lang.String">
+		delete from
+		csmp_bd_com_str where com_id = #{id}
+	</delete>
+</mapper>

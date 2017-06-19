@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="avicit.csmp.basicData.csmpbdcompanystructure.dao.CsmpBdCompanystructureDao">
+
+<resultMap id="CsmpBdCompanystructureDTOMap" type="avicit.csmp.basicData.csmpbdcompanystructure.dto.CsmpBdCompanystructureDTO">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="pid" column="PID" jdbcType="VARCHAR" />
+		<result property="catalogCode" column="CATALOG_CODE" jdbcType="VARCHAR" />
+		<result property="catalogName" column="CATALOG_NAME" jdbcType="VARCHAR" />
+		<result property="sequenceNum" column="SEQUENCE_NUM" jdbcType="DECIMAL" />
+		<result property="isValid" column="IS_VALID" jdbcType="VARCHAR" />
+		<result property="catalogLevel" column="CATALOG_LEVEL" jdbcType="VARCHAR" />
+		<result property="catalogType" column="CATALOG_TYPE" jdbcType="VARCHAR" />
+		<result property="remark" column="REMARK" jdbcType="VARCHAR" />
+		<result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR" />
+		<result property="creationDate" column="CREATION_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdatedBy" column="LAST_UPDATED_BY" jdbcType="VARCHAR" />
+		<result property="lastUpdateDate" column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdateIp" column="LAST_UPDATE_IP" jdbcType="VARCHAR" />
+		<result property="version" column="VERSION" jdbcType="DECIMAL" />
+</resultMap>
+<resultMap id="CsmpBdCompanystructureMap" type="java.util.HashMap">
+	<result property="Id" column="ID" jdbcType="VARCHAR" />
+	<result property="Pid" column="PID" jdbcType="VARCHAR" />
+	<result property="CatalogName" column="CATALOG_NAME" jdbcType="VARCHAR" />
+	<result property="IsValid" column="IS_VALID" jdbcType="VARCHAR" />
+	<result property="childCount" column="childCount" jdbcType="VARCHAR" />
+</resultMap>
+
+<select id="getCsmpBdCompanystructureByPid" parameterType="java.lang.String" resultMap="CsmpBdCompanystructureMap">
+  select (select count(1) from CSMP_BD_COMPANYSTRUCTURE t1 where t.ID = t1.PID) childCount,
+  t.CATALOG_NAME,
+  t.PID,
+  t.ID,
+  t.IS_VALID
+  from CSMP_BD_COMPANYSTRUCTURE t  where t.PID = #{id,jdbcType=VARCHAR}
+ order by  SEQUENCE_NUM ASC
+</select>
+<select id="getCsmpBdCompanystructureCanUseByPid" parameterType="java.lang.String" resultMap="CsmpBdCompanystructureMap">
+  select (select count(1) from CSMP_BD_COMPANYSTRUCTURE t1 where t.ID = t1.PID) childCount,
+  t.CATALOG_NAME,
+  t.PID,
+  t.ID,
+  t.IS_VALID
+  from CSMP_BD_COMPANYSTRUCTURE t  where t.PID = #{id,jdbcType=VARCHAR} AND t.is_valid ='1'
+ order by  SEQUENCE_NUM ASC
+</select>
+<select id="searchCsmpBdCompanystructure" parameterType="java.lang.String" resultMap="CsmpBdCompanystructureMap">
+  select (select count(1) from CSMP_BD_COMPANYSTRUCTURE t1 where t.ID = t1.PID) childCount,
+  t.CATALOG_NAME,
+  t.PID,
+  t.ID
+  from CSMP_BD_COMPANYSTRUCTURE t  where t.CATALOG_NAME like '%'||#{CatalogName,jdbcType=VARCHAR}||'%'
+</select>
+<select id="searchCsmpBdCompanystructureValid" parameterType="java.lang.String" resultMap="CsmpBdCompanystructureMap">
+  select (select count(1) from CSMP_BD_COMPANYSTRUCTURE t1 where t.ID = t1.PID) childCount,
+  t.CATALOG_NAME,
+  t.PID,
+  t.ID
+  from CSMP_BD_COMPANYSTRUCTURE t  where t.CATALOG_NAME like '%'||#{CatalogName,jdbcType=VARCHAR}||'%' AND t.is_valid ='1'
+</select>
+
+<select id="getNodeById" parameterType="java.lang.String" resultMap="CsmpBdCompanystructureDTOMap">
+	SELECT * FROM CSMP_BD_COMPANYSTRUCTURE b WHERE b.ID=#{id,jdbcType=VARCHAR}
+</select>
+<select id="getNodeByPid" parameterType="java.lang.String" resultMap="CsmpBdCompanystructureDTOMap">
+	SELECT * FROM CSMP_BD_COMPANYSTRUCTURE b WHERE b.PID=#{pid,jdbcType=VARCHAR} AND b.is_valid ='1'
+ </select>
+ <select id="getAllNodeByPid" parameterType="java.lang.String" resultMap="CsmpBdCompanystructureDTOMap">
+	SELECT * FROM CSMP_BD_COMPANYSTRUCTURE b WHERE b.PID=#{pid,jdbcType=VARCHAR}
+ </select>
+<!-- 新增对象 CSMP_BD_COMPANYSTRUCTURE -->
+<insert id="insertCsmpBdCompanystructure" parameterType="avicit.csmp.basicData.csmpbdcompanystructure.dto.CsmpBdCompanystructureDTO">
+	insert into csmp_bd_companystructure
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="pid != null">
+				pid,
+			</if>
+			<if test="catalogCode != null">
+				catalog_code,
+			</if>
+			<if test="catalogName != null">
+				catalog_name,
+			</if>
+			<if test="sequenceNum != null">
+				sequence_num,
+			</if>
+			<if test="isValid != null">
+				is_valid,
+			</if>
+			<if test="catalogLevel != null">
+				catalog_level,
+			</if>
+			<if test="catalogType != null">
+				catalog_type,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="creationDate != null">
+				creation_date,
+			</if>
+			<if test="lastUpdatedBy != null">
+				last_updated_by,
+			</if>
+			<if test="lastUpdateDate != null">
+				last_update_date,
+			</if>
+			<if test="lastUpdateIp != null">
+				last_update_ip,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=VARCHAR},
+			</if>
+			<if test="catalogCode != null">
+				#{catalogCode,jdbcType=VARCHAR},
+			</if>
+			<if test="catalogName != null">
+				#{catalogName,jdbcType=VARCHAR},
+			</if>
+			<if test="sequenceNum != null">
+				#{sequenceNum,jdbcType=DECIMAL},
+			</if>
+			<if test="isValid != null">
+				#{isValid,jdbcType=VARCHAR},
+			</if>
+			<if test="catalogLevel != null">
+				#{catalogLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="catalogType != null">
+				#{catalogType,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=DECIMAL},
+			</if>
+	</trim>
+</insert>
+<!-- 更新对象 CSMP_BD_COMPANYSTRUCTURE -->
+<update id="updateCsmpBdCompanystructureSensitive" parameterType="avicit.csmp.basicData.csmpbdcompanystructure.dto.CsmpBdCompanystructureDTO">
+	update csmp_bd_companystructure t1
+	<set>
+			<if test="id != null">
+				t1.id                             =#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="pid != null">
+				t1.pid                            =#{pid,jdbcType=VARCHAR},
+			</if>
+			<if test="catalogCode != null">
+				t1.catalog_code                   =#{catalogCode,jdbcType=VARCHAR},
+			</if>
+			<if test="catalogName != null">
+				t1.catalog_name                   =#{catalogName,jdbcType=VARCHAR},
+			</if>
+			<if test="sequenceNum != null">
+				t1.sequence_num                   =#{sequenceNum,jdbcType=DECIMAL},
+			</if>
+			<if test="isValid != null">
+				t1.is_valid                       =#{isValid,jdbcType=VARCHAR},
+			</if>
+			<if test="catalogLevel != null">
+				t1.catalog_level                  =#{catalogLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="catalogType != null">
+				t1.catalog_type                   =#{catalogType,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				t1.remark                         =#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				t1.creation_date                  =#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				t1.last_update_date               =#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				t1.version                        =t1.version+1,
+			</if>
+	</set>
+		where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 更新对象 CSMP_BD_COMPANYSTRUCTURE -->
+<update id="updateCsmpBdCompanystructureAll" parameterType="avicit.csmp.basicData.csmpbdcompanystructure.dto.CsmpBdCompanystructureDTO">
+	update csmp_bd_companystructure t1
+		set
+			t1.id                             =#{id,jdbcType=VARCHAR},
+			t1.pid                            =#{pid,jdbcType=VARCHAR},
+			t1.catalog_code                   =#{catalogCode,jdbcType=VARCHAR},
+			t1.catalog_name                   =#{catalogName,jdbcType=VARCHAR},
+			t1.sequence_num                   =#{sequenceNum,jdbcType=DECIMAL},
+			t1.is_valid                       =#{isValid,jdbcType=VARCHAR},
+			t1.catalog_level                  =#{catalogLevel,jdbcType=VARCHAR},
+			t1.catalog_type                   =#{catalogType,jdbcType=VARCHAR},
+			t1.remark                         =#{remark,jdbcType=VARCHAR},
+			t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			t1.creation_date                  =#{dto.creationDate},
+			t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			t1.last_update_date               =#{dto.lastUpdateDate},
+			t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			t1.version                        =t1.version+1,
+	where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 主键删除 CSMP_BD_COMPANYSTRUCTURE -->
+<delete id="deleteCsmpBdCompanystructureById" parameterType="java.lang.String">
+		delete from csmp_bd_companystructure  where  id = #{id}  
+</delete>
+<!-- 结构树已经删除的节点，要在关系表里删除 -->
+<delete id="deleteStr" parameterType="java.lang.String">
+		delete from csmp_bd_companystructure  where  id = #{id}  
+</delete>
+
+
+<select id="getUnitList" resultMap="CsmpBdCompanystructureMap" parameterType="java.lang.String">
+
+ <!--  select t.id , t.CATALOG_NAME,t.catalog_type from CSMP_BD_COMPANYSTRUCTURE t where t.id not in 
+  
+  (select str_id from csmp_bd_com_str  where com_id = #{comID}) and t.id!='1' and t.id in(select t.id from CSMP_BD_COMPANYSTRUCTURE t where id not in (select pid from CSMP_BD_COMPANYSTRUCTURE))
+ -->
+select t.id , t.CATALOG_NAME,t.catalog_type  from CSMP_BD_COMPANYSTRUCTURE t where not exists (select 1 from CSMP_BD_COMPANYSTRUCTURE t2 where t.id=t2.pid) and t.id not in 
+  
+  (select str_id from csmp_bd_com_str  where com_id = #{comID}) and t.is_valid='1'
+
+<!-- 	select * from
+
+	(select * from (select (select count(1) from CSMP_BD_COMPANYSTRUCTURE t1 where t.ID = t1.PID) childCount,
+	t.CATALOG_NAME,
+	t.PID,
+	t.ID
+	from CSMP_BD_COMPANYSTRUCTURE t where t.is_valid = '1') tt where tt.childCount=0) tt1 where tt1.id not in(
+	select str_id from csmp_bd_com_str where com_id = #{comID}) -->
+</select>
+
+</mapper>

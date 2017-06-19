@@ -1,0 +1,1010 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="avicit.csmp.basicData.csmpbdsparepart.dao.CsmpBdSparepartDao">
+
+	<resultMap id="CsmpBdSparepartDTOMap" type="avicit.csmp.basicData.csmpbdsparepart.dto.CsmpBdSparepartDTO">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="productName" column="PRODUCT_NAME" jdbcType="VARCHAR" />
+		<result property="drawingNo" column="DRAWING_NO" jdbcType="VARCHAR" />
+		<result property="batchNo" column="BATCH_NO" jdbcType="VARCHAR" />
+		<result property="unit" column="UNIT" jdbcType="VARCHAR" />
+		<result property="quantity" column="QUANTITY" jdbcType="DECIMAL" />
+		<result property="specification" column="SPECIFICATION" jdbcType="VARCHAR" />
+		<result property="dutyFreePrice" column="DUTY_FREE_PRICE" jdbcType="DECIMAL" />
+		<result property="taxPrice" column="TAX_PRICE" jdbcType="DECIMAL" />
+		<result property="liabilityUnit" column="LIABILITY_UNIT" jdbcType="VARCHAR" />
+		<result property="category" column="CATEGORY" jdbcType="VARCHAR" />
+		<result property="cycle" column="CYCLE" jdbcType="VARCHAR" />
+		<result property="productType" column="PRODUCT_TYPE" jdbcType="VARCHAR" />
+		<result property="validFlag" column="VALID_FLAG" jdbcType="VARCHAR" />
+		<result property="isRandompart" column="IS_RANDOMPART" jdbcType="VARCHAR" />
+		<result property="remark" column="REMARK" jdbcType="VARCHAR" />
+		<result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR" />
+		<result property="creationDate" column="CREATION_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdatedBy" column="LAST_UPDATED_BY" jdbcType="VARCHAR" />
+		<result property="lastUpdateDate" column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdateIp" column="LAST_UPDATE_IP" jdbcType="VARCHAR" />
+		<result property="version" column="VERSION" jdbcType="DECIMAL" />
+		<result property="attribute01" column="ATTRIBUTE_01" jdbcType="VARCHAR" />
+		<result property="attribute02" column="ATTRIBUTE_02" jdbcType="VARCHAR" />
+		<result property="attribute03" column="ATTRIBUTE_03" jdbcType="VARCHAR" />
+		<result property="attribute04" column="ATTRIBUTE_04" jdbcType="VARCHAR" />
+		<result property="attribute05" column="ATTRIBUTE_05" jdbcType="VARCHAR" />
+		<result property="attribute06" column="ATTRIBUTE_06" jdbcType="VARCHAR" />
+		<result property="attribute07" column="ATTRIBUTE_07" jdbcType="VARCHAR" />
+		<result property="attribute08" column="ATTRIBUTE_08" jdbcType="VARCHAR" />
+		<result property="attribute09" column="ATTRIBUTE_09" jdbcType="VARCHAR" />
+		<result property="attribute10" column="ATTRIBUTE_10" jdbcType="VARCHAR" />
+		<result property="classifyDept" column="CLASSIFY_DEPT" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 分页查询 CSMP_BD_SPAREPART 其中查询是的一个字段没有按顺序放 -->
+	<select id="searchCsmpBdSparepartByPage" parameterType="java.util.Map" resultMap="CsmpBdSparepartDTOMap">
+		select
+		t1.id ,
+		t1.product_name ,
+		t1.drawing_no ,
+		t1.batch_no ,
+		t1.unit ,
+		t1.quantity ,
+		t1.specification ,
+		t1.duty_free_price ,
+		t1.tax_price ,
+		t1.liability_unit ,
+		t1.category ,
+		t1.cycle ,
+		t1.product_type ,
+		t1.valid_flag ,
+		t1.is_randompart ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.version ,
+		t1.attribute_01 ,
+		t1.attribute_02 ,
+		t1.attribute_03 ,
+		t1.attribute_04 ,
+		t1.attribute_05 ,
+		t1.attribute_06 ,
+		t1.attribute_07 ,
+		t1.attribute_08 ,
+		t1.attribute_09 ,
+		t1.attribute_10,
+		t1.classify_dept
+		from csmp_bd_sparepart t1
+		<where>
+			<if test="bean != null">
+				<if test="bean.id != null and bean.id != ''">
+					and t1.ID like '%'||#{bean.id}||'%'
+				</if>
+				<if test="bean.productName != null and bean.productName != ''">
+					and t1.PRODUCT_NAME like '%'||#{bean.productName}||'%'
+				</if>
+				<if test="bean.drawingNo != null and bean.drawingNo != ''">
+					and t1.DRAWING_NO like '%'||#{bean.drawingNo}||'%'
+				</if>
+				<if test="bean.batchNo != null and bean.batchNo != ''">
+					and t1.BATCH_NO like '%'||#{bean.batchNo}||'%'
+				</if>
+				<if test="bean.unit != null and bean.unit != ''">
+					and t1.UNIT like '%'||#{bean.unit}||'%'
+				</if>
+				<if test="bean.quantity != null and bean.quantity != ''">
+					and t1.QUANTITY like '%'||#{bean.quantity}||'%'
+				</if>
+				<if test="bean.specification != null and bean.specification != ''">
+					and t1.SPECIFICATION like '%'||#{bean.specification}||'%'
+				</if>
+				<if test="bean.dutyFreePrice != null and bean.dutyFreePrice != ''">
+					and t1.DUTY_FREE_PRICE like '%'||#{bean.dutyFreePrice}||'%'
+				</if>
+				<if test="bean.taxPrice != null and bean.taxPrice != ''">
+					and t1.TAX_PRICE like '%'||#{bean.taxPrice}||'%'
+				</if>
+				<if test="bean.cycle !=null and bean.cycle !=''">
+					and t1.CYCLE like '%'||#{bean.cycle}||'%'
+				</if>
+				<if test="bean.liabilityUnit != null and bean.liabilityUnit != ''">
+					and t1.LIABILITY_UNIT like '%'||#{bean.liabilityUnit}||'%'
+				</if>
+				<if test="bean.category != null and bean.category != ''">
+					and t1.CATEGORY like '%'||#{bean.category}||'%'
+				</if>
+				<if test="bean.productType != null and bean.productType != ''">
+					and t1.PRODUCT_TYPE like '%'||#{bean.productType}||'%'
+				</if>
+				<if test="bean.validFlag != null and bean.validFlag != ''">
+					and t1.VALID_FLAG like '%'||#{bean.validFlag}||'%'
+				</if>
+				<if test="bean.isRandompart != null and bean.isRandompart != ''">
+					and t1.IS_RANDOMPART like '%'||#{bean.isRandompart}||'%'
+				</if>
+				<if test="bean.remark != null and bean.remark != ''">
+					and t1.REMARK like '%'||#{bean.remark}||'%'
+				</if>
+				<if test="bean.createdBy != null and bean.createdBy != ''">
+					and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+				</if>
+				<if test="bean.creationDate != null and bean.creationDate != ''">
+					and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+				</if>
+				<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+					and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+				</if>
+				<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+					and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+				</if>
+				<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+					and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+				</if>
+				<if test="bean.version != null and bean.version != ''">
+					and t1.VERSION like '%'||#{bean.version}||'%'
+				</if>
+				<if test="bean.attribute01 != null and bean.attribute01 != ''">
+					and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+				</if>
+				<if test="bean.attribute02 != null and bean.attribute02 != ''">
+					and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+				</if>
+				<if test="bean.attribute03 != null and bean.attribute03 != ''">
+					and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+				</if>
+				<if test="bean.attribute04 != null and bean.attribute04 != ''">
+					and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+				</if>
+				<if test="bean.attribute05 != null and bean.attribute05 != ''">
+					and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+				</if>
+				<if test="bean.attribute06 != null and bean.attribute06 != ''">
+					and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+				</if>
+				<if test="bean.attribute07 != null and bean.attribute07 != ''">
+					and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+				</if>
+				<if test="bean.attribute08 != null and bean.attribute08 != ''">
+					and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+				</if>
+				<if test="bean.attribute09 != null and bean.attribute09 != ''">
+					and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+				</if>
+				<if test="bean.attribute10 != null and bean.attribute10 != ''">
+					and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+				</if>
+				<if test="bean.classifyDept !=null and bean.classifyDept!=''">
+					and t1.CLASSIFY_DEPT like '%'||#{bean.classifyDept}||'%'
+				</if>
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}
+			</if>
+		</where>
+		order by t1.creation_date desc
+	</select>
+	<!-- 查询列表 CSMP_BD_SPAREPART -->
+	<select id="searchCsmpBdSparepart" parameterType="java.util.Map" resultMap="CsmpBdSparepartDTOMap">
+		select
+		t1.id ,
+		t1.product_name ,
+		t1.drawing_no ,
+		t1.batch_no ,
+		t1.unit ,
+		t1.quantity ,
+		t1.specification ,
+		t1.duty_free_price ,
+		t1.tax_price ,
+		t1.liability_unit ,
+		t1.category ,
+		t1.product_type ,
+		t1.valid_flag ,
+		t1.is_randompart ,
+		t1.cycle ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.version ,
+		t1.attribute_01 ,
+		t1.attribute_02 ,
+		t1.attribute_03 ,
+		t1.attribute_04 ,
+		t1.attribute_05 ,
+		t1.attribute_06 ,
+		t1.attribute_07 ,
+		t1.attribute_08 ,
+		t1.attribute_09 ,
+		t1.attribute_10,
+		t1.classify_dept
+		from csmp_bd_sparepart t1
+		<where>
+			<if test="id != null and id != ''">
+				and t1.ID =#{id}
+			</if>
+			<if test="productName != null and productName != ''">
+				and t1.PRODUCT_NAME =#{productName}
+			</if>
+			<if test="drawingNo != null and drawingNo != ''">
+				and t1.DRAWING_NO =#{drawingNo}
+			</if>
+			<if test="batchNo != null and batchNo != ''">
+				and t1.BATCH_NO =#{batchNo}
+			</if>
+			<if test="unit != null and unit != ''">
+				and t1.UNIT =#{unit}
+			</if>
+			<if test="quantity != null and quantity != ''">
+				and t1.QUANTITY =#{quantity}
+			</if>
+
+			<if test="specification != null and specification != ''">
+				and t1.SPECIFICATION =#{specification}
+			</if>
+			<if test="dutyFreePrice != null and dutyFreePrice != ''">
+				and t1.DUTY_FREE_PRICE =#{dutyFreePrice}
+			</if>
+			<if test="taxPrice != null and taxPrice != ''">
+				and t1.TAX_PRICE =#{taxPrice}
+			</if>
+			<if test="liabilityUnit != null and liabilityUnit != ''">
+				and t1.LIABILITY_UNIT =#{liabilityUnit}
+			</if>
+			<if test="category != null and category != ''">
+				and t1.CATEGORY =#{category}
+			</if>
+			<if test="productType != null and productType != ''">
+				and t1.PRODUCT_TYPE =#{productType}
+			</if>
+			<if test="validFlag != null and validFlag != ''">
+				and t1.VALID_FLAG =#{validFlag}
+			</if>
+			<if test="isRandompart != null and isRandompart != ''">
+				and t1.IS_RANDOMPART =#{isRandompart}
+			</if>
+			<if test="cycle !=null and cycle !=''">
+				and t1.CYCLE like '%'||#{cycle}||'%'
+			</if>
+			<if test="remark != null and remark != ''">
+				and t1.REMARK =#{remark}
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				and t1.CREATED_BY =#{createdBy}
+			</if>
+			<if test="creationDate != null and creationDate != ''">
+				and t1.CREATION_DATE =#{creationDate}
+			</if>
+			<if test="lastUpdatedBy != null and lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY =#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdateDate != null and lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE =#{lastUpdateDate}
+			</if>
+			<if test="lastUpdateIp != null and lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP =#{lastUpdateIp}
+			</if>
+			<if test="version != null and version != ''">
+				and t1.VERSION =#{version}
+			</if>
+			<if test="attribute01 != null and attribute01 != ''">
+				and t1.ATTRIBUTE_01 =#{attribute01}
+			</if>
+			<if test="attribute02 != null and attribute02 != ''">
+				and t1.ATTRIBUTE_02 =#{attribute02}
+			</if>
+			<if test="attribute03 != null and attribute03 != ''">
+				and t1.ATTRIBUTE_03 =#{attribute03}
+			</if>
+			<if test="attribute04 != null and attribute04 != ''">
+				and t1.ATTRIBUTE_04 =#{attribute04}
+			</if>
+			<if test="attribute05 != null and attribute05 != ''">
+				and t1.ATTRIBUTE_05 =#{attribute05}
+			</if>
+			<if test="attribute06 != null and attribute06 != ''">
+				and t1.ATTRIBUTE_06 =#{attribute06}
+			</if>
+			<if test="attribute07 != null and attribute07 != ''">
+				and t1.ATTRIBUTE_07 =#{attribute07}
+			</if>
+			<if test="attribute08 != null and attribute08 != ''">
+				and t1.ATTRIBUTE_08 =#{attribute08}
+			</if>
+			<if test="attribute09 != null and attribute09 != ''">
+				and t1.ATTRIBUTE_09 =#{attribute09}
+			</if>
+			<if test="attribute10 != null and attribute10 != ''">
+				and t1.ATTRIBUTE_10 =#{attribute10}
+			</if>
+			<if test="classifyDept != null and classifyDept !=''">
+				and t1.classify_dept =#{classifyDept}
+			</if>
+		</where>
+	</select>
+	<!-- 主键查询对象 CSMP_BD_SPAREPART -->
+	<select id="findCsmpBdSparepartById" parameterType="java.util.Map" resultMap="CsmpBdSparepartDTOMap">
+		select
+		t1.id ,
+		t1.product_name ,
+		t1.drawing_no ,
+		t1.batch_no ,
+		t1.unit ,
+		t1.quantity ,
+		t1.specification ,
+		t1.duty_free_price ,
+		t1.tax_price ,
+		t1.cycle ,
+		t1.liability_unit ,
+		t1.category ,
+		t1.product_type ,
+		t1.valid_flag ,
+		t1.is_randompart ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.version ,
+		t1.attribute_01 ,
+		t1.attribute_02 ,
+		t1.attribute_03 ,
+		t1.attribute_04 ,
+		t1.attribute_05 ,
+		t1.attribute_06 ,
+		t1.attribute_07 ,
+		t1.attribute_08 ,
+		t1.attribute_09 ,
+		t1.attribute_10,
+		t1.classify_dept
+		from csmp_bd_sparepart t1
+		where t1.id = #{id}
+	</select>
+	<!-- 新增对象 CSMP_BD_SPAREPART -->
+	<insert id="insertCsmpBdSparepart" parameterType="avicit.csmp.basicData.csmpbdsparepart.dto.CsmpBdSparepartDTO">
+		insert into csmp_bd_sparepart
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="productName != null">
+				product_name,
+			</if>
+			<if test="drawingNo != null">
+				drawing_no,
+			</if>
+			<if test="batchNo != null">
+				batch_no,
+			</if>
+			<if test="unit != null">
+				unit,
+			</if>
+			<if test="quantity != null">
+				quantity,
+			</if>
+			<if test="specification != null">
+				specification,
+			</if>
+			<if test="dutyFreePrice != null">
+				duty_free_price,
+			</if>
+			<if test="taxPrice != null">
+				tax_price,
+			</if>
+			<if test="liabilityUnit != null">
+				liability_unit,
+			</if>
+			<if test="category != null">
+				category,
+			</if>
+			<if test="productType != null">
+				product_type,
+			</if>
+			<if test="validFlag != null">
+				valid_flag,
+			</if>
+			<if test="isRandompart != null">
+				is_randompart,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="creationDate != null">
+				creation_date,
+			</if>
+			<if test="lastUpdatedBy != null">
+				last_updated_by,
+			</if>
+			<if test="lastUpdateDate != null">
+				last_update_date,
+			</if>
+			<if test="lastUpdateIp != null">
+				last_update_ip,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+			<if test="attribute01 != null">
+				attribute_01,
+			</if>
+			<if test="attribute02 != null">
+				attribute_02,
+			</if>
+			<if test="attribute03 != null">
+				attribute_03,
+			</if>
+			<if test="attribute04 != null">
+				attribute_04,
+			</if>
+			<if test="attribute05 != null">
+				attribute_05,
+			</if>
+			<if test="attribute06 != null">
+				attribute_06,
+			</if>
+			<if test="attribute07 != null">
+				attribute_07,
+			</if>
+			<if test="attribute08 != null">
+				attribute_08,
+			</if>
+			<if test="attribute09 != null">
+				attribute_09,
+			</if>
+			<if test="attribute10 != null">
+				attribute_10,
+			</if>
+			<if test="cycle !=null ">
+				cycle,
+			</if>
+			<if test="classifyDept != null">
+				classify_dept,
+			</if>
+
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="productName != null">
+				#{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="drawingNo != null">
+				#{drawingNo,jdbcType=VARCHAR},
+			</if>
+			<if test="batchNo != null">
+				#{batchNo,jdbcType=VARCHAR},
+			</if>
+			<if test="unit != null">
+				#{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="quantity != null">
+				#{quantity,jdbcType=DECIMAL},
+			</if>
+			<if test="specification != null">
+				#{specification,jdbcType=VARCHAR},
+			</if>
+			<if test="dutyFreePrice != null">
+				#{dutyFreePrice,jdbcType=DECIMAL},
+			</if>
+			<if test="taxPrice != null">
+				#{taxPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="liabilityUnit != null">
+				#{liabilityUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="category != null">
+				#{category,jdbcType=VARCHAR},
+			</if>
+			<if test="productType != null">
+				#{productType,jdbcType=VARCHAR},
+			</if>
+			<if test="validFlag != null">
+				#{validFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="isRandompart != null">
+				#{isRandompart,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute01 != null">
+				#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="cycle != null">
+				#{cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="classifyDept != null">
+				#{classifyDept,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- 更新对象 CSMP_BD_SPAREPART -->
+	<update id="updateCsmpBdSparepartSensitive" parameterType="avicit.csmp.basicData.csmpbdsparepart.dto.CsmpBdSparepartDTO">
+		update csmp_bd_sparepart t1
+		<set>
+			<if test="id != null">
+				t1.id =#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="productName != null">
+				t1.product_name =#{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="drawingNo != null">
+				t1.drawing_no =#{drawingNo,jdbcType=VARCHAR},
+			</if>
+			<if test="batchNo != null">
+				t1.batch_no =#{batchNo,jdbcType=VARCHAR},
+			</if>
+			<if test="unit != null">
+				t1.unit =#{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="quantity != null">
+				t1.quantity =#{quantity,jdbcType=DECIMAL},
+			</if>
+			<if test="specification != null">
+				t1.specification =#{specification,jdbcType=VARCHAR},
+			</if>
+			<if test="dutyFreePrice != null">
+				t1.duty_free_price =#{dutyFreePrice,jdbcType=DECIMAL},
+			</if>
+			<if test="taxPrice != null">
+				t1.tax_price =#{taxPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="liabilityUnit != null">
+				t1.liability_unit =#{liabilityUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="category != null">
+				t1.category =#{category,jdbcType=VARCHAR},
+			</if>
+			<if test="productType != null">
+				t1.product_type =#{productType,jdbcType=VARCHAR},
+			</if>
+			<if test="validFlag != null">
+				t1.valid_flag =#{validFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="isRandompart != null">
+				t1.is_randompart =#{isRandompart,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				t1.remark =#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				t1.created_by =#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				t1.creation_date =#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				t1.last_updated_by =#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				t1.last_update_date =#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				t1.last_update_ip =#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				t1.version =t1.version+1,
+			</if>
+			<if test="attribute01 != null">
+				t1.attribute_01 =#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				t1.attribute_02 =#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				t1.attribute_03 =#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				t1.attribute_04 =#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				t1.attribute_05 =#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				t1.attribute_06 =#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				t1.attribute_07 =#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				t1.attribute_08 =#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				t1.attribute_09 =#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				t1.attribute_10 =#{attribute10,jdbcType=VARCHAR},
+			</if>
+			<if test="cycle != null">
+				t1.cycle =#{cycle,jdbcType=VARCHAR},
+			</if>
+			<if test="classifyDept != null">
+				t1.classify_dept =#{classifyDept,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where t1.id = #{id} and t1.version =#{version}
+	</update>
+	<!-- 更新对象 CSMP_BD_SPAREPART -->
+	<update id="updateCsmpBdSparepartAll" parameterType="avicit.csmp.basicData.csmpbdsparepart.dto.CsmpBdSparepartDTO">
+		update csmp_bd_sparepart t1
+		set
+		t1.id =#{id,jdbcType=VARCHAR},
+		t1.product_name =#{productName,jdbcType=VARCHAR},
+		t1.drawing_no =#{drawingNo,jdbcType=VARCHAR},
+		t1.batch_no =#{batchNo,jdbcType=VARCHAR},
+		t1.unit =#{unit,jdbcType=VARCHAR},
+		t1.quantity =#{quantity,jdbcType=DECIMAL},
+		t1.specification =#{specification,jdbcType=VARCHAR},
+		t1.duty_free_price =#{dutyFreePrice,jdbcType=DECIMAL},
+		t1.tax_price =#{taxPrice,jdbcType=DECIMAL},
+		t1.liability_unit =#{liabilityUnit,jdbcType=VARCHAR},
+		t1.category =#{category,jdbcType=VARCHAR},
+		t1.product_type =#{productType,jdbcType=VARCHAR},
+		t1.valid_flag =#{validFlag,jdbcType=VARCHAR},
+		t1.is_randompart =#{isRandompart,jdbcType=VARCHAR},
+		t1.remark =#{remark,jdbcType=VARCHAR},
+		t1.created_by =#{createdBy,jdbcType=VARCHAR},
+		t1.creation_date =#{creationDate},
+		t1.last_updated_by =#{lastUpdatedBy,jdbcType=VARCHAR},
+		t1.last_update_date =#{lastUpdateDate},
+		t1.last_update_ip =#{lastUpdateIp,jdbcType=VARCHAR},
+		t1.version
+		=t1.version+1,
+		t1.attribute_01 =#{attribute01,jdbcType=VARCHAR},
+		t1.attribute_02 =#{attribute02,jdbcType=VARCHAR},
+		t1.attribute_03 =#{attribute03,jdbcType=VARCHAR},
+		t1.attribute_04 =#{attribute04,jdbcType=VARCHAR},
+		t1.attribute_05 =#{attribute05,jdbcType=VARCHAR},
+		t1.attribute_06 =#{attribute06,jdbcType=VARCHAR},
+		t1.attribute_07 =#{attribute07,jdbcType=VARCHAR},
+		t1.attribute_08 =#{attribute08,jdbcType=VARCHAR},
+		t1.attribute_09 =#{attribute09,jdbcType=VARCHAR},
+		t1.attribute_10 =#{attribute10,jdbcType=VARCHAR},
+		t1.cycle =#{cycle,jdbcType=VARCHAR},
+		t1.classify_dept =#{classifyDept,jdbcType=VARCHAR},
+		where t1.id = #{id} and t1.version =#{version}
+	</update>
+	<!-- 主键删除 CSMP_BD_SPAREPART -->
+	<delete id="deleteCsmpBdSparepartById" parameterType="java.lang.String">
+		delete from csmp_bd_sparepart where id = #{id}
+	</delete>
+	<!-- 根据某个字段来查询对象 -->
+	<select id="seleCsmpBdSparepart" parameterType="java.util.Map" resultMap="CsmpBdSparepartDTOMap">
+		select
+		t1.id ,
+		t1.product_name ,
+		t1.drawing_no ,
+		t1.batch_no ,
+		t1.unit ,
+		t1.quantity ,
+		t1.specification ,
+		t1.duty_free_price ,
+		t1.tax_price ,
+		t1.liability_unit ,
+		t1.category ,
+		t1.cycle ,
+		t1.product_type ,
+		t1.valid_flag ,
+		t1.is_randompart ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.version ,
+		t1.attribute_01 ,
+		t1.attribute_02 ,
+		t1.attribute_03 ,
+		t1.attribute_04 ,
+		t1.attribute_05 ,
+		t1.attribute_06 ,
+		t1.attribute_07 ,
+		t1.attribute_08 ,
+		t1.attribute_09 ,
+		t1.attribute_10,
+		t1.classify_dept
+		from csmp_bd_sparepart t1
+		<where>
+			<if test="bean != null">
+				<if test="bean.id != null and bean.id != ''">
+					and t1.ID like '%'||#{bean.id}||'%'
+				</if>
+				<if test="bean.productName != null and bean.productName != ''">
+					and t1.PRODUCT_NAME =#{bean.productName}
+				</if>
+				<if test="bean.drawingNo != null and bean.drawingNo != ''">
+					and t1.DRAWING_NO like '%'||#{bean.drawingNo}||'%'
+				</if>
+				<if test="bean.batchNo != null and bean.batchNo != ''">
+					and t1.BATCH_NO like '%'||#{bean.batchNo}||'%'
+				</if>
+				<if test="bean.unit != null and bean.unit != ''">
+					and t1.UNIT like '%'||#{bean.unit}||'%'
+				</if>
+				<if test="bean.quantity != null and bean.quantity != ''">
+					and t1.QUANTITY like '%'||#{bean.quantity}||'%'
+				</if>
+				<if test="bean.specification != null and bean.specification != ''">
+					and t1.SPECIFICATION like '%'||#{bean.specification}||'%'
+				</if>
+				<if test="bean.dutyFreePrice != null and bean.dutyFreePrice != ''">
+					and t1.DUTY_FREE_PRICE like '%'||#{bean.dutyFreePrice}||'%'
+				</if>
+				<if test="bean.taxPrice != null and bean.taxPrice != ''">
+					and t1.TAX_PRICE like '%'||#{bean.taxPrice}||'%'
+				</if>
+				<if test="bean.cycle !=null and bean.cycle !=''">
+					and t1.CYCLE like '%'||#{bean.cycle}||'%'
+				</if>
+				<if test="bean.liabilityUnit != null and bean.liabilityUnit != ''">
+					and t1.LIABILITY_UNIT like '%'||#{bean.liabilityUnit}||'%'
+				</if>
+				<if test="bean.category != null and bean.category != ''">
+					and t1.CATEGORY like '%'||#{bean.category}||'%'
+				</if>
+				<if test="bean.productType != null and bean.productType != ''">
+					and t1.PRODUCT_TYPE like '%'||#{bean.productType}||'%'
+				</if>
+				<if test="bean.validFlag != null and bean.validFlag != ''">
+					and t1.VALID_FLAG like '%'||#{bean.validFlag}||'%'
+				</if>
+				<if test="bean.isRandompart != null and bean.isRandompart != ''">
+					and t1.IS_RANDOMPART like '%'||#{bean.isRandompart}||'%'
+				</if>
+				<if test="bean.remark != null and bean.remark != ''">
+					and t1.REMARK like '%'||#{bean.remark}||'%'
+				</if>
+				<if test="bean.createdBy != null and bean.createdBy != ''">
+					and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+				</if>
+				<if test="bean.creationDate != null and bean.creationDate != ''">
+					and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+				</if>
+				<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+					and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+				</if>
+				<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+					and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+				</if>
+				<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+					and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+				</if>
+				<if test="bean.version != null and bean.version != ''">
+					and t1.VERSION like '%'||#{bean.version}||'%'
+				</if>
+				<if test="bean.attribute01 != null and bean.attribute01 != ''">
+					and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+				</if>
+				<if test="bean.attribute02 != null and bean.attribute02 != ''">
+					and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+				</if>
+				<if test="bean.attribute03 != null and bean.attribute03 != ''">
+					and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+				</if>
+				<if test="bean.attribute04 != null and bean.attribute04 != ''">
+					and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+				</if>
+				<if test="bean.attribute05 != null and bean.attribute05 != ''">
+					and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+				</if>
+				<if test="bean.attribute06 != null and bean.attribute06 != ''">
+					and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+				</if>
+				<if test="bean.attribute07 != null and bean.attribute07 != ''">
+					and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+				</if>
+				<if test="bean.attribute08 != null and bean.attribute08 != ''">
+					and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+				</if>
+				<if test="bean.attribute09 != null and bean.attribute09 != ''">
+					and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+				</if>
+				<if test="bean.attribute10 != null and bean.attribute10 != ''">
+					and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+				</if>
+				<if test="bean.classifyDept != null and bean.classifyDept != ''">
+					and t1.classify_dept like '%'||#{bean.classifyDept}||'%'
+				</if>
+			</if>
+
+		</where>
+	</select>
+	<!-- 备件购物查询 -->
+	<select id="searchCsmpBdSparepartByPage4shopCart" parameterType="java.util.Map" resultMap="CsmpBdSparepartDTOMap">
+		select
+		t1.id ,
+		t1.product_name ,
+		t1.drawing_no ,
+		t1.batch_no ,
+		t1.unit ,
+		t1.quantity ,
+		t1.specification ,
+		t1.duty_free_price ,
+		t1.tax_price ,
+		t1.liability_unit ,
+		t1.category ,
+		t1.cycle ,
+		t1.product_type ,
+		t1.valid_flag ,
+		t1.is_randompart ,
+		t1.remark ,
+		t1.created_by ,
+		t1.creation_date ,
+		t1.last_updated_by ,
+		t1.last_update_date ,
+		t1.last_update_ip ,
+		t1.version ,
+		t1.attribute_01 ,
+		t1.attribute_02 ,
+		t1.attribute_03 ,
+		t1.attribute_04 ,
+		t1.attribute_05 ,
+		t1.attribute_06 ,
+		t1.attribute_07 ,
+		t1.attribute_08 ,
+		t1.attribute_09 ,
+		t1.attribute_10,
+		t1.classify_dept
+		from csmp_bd_sparepart t1
+		<where>
+			<if test="bean != null">
+				<if test="bean.id != null and bean.id != ''">
+					and t1.ID like '%'||#{bean.id}||'%'
+				</if>
+				<if test="bean.productName != null and bean.productName != ''">
+					and t1.PRODUCT_NAME like '%'||#{bean.productName}||'%'
+				</if>
+				<if test="bean.drawingNo != null and bean.drawingNo != ''">
+					and t1.DRAWING_NO like '%'||#{bean.drawingNo}||'%'
+				</if>
+				<if test="bean.batchNo != null and bean.batchNo != ''">
+					and t1.BATCH_NO like '%'||#{bean.batchNo}||'%'
+				</if>
+				<if test="bean.unit != null and bean.unit != ''">
+					and t1.UNIT like '%'||#{bean.unit}||'%'
+				</if>
+				<if test="bean.quantity != null and bean.quantity != ''">
+					and t1.QUANTITY like '%'||#{bean.quantity}||'%'
+				</if>
+				<if test="bean.specification != null and bean.specification != ''">
+					and t1.SPECIFICATION like '%'||#{bean.specification}||'%'
+				</if>
+				<if test="bean.dutyFreePrice != null and bean.dutyFreePrice != ''">
+					and t1.DUTY_FREE_PRICE like '%'||#{bean.dutyFreePrice}||'%'
+				</if>
+				<if test="bean.taxPrice != null and bean.taxPrice != ''">
+					and t1.TAX_PRICE like '%'||#{bean.taxPrice}||'%'
+				</if>
+				<if test="bean.cycle !=null and bean.cycle !=''">
+					and t1.CYCLE like '%'||#{bean.cycle}||'%'
+				</if>
+				<if test="bean.liabilityUnit != null and bean.liabilityUnit != ''">
+					and t1.LIABILITY_UNIT like '%'||#{bean.liabilityUnit}||'%'
+				</if>
+				<if test="bean.category != null and bean.category != ''">
+					and t1.CATEGORY like '%'||#{bean.category}||'%'
+				</if>
+				<if test="bean.productType != null and bean.productType != ''">
+					and t1.PRODUCT_TYPE like '%'||#{bean.productType}||'%'
+				</if>
+				<if test="bean.validFlag != null and bean.validFlag != ''">
+					and t1.VALID_FLAG like '%'||#{bean.validFlag}||'%'
+				</if>
+				<if test="bean.isRandompart != null and bean.isRandompart != ''">
+					and t1.IS_RANDOMPART like '%'||#{bean.isRandompart}||'%'
+				</if>
+				<if test="bean.remark != null and bean.remark != ''">
+					and t1.REMARK like '%'||#{bean.remark}||'%'
+				</if>
+				<if test="bean.createdBy != null and bean.createdBy != ''">
+					and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+				</if>
+				<if test="bean.creationDate != null and bean.creationDate != ''">
+					and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+				</if>
+				<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+					and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+				</if>
+				<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+					and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+				</if>
+				<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+					and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+				</if>
+				<if test="bean.version != null and bean.version != ''">
+					and t1.VERSION like '%'||#{bean.version}||'%'
+				</if>
+				<if test="bean.attribute01 != null and bean.attribute01 != ''">
+					and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+				</if>
+				<if test="bean.attribute02 != null and bean.attribute02 != ''">
+					and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+				</if>
+				<if test="bean.attribute03 != null and bean.attribute03 != ''">
+					and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+				</if>
+				<if test="bean.attribute04 != null and bean.attribute04 != ''">
+					and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+				</if>
+				<if test="bean.attribute05 != null and bean.attribute05 != ''">
+					and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+				</if>
+				<if test="bean.attribute06 != null and bean.attribute06 != ''">
+					and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+				</if>
+				<if test="bean.attribute07 != null and bean.attribute07 != ''">
+					and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+				</if>
+				<if test="bean.attribute08 != null and bean.attribute08 != ''">
+					and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+				</if>
+				<if test="bean.attribute09 != null and bean.attribute09 != ''">
+					and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+				</if>
+				<if test="bean.attribute10 != null and bean.attribute10 != ''">
+					and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+				</if>
+				<if test="bean.classifyDept != null and bean.classifyDept !=''">
+					and t1.classify_dept like '%'||#{bean.classifyDept}||'%'
+				</if>
+			</if>
+		</where>
+		order by t1.creation_date desc
+	</select>
+<!-- 根据图号名字到数据库查询是否存在相同的名字 -->
+	<select id="checkedByNumber" parameterType="string" resultType="java.lang.Integer">
+	  select count(t1.drawing_no)  from csmp_bd_sparepart t1
+	   where t1.drawing_no=#{drawingNo}
+	</select>
+</mapper>

@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="avicit.csmp.basicData.csmpbdaricarftmodel.dao.CsmpBdAricarftmodelDao">
+
+<resultMap id="CsmpBdAricarftmodelDTOMap" type="avicit.csmp.basicData.csmpbdaricarftmodel.dto.CsmpBdAricarftmodelDTO">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="modelNum" column="MODEL_NUM" jdbcType="VARCHAR" />
+		<result property="modelName" column="MODEL_NAME" jdbcType="VARCHAR" />
+		<result property="modelType" column="MODEL_TYPE" jdbcType="VARCHAR" />
+		<result property="validFlag" column="VALID_FLAG" jdbcType="VARCHAR" />
+		<result property="describe" column="DESCRIBE" jdbcType="VARCHAR" />
+		<result property="remark" column="REMARK" jdbcType="VARCHAR" />
+		<result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR" />
+		<result property="creationDate" column="CREATION_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdatedBy" column="LAST_UPDATED_BY" jdbcType="VARCHAR" />
+		<result property="lastUpdateDate" column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdateIp" column="LAST_UPDATE_IP" jdbcType="VARCHAR" />
+		<result property="version" column="VERSION" jdbcType="DECIMAL" />
+		<result property="attribute01" column="ATTRIBUTE_01" jdbcType="VARCHAR" />
+		<result property="attribute02" column="ATTRIBUTE_02" jdbcType="VARCHAR" />
+		<result property="attribute03" column="ATTRIBUTE_03" jdbcType="VARCHAR" />
+		<result property="attribute04" column="ATTRIBUTE_04" jdbcType="VARCHAR" />
+		<result property="attribute05" column="ATTRIBUTE_05" jdbcType="VARCHAR" />
+		<result property="attribute06" column="ATTRIBUTE_06" jdbcType="VARCHAR" />
+		<result property="attribute07" column="ATTRIBUTE_07" jdbcType="VARCHAR" />
+		<result property="attribute08" column="ATTRIBUTE_08" jdbcType="VARCHAR" />
+		<result property="attribute09" column="ATTRIBUTE_09" jdbcType="VARCHAR" />
+		<result property="attribute10" column="ATTRIBUTE_10" jdbcType="VARCHAR" />
+</resultMap>
+<!-- 分页查询 CSMP_BD_ARICARFTMODEL -->
+<select id="searchCsmpBdAricarftmodelByPage" parameterType="java.util.Map" resultMap="CsmpBdAricarftmodelDTOMap">
+	select
+		t1.id                             ,
+		t1.model_num                      ,
+		t1.model_name                     ,
+		t1.model_type                     ,
+		t1.valid_flag                     ,
+		t1.describe                       ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   
+	from csmp_bd_aricarftmodel 	t1  
+		<where>
+			<if test="bean != null">
+			<if test="bean.id != null and bean.id != ''">
+				and t1.ID like '%'||#{bean.id}||'%'
+			</if>
+			<if test="bean.modelNum != null and bean.modelNum != ''">
+				and t1.MODEL_NUM like '%'||#{bean.modelNum}||'%'
+			</if>
+			<if test="bean.modelName != null and bean.modelName != ''">
+				and t1.MODEL_NAME like '%'||#{bean.modelName}||'%'
+			</if>
+			<if test="bean.modelType != null and bean.modelType != ''">
+				and t1.MODEL_TYPE like '%'||#{bean.modelType}||'%'
+			</if>
+			<if test="bean.validFlag != null and bean.validFlag != ''">
+				and t1.VALID_FLAG like '%'||#{bean.validFlag}||'%'
+			</if>
+			<if test="bean.describe != null and bean.describe != ''">
+				and t1.DESCRIBE like '%'||#{bean.describe}||'%'
+			</if>
+			<if test="bean.remark != null and bean.remark != ''">
+				and t1.REMARK like '%'||#{bean.remark}||'%'
+			</if>
+			<if test="bean.createdBy != null and bean.createdBy != ''">
+				and t1.CREATED_BY like '%'||#{bean.createdBy}||'%'
+			</if>
+			<if test="bean.creationDate != null and bean.creationDate != ''">
+				and t1.CREATION_DATE like '%'||#{bean.creationDate}||'%'
+			</if>
+			<if test="bean.lastUpdatedBy != null and bean.lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY like '%'||#{bean.lastUpdatedBy}||'%'
+			</if>
+			<if test="bean.lastUpdateDate != null and bean.lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE like '%'||#{bean.lastUpdateDate}||'%'
+			</if>
+			<if test="bean.lastUpdateIp != null and bean.lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP like '%'||#{bean.lastUpdateIp}||'%'
+			</if>
+			<if test="bean.version != null and bean.version != ''">
+				and t1.VERSION like '%'||#{bean.version}||'%'
+			</if>
+			<if test="bean.attribute01 != null and bean.attribute01 != ''">
+				and t1.ATTRIBUTE_01 like '%'||#{bean.attribute01}||'%'
+			</if>
+			<if test="bean.attribute02 != null and bean.attribute02 != ''">
+				and t1.ATTRIBUTE_02 like '%'||#{bean.attribute02}||'%'
+			</if>
+			<if test="bean.attribute03 != null and bean.attribute03 != ''">
+				and t1.ATTRIBUTE_03 like '%'||#{bean.attribute03}||'%'
+			</if>
+			<if test="bean.attribute04 != null and bean.attribute04 != ''">
+				and t1.ATTRIBUTE_04 like '%'||#{bean.attribute04}||'%'
+			</if>
+			<if test="bean.attribute05 != null and bean.attribute05 != ''">
+				and t1.ATTRIBUTE_05 like '%'||#{bean.attribute05}||'%'
+			</if>
+			<if test="bean.attribute06 != null and bean.attribute06 != ''">
+				and t1.ATTRIBUTE_06 like '%'||#{bean.attribute06}||'%'
+			</if>
+			<if test="bean.attribute07 != null and bean.attribute07 != ''">
+				and t1.ATTRIBUTE_07 like '%'||#{bean.attribute07}||'%'
+			</if>
+			<if test="bean.attribute08 != null and bean.attribute08 != ''">
+				and t1.ATTRIBUTE_08 like '%'||#{bean.attribute08}||'%'
+			</if>
+			<if test="bean.attribute09 != null and bean.attribute09 != ''">
+				and t1.ATTRIBUTE_09 like '%'||#{bean.attribute09}||'%'
+			</if>
+			<if test="bean.attribute10 != null and bean.attribute10 != ''">
+				and t1.ATTRIBUTE_10 like '%'||#{bean.attribute10}||'%'
+			</if>
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}			
+			</if>
+		</where>
+		  	order by t1.creation_date desc
+</select>
+
+<!-- 公共页面查询页 -->
+<select id="searchmodelByPage" parameterType="java.util.Map" resultMap="CsmpBdAricarftmodelDTOMap">
+	select
+		t1.id                             ,
+		t1.model_num                      ,
+		t1.model_name                     ,
+		t1.model_type                     ,
+		t1.valid_flag                     ,
+		t1.describe                       ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   
+	from csmp_bd_aricarftmodel 	t1  
+		<where>
+		    and  t1.valid_flag='1'
+			<if test="bean1 != null">
+			<if test="bean1.id != null and bean1.id != ''">
+				and t1.ID like '%'||#{bean1.id}||'%'
+			</if>
+			<if test="bean1.modelNum != null and bean1.modelNum != ''">
+				and t1.MODEL_NUM like '%'||#{bean1.modelNum}||'%'
+			</if>
+			<if test="bean1.modelName != null and bean1.modelName != ''">
+				and t1.MODEL_NAME like '%'||#{bean1.modelName}||'%'
+			</if>
+			<if test="bean1.modelType != null and bean1.modelType != ''">
+				and t1.MODEL_TYPE like '%'||#{bean1.modelType}||'%'
+			</if>
+			<if test="bean1.validFlag != null and bean1.validFlag != ''">
+				and t1.VALID_FLAG like '%'||#{bean1.validFlag}||'%'
+			</if>
+			<if test="bean1.describe != null and bean1.describe != ''">
+				and t1.DESCRIBE like '%'||#{bean1.describe}||'%'
+			</if>
+			<if test="bean1.remark != null and bean1.remark != ''">
+				and t1.REMARK like '%'||#{bean1.remark}||'%'
+			</if>
+			<if test="bean1.createdBy != null and bean1.createdBy != ''">
+				and t1.CREATED_BY like '%'||#{bean1.createdBy}||'%'
+			</if>
+			<if test="bean1.creationDate != null and bean1.creationDate != ''">
+				and t1.CREATION_DATE like '%'||#{bean1.creationDate}||'%'
+			</if>
+			<if test="bean1.lastUpdatedBy != null and bean1.lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY like '%'||#{bean1.lastUpdatedBy}||'%'
+			</if>
+			<if test="bean1.lastUpdateDate != null and bean1.lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE like '%'||#{bean1.lastUpdateDate}||'%'
+			</if>
+			<if test="bean1.lastUpdateIp != null and bean1.lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP like '%'||#{bean1.lastUpdateIp}||'%'
+			</if>
+			<if test="bean1.version != null and bean1.version != ''">
+				and t1.VERSION like '%'||#{bean1.version}||'%'
+			</if>
+			<if test="bean1.attribute01 != null and bean1.attribute01 != ''">
+				and t1.ATTRIBUTE_01 like '%'||#{bean1.attribute01}||'%'
+			</if>
+			<if test="bean1.attribute02 != null and bean1.attribute02 != ''">
+				and t1.ATTRIBUTE_02 like '%'||#{bean1.attribute02}||'%'
+			</if>
+			<if test="bean1.attribute03 != null and bean1.attribute03 != ''">
+				and t1.ATTRIBUTE_03 like '%'||#{bean1.attribute03}||'%'
+			</if>
+			<if test="bean1.attribute04 != null and bean1.attribute04 != ''">
+				and t1.ATTRIBUTE_04 like '%'||#{bean1.attribute04}||'%'
+			</if>
+			<if test="bean1.attribute05 != null and bean1.attribute05 != ''">
+				and t1.ATTRIBUTE_05 like '%'||#{bean1.attribute05}||'%'
+			</if>
+			<if test="bean1.attribute06 != null and bean1.attribute06 != ''">
+				and t1.ATTRIBUTE_06 like '%'||#{bean1.attribute06}||'%'
+			</if>
+			<if test="bean1.attribute07 != null and bean1.attribute07 != ''">
+				and t1.ATTRIBUTE_07 like '%'||#{bean1.attribute07}||'%'
+			</if>
+			<if test="bean1.attribute08 != null and bean1.attribute08 != ''">
+				and t1.ATTRIBUTE_08 like '%'||#{bean1.attribute08}||'%'
+			</if>
+			<if test="bean1.attribute09 != null and bean1.attribute09 != ''">
+				and t1.ATTRIBUTE_09 like '%'||#{bean1.attribute09}||'%'
+			</if>
+			<if test="bean1.attribute10 != null and bean1.attribute10 != ''">
+				and t1.ATTRIBUTE_10 like '%'||#{bean1.attribute10}||'%'
+			</if>
+			</if>
+			<if test="sfnConditions != null and sfnConditions.sql != ''">
+				and ${sfnConditions.sql}			
+			</if>
+		</where>
+			order by t1.creation_date desc
+</select>
+
+
+
+<!-- 查询列表 CSMP_BD_ARICARFTMODEL -->
+<select id="searchCsmpBdAricarftmodel" parameterType="java.util.Map" resultMap="CsmpBdAricarftmodelDTOMap">
+	select
+		t1.id                             ,
+		t1.model_num                      ,
+		t1.model_name                     ,
+		t1.model_type                     ,
+		t1.valid_flag                     ,
+		t1.describe                       ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   
+	from csmp_bd_aricarftmodel 	t1
+		<where>
+			<if test="id != null and id != ''">
+				and t1.ID =#{id}
+			</if>
+			<if test="modelNum != null and modelNum != ''">
+				and t1.MODEL_NUM =#{modelNum}
+			</if>
+			<if test="modelName != null and modelName != ''">
+				and t1.MODEL_NAME =#{modelName}
+			</if>
+			<if test="modelType != null and modelType != ''">
+				and t1.MODEL_TYPE =#{modelType}
+			</if>
+			<if test="validFlag != null and validFlag != ''">
+				and t1.VALID_FLAG =#{validFlag}
+			</if>
+			<if test="describe != null and describe != ''">
+				and t1.DESCRIBE =#{describe}
+			</if>
+			<if test="remark != null and remark != ''">
+				and t1.REMARK =#{remark}
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				and t1.CREATED_BY =#{createdBy}
+			</if>
+			<if test="creationDate != null and creationDate != ''">
+				and t1.CREATION_DATE =#{creationDate}
+			</if>
+			<if test="lastUpdatedBy != null and lastUpdatedBy != ''">
+				and t1.LAST_UPDATED_BY =#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdateDate != null and lastUpdateDate != ''">
+				and t1.LAST_UPDATE_DATE =#{lastUpdateDate}
+			</if>
+			<if test="lastUpdateIp != null and lastUpdateIp != ''">
+				and t1.LAST_UPDATE_IP =#{lastUpdateIp}
+			</if>
+			<if test="version != null and version != ''">
+				and t1.VERSION =#{version}
+			</if>
+			<if test="attribute01 != null and attribute01 != ''">
+				and t1.ATTRIBUTE_01 =#{attribute01}
+			</if>
+			<if test="attribute02 != null and attribute02 != ''">
+				and t1.ATTRIBUTE_02 =#{attribute02}
+			</if>
+			<if test="attribute03 != null and attribute03 != ''">
+				and t1.ATTRIBUTE_03 =#{attribute03}
+			</if>
+			<if test="attribute04 != null and attribute04 != ''">
+				and t1.ATTRIBUTE_04 =#{attribute04}
+			</if>
+			<if test="attribute05 != null and attribute05 != ''">
+				and t1.ATTRIBUTE_05 =#{attribute05}
+			</if>
+			<if test="attribute06 != null and attribute06 != ''">
+				and t1.ATTRIBUTE_06 =#{attribute06}
+			</if>
+			<if test="attribute07 != null and attribute07 != ''">
+				and t1.ATTRIBUTE_07 =#{attribute07}
+			</if>
+			<if test="attribute08 != null and attribute08 != ''">
+				and t1.ATTRIBUTE_08 =#{attribute08}
+			</if>
+			<if test="attribute09 != null and attribute09 != ''">
+				and t1.ATTRIBUTE_09 =#{attribute09}
+			</if>
+			<if test="attribute10 != null and attribute10 != ''">
+				and t1.ATTRIBUTE_10 =#{attribute10}
+			</if>
+		</where>
+</select>
+<!-- 主键查询对象 CSMP_BD_ARICARFTMODEL -->
+<select id="findCsmpBdAricarftmodelById" parameterType="java.util.Map" resultMap="CsmpBdAricarftmodelDTOMap">
+	select
+		t1.id                             ,
+		t1.model_num                      ,
+		t1.model_name                     ,
+		t1.model_type                     ,
+		t1.valid_flag                     ,
+		t1.describe                       ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   
+	from csmp_bd_aricarftmodel 	t1
+		where t1.id = #{id}
+</select>
+<!-- 新增对象 CSMP_BD_ARICARFTMODEL -->
+<insert id="insertCsmpBdAricarftmodel" parameterType="avicit.csmp.basicData.csmpbdaricarftmodel.dto.CsmpBdAricarftmodelDTO">
+	insert into csmp_bd_aricarftmodel
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="modelNum != null">
+				model_num,
+			</if>
+			<if test="modelName != null">
+				model_name,
+			</if>
+			<if test="modelType != null">
+				model_type,
+			</if>
+			<if test="validFlag != null">
+				valid_flag,
+			</if>
+			<if test="describe != null">
+				describe,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="creationDate != null">
+				creation_date,
+			</if>
+			<if test="lastUpdatedBy != null">
+				last_updated_by,
+			</if>
+			<if test="lastUpdateDate != null">
+				last_update_date,
+			</if>
+			<if test="lastUpdateIp != null">
+				last_update_ip,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+			<if test="attribute01 != null">
+				attribute_01,
+			</if>
+			<if test="attribute02 != null">
+				attribute_02,
+			</if>
+			<if test="attribute03 != null">
+				attribute_03,
+			</if>
+			<if test="attribute04 != null">
+				attribute_04,
+			</if>
+			<if test="attribute05 != null">
+				attribute_05,
+			</if>
+			<if test="attribute06 != null">
+				attribute_06,
+			</if>
+			<if test="attribute07 != null">
+				attribute_07,
+			</if>
+			<if test="attribute08 != null">
+				attribute_08,
+			</if>
+			<if test="attribute09 != null">
+				attribute_09,
+			</if>
+			<if test="attribute10 != null">
+				attribute_10,
+			</if>
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="modelNum != null">
+				#{modelNum,jdbcType=VARCHAR},
+			</if>
+			<if test="modelName != null">
+				#{modelName,jdbcType=VARCHAR},
+			</if>
+			<if test="modelType != null">
+				#{modelType,jdbcType=VARCHAR},
+			</if>
+			<if test="validFlag != null">
+				#{validFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="describe != null">
+				#{describe,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute01 != null">
+				#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				#{attribute10,jdbcType=VARCHAR},
+			</if>
+	</trim>
+</insert>
+<!-- 更新对象 CSMP_BD_ARICARFTMODEL -->
+<update id="updateCsmpBdAricarftmodelSensitive" parameterType="avicit.csmp.basicData.csmpbdaricarftmodel.dto.CsmpBdAricarftmodelDTO">
+	update csmp_bd_aricarftmodel t1
+	<set>
+			<if test="id != null">
+				t1.id                             =#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="modelNum != null">
+				t1.model_num                      =#{modelNum,jdbcType=VARCHAR},
+			</if>
+			<if test="modelName != null">
+				t1.model_name                     =#{modelName,jdbcType=VARCHAR},
+			</if>
+			<if test="modelType != null">
+				t1.model_type                     =#{modelType,jdbcType=VARCHAR},
+			</if>
+			<if test="validFlag != null">
+				t1.valid_flag                     =#{validFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="describe != null">
+				t1.describe                       =#{describe,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				t1.remark                         =#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				t1.creation_date                  =#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				t1.last_update_date               =#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				t1.version                        =t1.version+1,
+			</if>
+			<if test="attribute01 != null">
+				t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			</if>
+	</set>
+		where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 更新对象 CSMP_BD_ARICARFTMODEL -->
+<update id="updateCsmpBdAricarftmodelAll" parameterType="avicit.csmp.basicData.csmpbdaricarftmodel.dto.CsmpBdAricarftmodelDTO">
+	update csmp_bd_aricarftmodel t1
+		set
+			t1.id                             =#{id,jdbcType=VARCHAR},
+			t1.model_num                      =#{modelNum,jdbcType=VARCHAR},
+			t1.model_name                     =#{modelName,jdbcType=VARCHAR},
+			t1.model_type                     =#{modelType,jdbcType=VARCHAR},
+			t1.valid_flag                     =#{validFlag,jdbcType=VARCHAR},
+			t1.describe                       =#{describe,jdbcType=VARCHAR},
+			t1.remark                         =#{remark,jdbcType=VARCHAR},
+			t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			t1.creation_date                  =#{creationDate},
+			t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			t1.last_update_date               =#{lastUpdateDate},
+			t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			t1.version                        =t1.version+1,
+			t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+	where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 主键删除 CSMP_BD_ARICARFTMODEL -->
+<delete id="deleteCsmpBdAricarftmodelById" parameterType="java.lang.String">
+		delete from csmp_bd_aricarftmodel  where  id = #{id}
+</delete>
+
+<select id="selectTree"   resultMap="CsmpBdAricarftmodelDTOMap">
+		select
+		t1.id                             ,
+		t1.model_num                      ,
+		t1.model_name                     ,
+		t1.model_type                     ,
+		t1.valid_flag                     ,
+		t1.describe                       ,
+		t1.remark                         ,
+		t1.created_by                     ,
+		t1.creation_date                  ,
+		t1.last_updated_by                ,
+		t1.last_update_date               ,
+		t1.last_update_ip                 ,
+		t1.version                        ,
+		t1.attribute_01                   ,
+		t1.attribute_02                   ,
+		t1.attribute_03                   ,
+		t1.attribute_04                   ,
+		t1.attribute_05                   ,
+		t1.attribute_06                   ,
+		t1.attribute_07                   ,
+		t1.attribute_08                   ,
+		t1.attribute_09                   ,
+		t1.attribute_10                   
+	from csmp_bd_aricarftmodel 	t1
+	where valid_flag='1'
+</select>
+
+</mapper>

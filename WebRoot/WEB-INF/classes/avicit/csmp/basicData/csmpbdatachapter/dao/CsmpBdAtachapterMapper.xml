@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="avicit.csmp.basicData.csmpbdatachapter.dao.CsmpBdAtachapterDao">
+
+<resultMap id="CsmpBdAtachapterDTOMap" type="avicit.csmp.basicData.csmpbdatachapter.dto.CsmpBdAtachapterDTO">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="chapter" column="CHAPTER" jdbcType="VARCHAR" />
+		<result property="ataName" column="ATA_NAME" jdbcType="VARCHAR" />
+		<result property="nameEn" column="NAME_EN" jdbcType="VARCHAR" />
+		<result property="parentClassId" column="PARENT_CLASS_ID" jdbcType="VARCHAR" />
+		<result property="classOrder" column="CLASS_ORDER" jdbcType="DECIMAL" />
+		<result property="validFlag" column="VALID_FLAG" jdbcType="VARCHAR" />
+		<result property="isDetailed" column="IS_DETAILED" jdbcType="VARCHAR" />
+		<result property="remark" column="REMARK" jdbcType="VARCHAR" />
+		<result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR" />
+		<result property="creationDate" column="CREATION_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdatedBy" column="LAST_UPDATED_BY" jdbcType="VARCHAR" />
+		<result property="lastUpdateDate" column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP" />
+		<result property="lastUpdateIp" column="LAST_UPDATE_IP" jdbcType="VARCHAR" />
+		<result property="version" column="VERSION" jdbcType="DECIMAL" />
+		<result property="attribute01" column="ATTRIBUTE_01" jdbcType="VARCHAR" />
+		<result property="attribute02" column="ATTRIBUTE_02" jdbcType="VARCHAR" />
+		<result property="attribute03" column="ATTRIBUTE_03" jdbcType="VARCHAR" />
+		<result property="attribute04" column="ATTRIBUTE_04" jdbcType="VARCHAR" />
+		<result property="attribute05" column="ATTRIBUTE_05" jdbcType="VARCHAR" />
+		<result property="attribute06" column="ATTRIBUTE_06" jdbcType="VARCHAR" />
+		<result property="attribute07" column="ATTRIBUTE_07" jdbcType="VARCHAR" />
+		<result property="attribute08" column="ATTRIBUTE_08" jdbcType="VARCHAR" />
+		<result property="attribute09" column="ATTRIBUTE_09" jdbcType="VARCHAR" />
+		<result property="attribute10" column="ATTRIBUTE_10" jdbcType="VARCHAR" />
+</resultMap>
+<resultMap id="CsmpBdAtachapterMap" type="java.util.HashMap">
+	<result property="Id" column="ID" jdbcType="VARCHAR" />
+	<result property="AtaName" column="ATA_NAME" jdbcType="VARCHAR" />
+	<result property="ParentClassId" column="PARENT_CLASS_ID" jdbcType="VARCHAR" />
+	<result property="childCount" column="childCount" jdbcType="VARCHAR" />
+</resultMap>
+
+<select id="getCsmpBdAtachapterByParentClassId" parameterType="java.lang.String" resultMap="CsmpBdAtachapterMap">
+  select (select count(1) from CSMP_BD_ATACHAPTER t1 where t.ID = t1.PARENT_CLASS_ID) childCount,
+  t.CHAPTER,
+  t.ATA_NAME,
+  t.PARENT_CLASS_ID,
+  t.ID
+  from CSMP_BD_ATACHAPTER t 
+  <!-- where t.PARENT_CLASS_ID = #{id,jdbcType=VARCHAR} AND t.valid_flag = '1' -->
+  <where>
+  	<if test="id != null and id != ''">
+  	   and t.PARENT_CLASS_ID = #{id,jdbcType=VARCHAR}
+	</if>
+  	<if test="validFlag != null and validFlag != ''">
+  	   and t.valid_flag = #{validFlag,jdbcType=VARCHAR}
+	</if>
+  </where>
+  order by t.CLASS_ORDER ASC
+</select>
+<!-- 模糊查询搜索框用了 ,树节点的排序CLASS_ORDER-->
+<select id="searchCsmpBdAtachapter" parameterType="java.lang.String" resultMap="CsmpBdAtachapterMap">
+  select (select count(1) from CSMP_BD_ATACHAPTER t1 where t.ID = t1.PARENT_CLASS_ID) childCount,
+  t.ATA_NAME,
+  t.PARENT_CLASS_ID,
+  t.ID
+  from CSMP_BD_ATACHAPTER t  where t.ATA_NAME like '%'||#{AtaName,jdbcType=VARCHAR}||'%' AND t.valid_flag = '1'
+  
+</select>
+
+<select id="getNodeById" parameterType="java.lang.String" resultMap="CsmpBdAtachapterDTOMap">
+	SELECT * FROM CSMP_BD_ATACHAPTER b WHERE b.ID=#{id,jdbcType=VARCHAR} AND b.valid_flag = '1'
+</select>
+<!-- 查询树名字 -->
+
+
+
+<select id="getNodeByParentClassId" parameterType="java.lang.String" resultMap="CsmpBdAtachapterDTOMap">
+	SELECT * FROM CSMP_BD_ATACHAPTER b WHERE b.PARENT_CLASS_ID=#{parentClassId,jdbcType=VARCHAR} 
+</select>
+
+<!-- 查询列表 CSMP_BD_AIRCRAFTINFO -->
+<select id="searchCsmpBdAtachapterinfo" parameterType="java.util.Map" resultMap="CsmpBdAtachapterDTOMap">
+	select t1.ID,t1.ATA_NAME from CSMP_BD_ATACHAPTER t1 where t1.valid_flag='1'
+</select>
+<!-- 新增对象 CSMP_BD_ATACHAPTER -->
+<insert id="insertCsmpBdAtachapter" parameterType="avicit.csmp.basicData.csmpbdatachapter.dto.CsmpBdAtachapterDTO">
+	insert into csmp_bd_atachapter
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="chapter != null">
+				chapter,
+			</if>
+			<if test="ataName != null">
+				ata_name,
+			</if>
+			<if test="nameEn != null">
+				name_en,
+			</if>
+			<if test="parentClassId != null">
+				parent_class_id,
+			</if>
+			<if test="classOrder != null">
+				class_order,
+			</if>
+			<if test="validFlag != null">
+				valid_flag,
+			</if>
+			<if test="isDetailed != null">
+				is_detailed,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="creationDate != null">
+				creation_date,
+			</if>
+			<if test="lastUpdatedBy != null">
+				last_updated_by,
+			</if>
+			<if test="lastUpdateDate != null">
+				last_update_date,
+			</if>
+			<if test="lastUpdateIp != null">
+				last_update_ip,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+			<if test="attribute01 != null">
+				attribute_01,
+			</if>
+			<if test="attribute02 != null">
+				attribute_02,
+			</if>
+			<if test="attribute03 != null">
+				attribute_03,
+			</if>
+			<if test="attribute04 != null">
+				attribute_04,
+			</if>
+			<if test="attribute05 != null">
+				attribute_05,
+			</if>
+			<if test="attribute06 != null">
+				attribute_06,
+			</if>
+			<if test="attribute07 != null">
+				attribute_07,
+			</if>
+			<if test="attribute08 != null">
+				attribute_08,
+			</if>
+			<if test="attribute09 != null">
+				attribute_09,
+			</if>
+			<if test="attribute10 != null">
+				attribute_10,
+			</if>
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="chapter != null">
+				#{chapter,jdbcType=VARCHAR},
+			</if>
+			<if test="ataName != null">
+				#{ataName,jdbcType=VARCHAR},
+			</if>
+			<if test="nameEn != null">
+				#{nameEn,jdbcType=VARCHAR},
+			</if>
+			<if test="parentClassId != null">
+				#{parentClassId,jdbcType=VARCHAR},
+			</if>
+			<if test="classOrder != null">
+				#{classOrder,jdbcType=DECIMAL},
+			</if>
+			<if test="validFlag != null">
+				#{validFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="isDetailed != null">
+				#{isDetailed,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=DECIMAL},
+			</if>
+			<if test="attribute01 != null">
+				#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				#{attribute10,jdbcType=VARCHAR},
+			</if>
+	</trim>
+</insert>
+<!-- 更新对象 CSMP_BD_ATACHAPTER -->
+<update id="updateCsmpBdAtachapterSensitive" parameterType="avicit.csmp.basicData.csmpbdatachapter.dto.CsmpBdAtachapterDTO">
+	update csmp_bd_atachapter t1
+	<set>
+			<if test="id != null">
+				t1.id                             =#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="chapter != null">
+				t1.chapter                        =#{chapter,jdbcType=VARCHAR},
+			</if>
+			<if test="ataName != null">
+				t1.ata_name                       =#{ataName,jdbcType=VARCHAR},
+			</if>
+			<if test="nameEn != null">
+				t1.name_en                        =#{nameEn,jdbcType=VARCHAR},
+			</if>
+			<if test="parentClassId != null">
+				t1.parent_class_id                =#{parentClassId,jdbcType=VARCHAR},
+			</if>
+			<if test="classOrder != null">
+				t1.class_order                    =#{classOrder,jdbcType=DECIMAL},
+			</if>
+			<if test="validFlag != null">
+				t1.valid_flag                     =#{validFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="isDetailed != null">
+				t1.is_detailed                    =#{isDetailed,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				t1.remark                         =#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdBy != null">
+				t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="creationDate != null">
+				t1.creation_date                  =#{creationDate},
+			</if>
+			<if test="lastUpdatedBy != null">
+				t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateDate != null">
+				t1.last_update_date               =#{lastUpdateDate},
+			</if>
+			<if test="lastUpdateIp != null">
+				t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				t1.version                        =t1.version+1,
+			</if>
+			<if test="attribute01 != null">
+				t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute02 != null">
+				t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute03 != null">
+				t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute04 != null">
+				t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute05 != null">
+				t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute06 != null">
+				t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute07 != null">
+				t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute08 != null">
+				t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute09 != null">
+				t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			</if>
+			<if test="attribute10 != null">
+				t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+			</if>
+	</set>
+		where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 更新对象 CSMP_BD_ATACHAPTER -->
+<update id="updateCsmpBdAtachapterAll" parameterType="avicit.csmp.basicData.csmpbdatachapter.dto.CsmpBdAtachapterDTO">
+	update csmp_bd_atachapter t1
+		set
+			t1.id                             =#{id,jdbcType=VARCHAR},
+			t1.chapter                        =#{chapter,jdbcType=VARCHAR},
+			t1.ata_name                       =#{ataName,jdbcType=VARCHAR},
+			t1.name_en                        =#{nameEn,jdbcType=VARCHAR},
+			t1.parent_class_id                =#{parentClassId,jdbcType=VARCHAR},
+			t1.class_order                    =#{classOrder,jdbcType=DECIMAL},
+			t1.valid_flag                     =#{validFlag,jdbcType=VARCHAR},
+			t1.is_detailed                    =#{isDetailed,jdbcType=VARCHAR},
+			t1.remark                         =#{remark,jdbcType=VARCHAR},
+			t1.created_by                     =#{createdBy,jdbcType=VARCHAR},
+			t1.creation_date                  =#{dto.creationDate},
+			t1.last_updated_by                =#{lastUpdatedBy,jdbcType=VARCHAR},
+			t1.last_update_date               =#{dto.lastUpdateDate},
+			t1.last_update_ip                 =#{lastUpdateIp,jdbcType=VARCHAR},
+			t1.version                        =t1.version+1,
+			t1.attribute_01                   =#{attribute01,jdbcType=VARCHAR},
+			t1.attribute_02                   =#{attribute02,jdbcType=VARCHAR},
+			t1.attribute_03                   =#{attribute03,jdbcType=VARCHAR},
+			t1.attribute_04                   =#{attribute04,jdbcType=VARCHAR},
+			t1.attribute_05                   =#{attribute05,jdbcType=VARCHAR},
+			t1.attribute_06                   =#{attribute06,jdbcType=VARCHAR},
+			t1.attribute_07                   =#{attribute07,jdbcType=VARCHAR},
+			t1.attribute_08                   =#{attribute08,jdbcType=VARCHAR},
+			t1.attribute_09                   =#{attribute09,jdbcType=VARCHAR},
+			t1.attribute_10                   =#{attribute10,jdbcType=VARCHAR},
+	where t1.id = #{id} and t1.version =#{version}
+</update>
+<!-- 主键删除 CSMP_BD_ATACHAPTER -->
+<delete id="deleteCsmpBdAtachapterById" parameterType="java.lang.String">
+		delete from csmp_bd_atachapter  where  id = #{id}
+</delete>
+</mapper>
